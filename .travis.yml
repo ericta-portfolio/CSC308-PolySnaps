@@ -10,5 +10,11 @@ jobs:
       - pip install pylint
       script:
       - cd backend
-      - ls
       - pylint app.py
+    - language: node_js
+      node_js: 12
+      install:
+      - npm install prettier
+      script:
+      - cd frontend/src
+      - prettier check .
