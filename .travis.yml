@@ -10,4 +10,4 @@ jobs:
       - pip install pylint
       script:
       - cd frontend
-      - pylint app.py
+      - ls
