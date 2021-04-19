@@ -19,4 +19,4 @@ jobs:
       - npm install --save-dev --save-exact prettier
       script:
       - cd frontend/src
-      - prettier --check .
+      - npx prettier --check .
