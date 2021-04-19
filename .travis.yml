@@ -11,8 +11,3 @@ jobs:
       script:
       - cd frontend
       - pylint app.py
-
-    - language: node_js
-      node_js: 12
-      script:
-      - node -e "console.log('Hi from NodeJS!')"
