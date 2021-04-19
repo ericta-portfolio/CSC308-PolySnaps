@@ -16,7 +16,7 @@ jobs:
       before:
       - cd frontend/src
       install:
-      - npm install prettier
+      - npm install --save-dev --save-exact prettier
       script:
       - cd frontend/src
       - prettier --check .
