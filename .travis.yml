@@ -13,6 +13,8 @@ jobs:
       - pylint app.py
     - language: node_js
       node_js: 12
+      before:
+      - cd frontend/src
       install:
       - npm install prettier
       script:
