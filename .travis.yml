@@ -19,4 +19,4 @@ jobs:
       - npm install prettier
       script:
       - cd frontend/src
-      - prettier check .
+      - prettier --check .
