@@ -14,9 +14,8 @@ jobs:
     - language: node_js
       node_js: 12
       before:
-      - cd frontend/src
+      - cd frontend
       install:
-      - npm install --save-dev --save-exact prettier
+      - npm install
       script:
-      - cd frontend/src
-      - npx prettier --check .
+      - npx prettier .
