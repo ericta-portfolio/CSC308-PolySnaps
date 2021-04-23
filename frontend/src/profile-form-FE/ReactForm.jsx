@@ -3,6 +3,7 @@ import hobbiesList from "./data/hobbies.js";
 import religionsList from "./data/religions.js";
 import interestsList from "./data/interests.js";
 import recreationalsList from "./data/recreationals.js";
+import majorsList from "./data/majors.js";
 import axios from 'axios';
 
 export default function ReactForm() {
