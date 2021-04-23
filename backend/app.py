@@ -41,6 +41,7 @@ def add_info_users(id):
         _hobbies = _json['hobbies']
         _spirituality = _json['spirituality']
         _partying = _json['partying']
+        _major = _json['major']
 #        id = db_operations2.insert({
 #            'personality': _personality,
 #            'romance': _romance,
@@ -60,7 +61,8 @@ def add_info_users(id):
                         'friendship': _friendship,
                         'hobbies': _hobbies,
                         'spirituality': _spirituality,
-                        'partying': _partying
+                        'partying': _partying,
+                        'major': _major
                     }
                 }
         )
