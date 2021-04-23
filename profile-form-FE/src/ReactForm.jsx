@@ -3,10 +3,13 @@ import hobbiesList from "./data/hobbies.js";
 import religionsList from "./data/religions.js";
 import interestsList from "./data/interests.js";
 import recreationalsList from "./data/recreationals.js";
+import majorsList from "./data/majors.js";
 
 export default function ReactForm() {
   let submit = true;
   const [error, setError] = useState([false]);
+  const [gender, setGender] = useState("");
+  const [major, setMajor] = useState("");
   const [personality, setPersonality] = useState("");
   const [romance, setRomance] = useState([]);
   const [friendship, setFriendship] = useState([]);
@@ -21,6 +24,8 @@ export default function ReactForm() {
     }
 
     const profile = {
+      gender: gender !== "" ? gender : runError("Gender"),
+      major: major !== "" ? major : runError("Major"),
       personality:
         personality !== "" ? personality : runError("Personality Type"),
       romance: romance.length !== 0 ? romance : runError("Romantic Interests"),
@@ -37,6 +42,14 @@ export default function ReactForm() {
     } else {
       submit = true;
     }
+  }
+
+  function majorChange(event) {
+    setMajor(event.target.value);
+  }
+
+  function genderChange(event) {
+    setGender(event.target.value);
   }
 
   function personalityChange(event) {
@@ -97,6 +110,33 @@ export default function ReactForm() {
 
   return (
     <div>
+      {/* Gender */}
+      <h1>Gender: {gender}</h1>
+      <input
+        checked={gender === "Male"}
+        onChange={genderChange}
+        type="radio"
+        value="Male"
+      />
+      <label className="form-input">Male</label>
+      <br />
+      <input
+        checked={gender === "Female"}
+        onChange={genderChange}
+        type="radio"
+        value="Female"
+      />
+      <label className="form-input">Female</label>
+      <br />
+      <input
+        checked={gender === "Other"}
+        onChange={genderChange}
+        type="radio"
+        value="Other"
+      />
+      <label className="form-input">Other</label>
+      <br />
+
       {/* Personality */}
       <h1>Personality: {personality}</h1>
       <input
@@ -123,6 +163,20 @@ export default function ReactForm() {
       />
       <label className="form-input">In Between</label>
       <br />
+
+      {/* Major */}
+      <h1>Major: {major}</h1>
+      {majorsList.map((majorItem) => (
+        <div>
+          <input
+            checked={major === majorItem}
+            onChange={majorChange}
+            type="radio"
+            value={majorItem}
+          />
+          <label className="form-input">{majorItem}</label>
+        </div>
+      ))}
 
       {/* Romance */}
       <h1>Romantic Interests: {romance}</h1>

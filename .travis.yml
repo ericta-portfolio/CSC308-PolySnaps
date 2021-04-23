@@ -1,0 +1,22 @@
+jobs:
+  include:
+    - language: python
+      python: 3.8
+      before_install:
+      - cd backend
+      install: 
+      - pip install Flask
+      - pip install flask_cors
+      - pip install flask_pymongo
+      - pip install coverage
+      - pip install pylint
+      script:
+      - pylint app.py
+    - language: node_js
+      node_js: 12
+      before_install:
+      - cd frontend
+      install:
+      - npm install
+      script:
+      - npx prettier .
