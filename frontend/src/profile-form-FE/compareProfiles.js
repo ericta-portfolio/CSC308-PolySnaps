@@ -52,15 +52,15 @@ function compareProfiles(p1, p2) {
 
   // Gender Mismatch --> Fail Case
   if (
-    !romance1.includes("Not looking for this") ||
-    !romance2.includes("Not looking for this")
+    romance1.includes("Not looking for this") ||
+    romance2.includes("Not looking for this")
   ) {
     if (!friendship2.includes(gender1) || !friendship1.includes(gender2)) {
       return 0;
     }
   } else if (
-    !friendship1.includes("Not looking for this") ||
-    !friendship2.includes("Not looking for this")
+    friendship1.includes("Not looking for this") ||
+    friendship2.includes("Not looking for this")
   ) {
     if (!romance2.includes(gender1) || !romance1.includes(gender2)) {
       return 0;
