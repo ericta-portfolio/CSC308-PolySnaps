@@ -5,13 +5,9 @@ jobs:
       before_install:
       - cd backend
       install: 
-      - pip install Flask
-      - pip install flask_cors
-      - pip install flask_pymongo
-      - pip install coverage
-      - pip install pylint
+      - pip install requirements.txt
       script:
-      - pylint app.py
+      - pylint app.py -help-msg
     - language: node_js
       node_js: 12
       before_install:
