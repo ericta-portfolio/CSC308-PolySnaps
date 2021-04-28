@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 #CORS stands for Cross Origin Requests.
-CORS(app) #Here we'll allow requests coming from any domain. 
+CORS(app) #Here we'll allow requests coming from any domain.
 # Not recommended for production environment.
 
 app.config["MONGO_URI"] = "mongodb+srv://polysnaps:cpw2021@cluster0.2oaoq.mongodb.net/mydatabase?retryWrites=true&w=majority"
@@ -62,8 +62,7 @@ def add_info_users(id):
         resp = jsonify("User Added Successfully")
         resp.status_code = 201
         return resp
-    else:
-        return not_found()
+    return not_found()
 
 @app.route('/newUser', methods=['GET', 'POST'])
 def get_users():
@@ -78,7 +77,7 @@ def get_users():
         resp = jsonify("User found successfully!")
         resp.status_code = 200
         return resp
-    elif _email and _password and _gender and _first and _last and _date and request.method == 'POST':
+    if _email and _password and _gender and _first and _last and _date and request.method == 'POST':
         db_operations.insert({
             'email': _email,
             'password': _password,
@@ -90,12 +89,11 @@ def get_users():
         resp = jsonify("User Added Successfully")
         resp.status_code = 200
         return resp
-    else:
-        return not_found()
-    
+    return not_found()
+
 @app.route('/users', methods=['POST'])
 def check_user():
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         _json = request.get_json()
         _email = _json['email']
         _password = _json['password']
