@@ -5,7 +5,7 @@ jobs:
       before_install:
       - cd backend
       install: 
-      - pip install requirements.txt
+      - pip install -r requirements.txt
       script:
       - pylint app.py -help-msg
     - language: node_js
