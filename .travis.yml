@@ -7,7 +7,7 @@ jobs:
       install: 
       - pip install -r requirements.txt
       script:
-      - pylint app.py --help-msg=28
+      - pylint app.py --exit-0
     - language: node_js
       node_js: 12
       before_install:
