@@ -1,0 +1,5 @@
+Flask==1.1.2
+flask_cors==1.10.3
+flask_pymongo==2.3.0
+coverage==5.5
+pylint==2.8.2
