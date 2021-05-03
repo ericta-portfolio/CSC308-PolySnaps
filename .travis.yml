@@ -7,7 +7,7 @@ install:
   - npm install
   
 script:
-  - npm run buil
+  - npm run build
 
 jobs:
   include:
