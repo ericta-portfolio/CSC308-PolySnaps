@@ -9,14 +9,10 @@ function Signup() {
     console.log(details);
   
     if (details.password === details.password2 && details.date !== null) {
-      const baseURL = process.env.baseURL;
-      const port = process.env.port;
-      console.log(baseURL);
-      console.log(port);
       axios
-        .post("http://localhost:" + port + "/newUser", details)
+        .post("http://localhost:5000/newUser", details)
         .then(function (response) {
-         window.location.href = baseURL + "/Login";
+         window.location.href = "http://localhost:3000/Login";
         })
         .catch(function (error) {
           console.log(error);
