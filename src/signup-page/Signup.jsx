@@ -7,10 +7,12 @@ function Signup() {
   
   const signup = (details) => {
     console.log(details);
-
+  
     if (details.password === details.password2 && details.date !== null) {
       const baseURL = process.env.baseURL;
       const port = process.env.port;
+      console.log(baseURL);
+      console.log(port);
       axios
         .post("http://localhost:" + port + "/newUser", details)
         .then(function (response) {
