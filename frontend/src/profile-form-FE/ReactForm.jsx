@@ -7,7 +7,9 @@ import majorsList from "./data/majors.js";
 import axios from 'axios';
 
 export default function ReactForm() {
-  axios.get('http://localhost:5000/cache')
+  const beURL = "https://polysnaps-be.herokuapp.com";
+  
+  axios.get(beURL + '/cache')
   .then(res => {
     data = res["data"];
   })
@@ -49,7 +51,7 @@ export default function ReactForm() {
 
     if (submit) {
       axios
-        .put("http://localhost:5000/profileUser/" + data["_id"], profile)
+        .put(beURL + "/profileUser" + data["_id"], profile)
         .then(function (response) {
           console.log(response);
         })
