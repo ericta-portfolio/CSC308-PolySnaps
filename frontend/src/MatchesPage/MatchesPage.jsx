@@ -6,7 +6,6 @@ import profiles from "./profiles";
 import axios from "axios";
 
 export default class MatchesPage extends Component {
-  const beURL = "https://polysnaps-be.herokuapp.com";
   state = {
     profiles: [],
     response: false
