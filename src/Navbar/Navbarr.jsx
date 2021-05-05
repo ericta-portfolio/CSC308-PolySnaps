@@ -16,7 +16,7 @@ function Navbarr()
                     <Nav.Link href="/Signup" id="link0">Signup</Nav.Link>
                     <Nav.Link href="/Login" id="link2">Login</Nav.Link>
                     <Nav.Link href="/ProfileForm" id="link1">Profile Form</Nav.Link>
-                    <Nav.Link href="/MatchesPage" id="link3">Matches Form</Nav.Link>
+                    <Nav.Link href="/MatchesPage" id="link3">Matches Page</Nav.Link>
                 </Nav>
     </Navbar>
     </div>
