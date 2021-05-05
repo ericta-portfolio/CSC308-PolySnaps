@@ -64,7 +64,6 @@ def add_info_users(id):
         return resp
     return not_found()
 
-@Crossorigin
 @app.route('/newUser', methods=['GET', 'POST'])
 def get_users():
     _json = request.get_json()
