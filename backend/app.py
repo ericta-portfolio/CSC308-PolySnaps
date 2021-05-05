@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_pymongo import PyMongo
-# from bson.json_util import dumps
+from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import jsonify, request
 from flask_cors import CORS
@@ -20,6 +20,10 @@ db_operations = mongo.db.newUsers
 db_operations2 = mongo.db.profiles
 
 CACHE = None
+
+def stringify_userid(user_data):
+    user_data["_id"] = str(user_data["_id"])
+    return user_data
 
 #All the routings in our app will be mentioned here.
 @app.route('/test')
@@ -66,18 +70,18 @@ def add_info_users(id):
 
 @app.route('/newUser', methods=['GET', 'POST'])
 def get_users():
-    _json = request.get_json()
-    _email = _json['email']
-    _password = _json['password']
-    _gender = _json['gender']
-    _first = _json['first']
-    _last = _json['last']
-    _date = _json['date']
-    if _email and _password and _gender and _first and _last and _date and request.method == 'GET':
-        resp = jsonify("User found successfully!")
-        resp.status_code = 200
-        return resp
-    if _email and _password and _gender and _first and _last and _date and request.method == 'POST':
+    if request.method == 'GET':
+        users = db_operations.find()
+        users = map(stringify_userid, users)
+        return dumps(users)
+    if request.method == 'POST':
+        _json = request.get_json()
+        _email = _json['email']
+        _password = _json['password']
+        _gender = _json['gender']
+        _first = _json['first']
+        _last = _json['last']
+        _date = _json['date']
         db_operations.insert({
             'email': _email,
             'password': _password,
