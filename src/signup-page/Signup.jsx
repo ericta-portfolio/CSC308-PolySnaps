@@ -7,13 +7,14 @@ function Signup() {
   const beURL = "https://polysnaps-be.herokuapp.com";
   const feURL = "https://polysnaps-fe.herokuapp.com";
   const signup = (details) => {
+    
     console.log(details);
 
     if (details.password === details.password2 && details.date !== null) {
       axios
-        .post(beURL + "/newUser", details)
+        .get(beURL + "/test")
         .then(function (response) {
-         window.location.href = feURL + "/Login";
+         console.log(response.text)
         })
         .catch(function (error) {
           console.log(error);
