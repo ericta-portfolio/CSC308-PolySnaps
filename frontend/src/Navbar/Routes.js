@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import history from './history'
+import MatchesPage from "../MatchesPage/MatchesPage"
 
 import Signup from "../signup-page/Signup";
 import ProfileFormPage from "../profile-form-FE/ProfileFormPage"
@@ -15,6 +16,7 @@ export default class Routes extends Component {
                     <Route path="/Signup" component={Signup} />
                     <Route path="/ProfileForm" component={ProfileFormPage} />
                     <Route path="/Login" component={LoginPage} />
+                    <Route path="/MatchesPage" component={MatchesPage} />
                 </Switch>
             </Router>
         )
