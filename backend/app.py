@@ -4,6 +4,7 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import jsonify, request
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -82,9 +83,10 @@ def get_users():
         _first = _json['first']
         _last = _json['last']
         _date = _json['date']
+        _hashed_password = generate_password_hash(_password)
         db_operations.insert({
             'email': _email,
-            'password': _password,
+            'password': _hashed_password,
             'gender': _gender,
             'first': _first,
             'last': _last,
@@ -101,19 +103,27 @@ def check_user():
         _json = request.get_json()
         _email = _json['email']
         _password = _json['password']
-        if (_email and _password):
-            user = db_operations.find_one({
-                'email': _email,
-                'password': _password
-            })
-            if user:
+        get_info = db_operations.find_one({
+                'email': _email
+        })
+        if (get_info):
+            _stored_password = get_info['password']
+            if (check_password_hash(_stored_password, _password)):
+        # check_password_hash(_stored_password, _password)
+        # if (_email and _password and get_info):
+        #     user = db_operations.find_one({
+        #         'email': _email,
+        #         'password': _password
+        #     })
+            # if user:
                 global CACHE
-                CACHE = user
+                CACHE = get_info
                 resp = jsonify("User found successfully!")
                 # resp = dumps(user)
                 resp.status_code = 200
                 return resp
             else:
+                print("Wrong Password!")
                 return not_found()
 
 @app.route('/cache', methods=['GET'])
