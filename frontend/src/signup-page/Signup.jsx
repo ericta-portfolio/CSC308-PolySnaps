@@ -4,15 +4,16 @@ import logo from "./logo3.png";
 import axios from "axios";
 
 function Signup() {
-  
+  const beURL = "https://polysnaps-be.herokuapp.com";
+  const feURL = "https://polysnaps-fe.herokuapp.com";
   const signup = (details) => {
     console.log(details);
 
     if (details.password === details.password2 && details.date !== null) {
       axios
-        .post("http://localhost:5000/newUser", details)
+        .post(beURL + "/newUser", details)
         .then(function (response) {
-         window.location.href = "http://localhost:3000/Login";
+         window.location.href = feURL + "/Login";
         })
         .catch(function (error) {
           console.log(error);
