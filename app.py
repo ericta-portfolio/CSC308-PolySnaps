@@ -64,7 +64,7 @@ def add_info_users(id):
         return resp
     return not_found()
 
-@app.route('/newUser', methods=['GET', 'POST'])
+@app.route('/newUser', methods=['GET', 'POST', 'OPTIONS'])
 def get_users():
     _json = request.get_json()
     _email = _json['email']
@@ -73,6 +73,8 @@ def get_users():
     _first = _json['first']
     _last = _json['last']
     _date = _json['date']
+    if request.method == "OPTIONS":
+        return 200
     if _email and _password and _gender and _first and _last and _date and request.method == 'GET':
         resp = jsonify("User found successfully!")
         resp.status_code = 200
@@ -88,9 +90,6 @@ def get_users():
         })
         resp = jsonify("User Added Successfully")
         resp.status_code = 200
-        resp.setHeader('Access-Control-Allow-Origin', '*')
-        resp.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,OPTIONS');
-        resp.setHeader('Access-Control-Allow-Headers', 'Authorization');
         return resp
     return not_found()
 
