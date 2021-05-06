@@ -7,12 +7,12 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
+app.config["MONGO_URI"] = "mongodb+srv://polysnaps:cpw2021@cluster0.2oaoq.mongodb.net/mydatabase?retryWrites=true&w=majority"
+app.config['CORS_HEADERS'] = 'Content-Type'
 #CORS stands for Cross Origin Requests.
 CORS(app) #Here we'll allow requests coming from any domain.
 # Not recommended for production environment.
 
-app.config["MONGO_URI"] = "mongodb+srv://polysnaps:cpw2021@cluster0.2oaoq.mongodb.net/mydatabase?retryWrites=true&w=majority"
-app.config['CORS_HEADERS'] = 'Content-Type'
 mongo = PyMongo(app) #initializing the app variable
 
 ## Configuring collection name we are going to work with
