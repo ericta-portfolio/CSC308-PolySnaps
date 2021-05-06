@@ -4,7 +4,7 @@ import logo from "./logo3.png";
 import axios from "axios";
 
 function Signup() {
-  const beURL = "https://polysnaps-be.herokuapp.com";
+  const beURL = "http://polysnaps-be.herokuapp.com";
   const feURL = "https://polysnaps-fe.herokuapp.com";
   const signup = (details) => {
     
