@@ -65,24 +65,25 @@ def add_info_users(id):
         return resp
     return not_found()
 
-@app.route('/newUser', methods=['GET', 'POST', 'OPTIONS'])
+
+@app.route('/newUser', methods=['GET', 'POST'])
 def get_users():
     if request.method == 'GET':
-#    why do we need a get here?
-        resp = jsonify("User found successfully!")
-        resp.status_code = 200
-        return resp
+        users = db_operations.find()
+        users = map(stringify_userid, users)
+        return dumps(users)
     if request.method == 'POST':
         _json = request.get_json()
-       _email = _json['email']
-       _password = _json['password']
-       _gender = _json['gender']
-       _first = _json['first']
-       _last = _json['last']
-       _date = _json['date']
+        _email = _json['email']
+        _password = _json['password']
+        _gender = _json['gender']
+        _first = _json['first']
+        _last = _json['last']
+        _date = _json['date']
+        _hashed_password = generate_password_hash(_password)
         db_operations.insert({
             'email': _email,
-            'password': _password,
+            'password': _hashed_password,
             'gender': _gender,
             'first': _first,
             'last': _last,
