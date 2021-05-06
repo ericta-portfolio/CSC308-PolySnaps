@@ -69,9 +69,9 @@ def add_info_users(id):
 @app.route('/newUser', methods=['GET', 'POST'])
 def get_users():
     if request.method == 'GET':
-        users = db_operations.find()
-        users = map(stringify_userid, users)
-        return dumps(users)
+#         users = db_operations.find()
+#         users = map(stringify_userid, users)
+        return "success"
     if request.method == 'POST':
         print("hello")
         _json = request.get_json()
