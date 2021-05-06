@@ -73,8 +73,6 @@ def get_users():
     _first = _json['first']
     _last = _json['last']
     _date = _json['date']
-    if request.method == "OPTIONS":
-        return 200
     if _email and _password and _gender and _first and _last and _date and request.method == 'GET':
         resp = jsonify("User found successfully!")
         resp.status_code = 200
@@ -90,7 +88,7 @@ def get_users():
         })
         resp = jsonify("User Added Successfully")
         resp.status_code = 200
-        return resp
+        return "YAY"
     return not_found()
 
 @app.route('/users', methods=['POST'])
