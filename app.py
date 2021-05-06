@@ -66,6 +66,7 @@ def add_info_users(id):
 
 @app.route('/newUser', methods=['GET', 'POST', 'OPTIONS'])
 def get_users():
+    return "YAY"
     _json = request.get_json()
     _email = _json['email']
     _password = _json['password']
