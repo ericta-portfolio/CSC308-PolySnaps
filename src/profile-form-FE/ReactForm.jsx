@@ -51,7 +51,7 @@ export default function ReactForm() {
 
     if (submit) {
       axios
-        .put(beURL + "/profileUser" + data["_id"], profile)
+        .put(beURL + "/profileUser/" + data["_id"], profile)
         .then(function (response) {
           console.log(response);
         })
