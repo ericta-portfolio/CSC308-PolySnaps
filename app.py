@@ -67,18 +67,19 @@ def add_info_users(id):
 
 @app.route('/newUser', methods=['GET', 'POST', 'OPTIONS'])
 def get_users():
-    _json = request.get_json()
-    _email = _json['email']
-    _password = _json['password']
-    _gender = _json['gender']
-    _first = _json['first']
-    _last = _json['last']
-    _date = _json['date']
-    if _email and _password and _gender and _first and _last and _date and request.method == 'GET':
+    if request.method == 'GET':
+#    why do we need a get here?
         resp = jsonify("User found successfully!")
         resp.status_code = 200
         return resp
-    if _email and _password and _gender and _first and _last and _date and request.method == 'POST':
+    if request.method == 'POST':
+        _json = request.get_json()
+       _email = _json['email']
+       _password = _json['password']
+       _gender = _json['gender']
+       _first = _json['first']
+       _last = _json['last']
+       _date = _json['date']
         db_operations.insert({
             'email': _email,
             'password': _password,
