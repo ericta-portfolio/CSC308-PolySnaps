@@ -66,7 +66,6 @@ def add_info_users(id):
 
 @app.route('/newUser', methods=['GET', 'POST', 'OPTIONS'])
 def get_users():
-    return "YAY"
     _json = request.get_json()
     _email = _json['email']
     _password = _json['password']
@@ -89,7 +88,7 @@ def get_users():
         })
         resp = jsonify("User Added Successfully")
         resp.status_code = 200
-        return "YAY"
+        return resp
     return not_found()
 
 @app.route('/users', methods=['POST'])
