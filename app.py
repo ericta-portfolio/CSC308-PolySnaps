@@ -73,6 +73,7 @@ def get_users():
         users = map(stringify_userid, users)
         return dumps(users)
     if request.method == 'POST':
+        print("hello")
         _json = request.get_json()
         _email = _json['email']
         _password = _json['password']
