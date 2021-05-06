@@ -13,7 +13,10 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app) #Here we'll allow requests coming from any domain.
 # Not recommended for production environment.
 
+header := w.Header()
 header.Add("Access-Control-Allow-Origin", "*")
+header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+header.Add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 
 mongo = PyMongo(app) #initializing the app variable
 
