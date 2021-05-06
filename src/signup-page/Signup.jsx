@@ -12,7 +12,7 @@ function Signup() {
 
     if (details.password === details.password2 && details.date !== null) {
       axios
-        .post(beURL + "/newUser")
+        .post(beURL + "/newUser", details)
         .then(function (response) {
            window.location.href = feURL + "/Login";
         })
