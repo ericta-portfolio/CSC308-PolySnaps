@@ -9,8 +9,13 @@ function Signup() {
   const signup = (details) => {
     
     console.log(details);
-
+    
     if (details.password === details.password2 && details.date !== null) {
+      let config = {
+          headers: {
+            Access-Control-Allow-Origin: *,
+          }
+      }
       axios
         .post(beURL + "/newUser", details)
         .then(function (response) {
