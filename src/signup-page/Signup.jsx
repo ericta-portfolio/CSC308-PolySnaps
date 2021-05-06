@@ -15,6 +15,7 @@ function Signup() {
         .post(beURL + "/newUser", details)
         .then(function (response) {
           // window.location.href = feURL + "/Login";
+          console.log(response);
         })
         .catch(function (error) {
           console.log(error);
