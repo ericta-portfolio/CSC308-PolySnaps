@@ -11,15 +11,10 @@ function Signup() {
     console.log(details);
     
     if (details.password === details.password2 && details.date !== null) {
-      let config = {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          }
-      }
       axios
-        .post(beURL + "/newUser", details, config)
+        .post(beURL + "/newUser", details)
         .then(function (response) {
-           window.location.href = feURL + "/Login";
+          // window.location.href = feURL + "/Login";
         })
         .catch(function (error) {
           console.log(error);
