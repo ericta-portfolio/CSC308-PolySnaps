@@ -17,7 +17,7 @@ function Signup() {
           }
       }
       axios
-        .post(beURL + "/newUser", details)
+        .post(beURL + "/newUser", details, config)
         .then(function (response) {
            window.location.href = feURL + "/Login";
         })
