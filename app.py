@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_pymongo import PyMongo
-# from bson.json_util import dumps
+from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import jsonify, request
 from flask_cors import CORS
@@ -81,7 +81,7 @@ def get_users():
         _first = _json['first']
         _last = _json['last']
         _date = _json['date']
-        _hashed_password = generate_password_hash(_password)
+        _hashed_password = _password
         db_operations.insert({
             'email': _email,
             'password': _hashed_password,
