@@ -13,7 +13,7 @@ function Signup() {
     if (details.password === details.password2 && details.date !== null) {
       let config = {
           headers: {
-            Access-Control-Allow-Origin: *,
+            "Access-Control-Allow-Origin": "*",
           }
       }
       axios
