@@ -20,8 +20,10 @@ function LoginPage() {
     axios
       .post("http://localhost:5000/users", details)
       .then(function (response) {
+        const data = response.data;
+        localStorage.setItem("id", data)
         window.location.href = "http://localhost:3000/ProfileForm";
-        console.log(response);
+        
       })
       .catch(function (error) {
         console.log(error);

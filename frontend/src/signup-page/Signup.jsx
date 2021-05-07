@@ -12,6 +12,8 @@ function Signup() {
       axios
         .post("http://localhost:5000/newUser", details)
         .then(function (response) {
+          const data = response.data;
+          localStorage.setItem("id", data)
          window.location.href = "http://localhost:3000/Login";
         })
         .catch(function (error) {
