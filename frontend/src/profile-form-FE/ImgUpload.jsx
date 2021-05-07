@@ -6,21 +6,14 @@ import { Avatar } from 'antd';
 
 class ImgUpload extends Component {
 
-  constructor(props){
-    super(props);
-    this.state={
-      profileImage: ''
-    }
-  }
-  handleImageChange = (profileImage) => {
-    this.setState({
-      profileImage
-    })
+  state={
+    profileImage: "",
+    selectedFile: null 
   }
 
-  //to store the picture
-  state = { selectedFile: null };
-  // state = {imgSrc: null};
+  // handleImageChange = (profileImage) => {
+
+  // }
 
   fileSelectedHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
@@ -50,24 +43,28 @@ class ImgUpload extends Component {
         })
         .then((res) => {
           console.log(res);
+          axios
+          .get("http://localhost:5000/profile/" + data["_id"])
+            .then((res) => {
+               console.log(res);
+               this.setState({
+                profileImage: res["data"]
+              })
+              console.log(res["data"]);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         })
         .catch(function (error) {
           console.log(error);
         });
+    
     })
     .catch(function (e) {
     //Not handling the error. Just logging into the console.
       console.log(e);
     });
-
-    axios
-      .get("http://localhost:5000/profile/609599b17d7512731470344a")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   render() {
