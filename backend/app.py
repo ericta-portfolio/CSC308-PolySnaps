@@ -99,12 +99,14 @@ def get_matches():
     _json = request.get_json()
     _id = _json['id']
     users = list(db_operations.find())
+    users = list(map(stringify_userid, users))
     users = list(filter(lambda x: "romance" in x.keys(), users))
     user = db_operations.find_one({
         '_id': ObjectId(_id)
     })
     users = list(map(lambda x: get_scores(x, user), users))
-    users = list(filter(lambda x: x["score"] > 0 and x["_id"] != ObjectId(_id), users))
+    users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
+    users = sorted(users, key=lambda k: k["score"], reverse=True)
     return dumps(users), 200
 
 @app.route('/users', methods=['POST'])
@@ -149,9 +151,9 @@ def stringify_userid(user):
     return user
     
 def get_scores(x, user):
-    user["score"] = compareProfiles(x, user)
-    user["password"] = None
-    return user
+    x["score"] = compareProfiles(x, user)
+    x["password"] = None
+    return x
 
 if __name__ == "__main__":
     app.run(debug=True)
