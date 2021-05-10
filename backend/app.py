@@ -96,18 +96,25 @@ def get_users():
     
 @app.route('/matches', methods=['POST'])
 def get_matches():
-    _json = request.get_json()
-    _id = _json['id']
-    users = list(db_operations.find())
-    users = list(map(stringify_userid, users))
-    users = list(filter(lambda x: "romance" in x.keys(), users))
-    user = db_operations.find_one({
-        '_id': ObjectId(_id)
-    })
-    users = list(map(lambda x: get_scores(x, user), users))
-    users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
-    users = sorted(users, key=lambda k: k["score"], reverse=True)
-    return dumps(users), 200
+    if request.method == 'POST':
+        _json = request.get_json()
+        _id = _json['id']
+        users = list(db_operations.find())
+        if users:
+            users = list(map(stringify_userid, users))
+            users = list(filter(lambda x: "romance" in x.keys(), users))
+        user = db_operations.find_one({
+            '_id': ObjectId(_id)
+        })
+        if user:
+            if "romance" in user.keys():
+                users = list(filter(lambda x: "romance" in x.keys(), users))
+                users = list(map(lambda x: get_scores(x, user), users))
+                users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
+                users = sorted(users, key=lambda k: k["score"], reverse=True)
+                return dumps(users), 200
+            return "no matches", 200
+    return not_found()
 
 @app.route('/users', methods=['POST'])
 def check_user():
@@ -122,19 +129,21 @@ def check_user():
         if user:
             user = stringify_userid(user)
             return user["_id"], 200
-        else:
-            return not_found()
+    return not_found()
             
 @app.route('/getUser', methods=['POST'])
 def get_user():
-    _json = request.get_json()
-    _id = _json["id"]
-    user = db_operations.find_one({
-        '_id': ObjectId(_id)
-    })
-    user = stringify_userid(user)
-    user["password"] = None
-    return user, 200
+    if request.method == 'POST':
+        _json = request.get_json()
+        _id = _json["id"]
+        user = db_operations.find_one({
+            '_id': ObjectId(_id)
+        })
+        if user:
+            user = stringify_userid(user)
+            user["password"] = None
+            return user, 200
+    return not_found()
 
 @app.errorhandler(404)
 def not_found(error=None):
@@ -150,10 +159,10 @@ def stringify_userid(user):
     user["_id"] = str(user["_id"])
     return user
     
-def get_scores(x, user):
-    x["score"] = compareProfiles(x, user)
-    x["password"] = None
-    return x
+def get_scores(user, match):
+    user["score"] = compareProfiles(user, match)
+    user["password"] = None
+    return user
 
 if __name__ == "__main__":
     app.run(debug=True)
