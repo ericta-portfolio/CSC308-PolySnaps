@@ -113,7 +113,7 @@ def get_matches():
                 users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
                 users = sorted(users, key=lambda k: k["score"], reverse=True)
                 return dumps(users), 200
-            return "no matches", 200
+            return "no profile info", 200
     return not_found()
 
 @app.route('/users', methods=['POST'])
