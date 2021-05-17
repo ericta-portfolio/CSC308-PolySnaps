@@ -12,8 +12,10 @@ export default class MatchesPage extends Component {
   };
 
   componentDidMount() {
+    const id = localStorage.getItem("id");
+    const jsonId = {"id": id};
     axios
-      .get("http://localhost:5000/newUser")
+      .post("http://localhost:5000/matches", jsonId)
       .then((res) => {
         const profileList = res.data;
         this.setState({ profiles: profileList, response: true });
@@ -66,6 +68,7 @@ export default class MatchesPage extends Component {
           hobbies={profile.hobbies}
           spirituality={profile.spirituality}
           partying={profile.partying}
+          score={profile.score}
         />
       </div>
     );
