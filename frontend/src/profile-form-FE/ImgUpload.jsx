@@ -22,7 +22,8 @@ class ImgUpload extends Component {
 
   fileUploadHandler = () => {
     var data = null;
-    axios.get('http://localhost:5000/cache')
+    const id = localStorage.getItem("id")
+    axios.get('http://localhost:5000/getUser/' + id)
     .then(res => {
       console.log(res);
       data = res["data"];
