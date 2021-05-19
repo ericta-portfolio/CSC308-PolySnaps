@@ -7,16 +7,6 @@ import majorsList from "./data/majors.js";
 import axios from 'axios';
 
 export default function ReactForm() {
-  const beURL = "https://polysnaps-be.herokuapp.com";
-  
-  axios.get(beURL + '/cache')
-  .then(res => {
-    data = res["data"];
-  })
-  .catch(function (e) {
-    //Not handling the error. Just logging into the console.
-    console.log(e);
-  });
   let submit = true;
   const [error, setError] = useState([false]);
   const [gender, setGender] = useState("");
@@ -50,8 +40,9 @@ export default function ReactForm() {
     };
 
     if (submit) {
+      const id = localStorage.getItem("id");
       axios
-        .put(beURL + "/profileUser/" + data["_id"], profile)
+        .put("http://localhost:5000/profileUser/" + id, profile)
         .then(function (response) {
           console.log(response);
         })
