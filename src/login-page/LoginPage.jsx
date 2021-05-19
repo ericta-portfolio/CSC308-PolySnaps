@@ -4,6 +4,9 @@ import logo from "./logo3.png";
 import axios from "axios"
 
 function LoginPage() {
+  const beURL = "https://polysnaps-be.herokuapp.com";
+  const feURL = "https://polysnaps-fe.herokuapp.com";
+  
   const adminUser = {
     email: "admin@calpoly.edu",
     password: "admin123"
@@ -14,16 +17,14 @@ function LoginPage() {
 
   const Login = (details) => {
     console.log(details);
-    console.log("Logged in");
+    console.log("Loggged in");
     console.log(details.email);
     console.log(details.password);
     axios
-      .post("http://localhost:5000/users", details)
+      .post(beURL + "/users", details)
       .then(function (response) {
-        const data = response.data;
-        localStorage.setItem("id", data)
-        window.location.href = "http://localhost:3000/ProfileForm";
-        
+        window.location.href = feURL + "/ProfileForm";
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
