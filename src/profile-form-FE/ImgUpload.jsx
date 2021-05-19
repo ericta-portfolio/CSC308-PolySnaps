@@ -6,7 +6,6 @@ import { Avatar } from 'antd';
 
 class ImgUpload extends Component {
 
-  beURL = "https://polysnaps-be.herokuapp.com/";
   state={
     profileImage: "",
     selectedFile: null 
@@ -24,6 +23,7 @@ class ImgUpload extends Component {
   fileUploadHandler = () => {
     var data = null;
     const id = localStorage.getItem("id")
+    const beURL = "https://polysnaps-be.herokuapp.com/";
     axios.get(beURL + 'getUser/' + id)
     .then(res => {
       console.log(res);
