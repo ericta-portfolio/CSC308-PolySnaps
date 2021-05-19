@@ -6,6 +6,7 @@ import { Avatar } from 'antd';
 
 class ImgUpload extends Component {
 
+  beURL = "https://polysnaps-be.herokuapp.com/";
   state={
     profileImage: "",
     selectedFile: null 
@@ -23,7 +24,7 @@ class ImgUpload extends Component {
   fileUploadHandler = () => {
     var data = null;
     const id = localStorage.getItem("id")
-    axios.get('http://localhost:5000/getUser/' + id)
+    axios.get(beURL + 'getUser/' + id)
     .then(res => {
       console.log(res);
       data = res["data"];
@@ -33,7 +34,7 @@ class ImgUpload extends Component {
       fd.append("image", this.state.selectedFile, this.state.selectedFile.name);
       //needs to send an http request
       axios
-        .put("http://localhost:5000/upload/" + data["_id"], fd, {
+        .put(beURL + "upload/" + data["_id"], fd, {
           onUploadProgress: (progressEvent) => {
             console.log(
               "Upload Progress:" +
@@ -45,7 +46,7 @@ class ImgUpload extends Component {
         .then((res) => {
           console.log(res);
           axios
-          .get("http://localhost:5000/profile/" + data["_id"])
+          .get(beURL + "profile/" + data["_id"])
             .then((res) => {
                console.log(res);
                this.setState({
