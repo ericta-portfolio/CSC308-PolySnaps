@@ -4,6 +4,8 @@ import logo from "./logo3.png";
 import axios from "axios";
 
 function Signup() {
+  const feURL = "https://polysnaps-fe.herokuapp.com/";
+  const beURL = "https://polysnaps-be.herokuapp.com/";
   
   const signup = (details) => {
     console.log(details);
@@ -11,13 +13,13 @@ function Signup() {
     if (details.password === details.password2) {
       if (details.date == null) {
         details.date = new Date();
-      } 
+      }
       axios
-        .post("http://localhost:5000/newUser", details)
+        .post(beURL + "newUser", details)
         .then(function (response) {
           const data = response.data;
           localStorage.setItem("id", data)
-         window.location.href = "http://localhost:3000/Login";
+          window.location.href = feURL + "Login";
         })
         .catch(function (error) {
           console.log(error);

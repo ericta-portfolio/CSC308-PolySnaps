@@ -6,6 +6,8 @@ import profiles from "./profiles";
 import axios from "axios";
 
 export default class MatchesPage extends Component {
+  beURL = "https://polysnaps-be.herokuapp.com/";
+
   state = {
     profiles: [],
     response: false
@@ -15,7 +17,7 @@ export default class MatchesPage extends Component {
     const id = localStorage.getItem("id");
     const jsonId = {"id": id};
     axios
-      .post("http://localhost:5000/matches", jsonId)
+      .post(beURL + "matches", jsonId)
       .then((res) => {
         const profileList = res.data;
         this.setState({ profiles: profileList, response: true });

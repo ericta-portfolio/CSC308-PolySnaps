@@ -7,6 +7,8 @@ import majorsList from "./data/majors.js";
 import axios from 'axios';
 
 export default function ReactForm() {
+  const feURL = "https://polysnaps-fe.herokuapp.com/";
+  const beURL = "https://polysnaps-be.herokuapp.com/";
   let submit = true;
   const [error, setError] = useState([false]);
   const [gender, setGender] = useState("");
@@ -42,8 +44,9 @@ export default function ReactForm() {
     if (submit) {
       const id = localStorage.getItem("id");
       axios
-        .put("http://localhost:5000/profileUser/" + id, profile)
+        .put(beURL + "profileUser/" + id, profile)
         .then(function (response) {
+          window.location.href = feURL + "MatchesPage";
           console.log(response);
         })
         .catch(function (e) {
