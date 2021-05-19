@@ -2,8 +2,10 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
-from flask import jsonify, request
+from flask import jsonify, request, url_for
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
+from compareProfiles import compareProfiles
 
 app = Flask(__name__)
 
@@ -58,22 +60,17 @@ def add_info_users(id):
         user = db_operations.find_one({
             '_id': ObjectId(_id)
         })
-        global CACHE
-        CACHE = user
-        resp = jsonify("User Added Successfully")
-        resp.status_code = 201
-        return resp
+        user = stringify_userid(user)
+        return user["_id"]
     return not_found()
 
-
-@app.route('/newUser', methods=['GET', 'POST'])
+@app.route('/newUser', methods=['GET','POST'])
 def get_users():
     if request.method == 'GET':
-#         users = db_operations.find()
-#         users = map(stringify_userid, users)
-        return "success"
+        users = db_operations.find()
+        # users = map(stringify_userid, users)
+        return dumps(users)
     if request.method == 'POST':
-        print("hello")
         _json = request.get_json()
         _email = _json['email']
         _password = _json['password']
@@ -81,7 +78,7 @@ def get_users():
         _first = _json['first']
         _last = _json['last']
         _date = _json['date']
-        _hashed_password = _password
+        _hashed_password = generate_password_hash(_password)
         db_operations.insert({
             'email': _email,
             'password': _hashed_password,
@@ -90,9 +87,34 @@ def get_users():
             'last': _last,
             'date': _date
         })
-        resp = jsonify("User Added Successfully")
-        resp.status_code = 200
-        return resp
+        user = db_operations.find_one({
+            'email': _email,
+            'password': _hashed_password
+        })
+        user = stringify_userid(user)
+        return user["_id"], 200
+    return not_found()
+    
+@app.route('/matches', methods=['POST'])
+def get_matches():
+    if request.method == 'POST':
+        _json = request.get_json()
+        _id = _json['id']
+        users = list(db_operations.find())
+        if users:
+            users = list(map(stringify_userid, users))
+            users = list(filter(lambda x: "romance" in x.keys(), users))
+        user = db_operations.find_one({
+            '_id': ObjectId(_id)
+        })
+        if user:
+            if "romance" in user.keys():
+                users = list(filter(lambda x: "romance" in x.keys(), users))
+                users = list(map(lambda x: get_scores(x, user), users))
+                users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
+                users = sorted(users, key=lambda k: k["score"], reverse=True)
+                return dumps(users), 200
+            return "no profile info", 200
     return not_found()
 
 @app.route('/users', methods=['POST'])
@@ -101,27 +123,91 @@ def check_user():
         _json = request.get_json()
         _email = _json['email']
         _password = _json['password']
-        if (_email and _password):
-            user = db_operations.find_one({
-                'email': _email,
-                'password': _password
-            })
-            if user:
-                global CACHE
-                CACHE = user
-                resp = jsonify("User found successfully!")
-                # resp = dumps(user)
-                resp.status_code = 200
-                return resp
+        get_info = db_operations.find_one({
+                'email': _email
+        })
+        if (get_info):
+            _stored_password = get_info['password']
+            if (check_password_hash(_stored_password, _password)):
+                if get_info:
+                    user = stringify_userid(get_info)
+                    return user["_id"], 200
             else:
+                print("Wrong Password!")
                 return not_found()
+    return not_found()
+            
+@app.route('/getUser/<id>', methods=['GET'])
+def get_user(id):
+    if request.method == 'GET':
+        user = db_operations.find_one({
+            '_id': ObjectId(id)
+        })
+        if user:
+            user = stringify_userid(user)
+            user["password"] = None
+            return user, 200
+    return not_found()
 
-@app.route('/cache', methods=['GET'])
-def get_cache():
-    print("this happened")
-    global CACHE
-    CACHE["_id"] = str(CACHE["_id"])
-    return jsonify(CACHE), 200
+@app.route('/upload/<id>', methods=['POST', 'PUT'])
+def upload(id):
+    if 'image' in request.files:
+        print("inside upload")
+        #create a file object
+        image = request.files['image']
+        _id = id
+        #save_file params (file_name, "actual file data (binary data)")
+        user = db_operations.find_one({
+            '_id': ObjectId(_id)
+        })
+        if user and request.method == 'PUT':
+            mongo.save_file(image.filename, image)
+            db_operations.update_one({
+                '_id': ObjectId(
+                    _id['$oid']) if '$oid' in _id else ObjectId(_id)
+                    },
+                    {
+                        '$set' : {
+                            'image' : image.filename
+                    }
+            }
+        )
+        global CACHE
+        #update cache
+        CACHE = user
+        resp = jsonify("picture added and user updated successfully!")
+        resp.status_code = 201
+        return resp
+    return not_found()
+
+#send file
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
+
+@app.route('/profile/<id>', methods=['GET'])
+def profile(id):
+    if request.method == 'GET':
+        _id = id
+        user = db_operations.find_one({
+                '_id': ObjectId(_id)
+        })
+        if user:
+            # resp = jsonify(url_for('file', filename= user['image']))
+            filename= user['image']
+            # resp = jsonify()
+            # resp.status_code = 201
+            return ("http://localhost:5000/file/" + str(filename))
+            # mongo.send_file(filename)
+            # return f'''
+            # <img src="{url_for('file', filename= user['image_name'])}">
+            # '''
+    return not_found()
+    # return f'''
+    #     <h1>{username}</h1>
+    #     <img src="{url_for('file', filename= user['image_name'])}">
+    # '''
+
 
 @app.errorhandler(404)
 def not_found(error=None):
@@ -132,6 +218,15 @@ def not_found(error=None):
     resp = jsonify(message)
     resp.status_code = 404
     return resp
+    
+def stringify_userid(user):
+    user["_id"] = str(user["_id"])
+    user["password"] = None
+    return user
+    
+def get_scores(user, match):
+    user["score"] = compareProfiles(user, match)
+    return user
 
 if __name__ == "__main__":
     app.run(debug=True)

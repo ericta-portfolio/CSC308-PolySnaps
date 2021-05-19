@@ -5,7 +5,9 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "antd": "^4.15.5",
     "axios": "0.21.1",
+    "cypress": "^7.3.0",
     "jalali-react-datepicker": "1.2.1",
     "react": "17.0.2",
     "react-bootstrap": "^1.5.2",
