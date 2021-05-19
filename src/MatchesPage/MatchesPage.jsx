@@ -6,7 +6,6 @@ import profiles from "./profiles";
 import axios from "axios";
 
 export default class MatchesPage extends Component {
-  beURL = "https://polysnaps-be.herokuapp.com/";
 
   state = {
     profiles: [],
@@ -14,6 +13,7 @@ export default class MatchesPage extends Component {
   };
 
   componentDidMount() {
+    const beURL = "https://polysnaps-be.herokuapp.com/";
     const id = localStorage.getItem("id");
     const jsonId = {"id": id};
     axios
