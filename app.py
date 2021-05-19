@@ -197,7 +197,7 @@ def profile(id):
             filename= user['image']
             # resp = jsonify()
             # resp.status_code = 201
-            return ("http://localhost:5000/file/" + str(filename))
+            return ("https://polysnaps-be.herokuapp.com/file/" + str(filename))
             # mongo.send_file(filename)
             # return f'''
             # <img src="{url_for('file', filename= user['image_name'])}">
