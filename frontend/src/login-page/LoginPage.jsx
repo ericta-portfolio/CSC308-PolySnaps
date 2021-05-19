@@ -14,7 +14,7 @@ function LoginPage() {
 
   const Login = (details) => {
     console.log(details);
-    console.log("Loggged in");
+    console.log("Logged in");
     console.log(details.email);
     console.log(details.password);
     axios

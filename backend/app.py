@@ -89,7 +89,7 @@ def get_users():
         })
         user = db_operations.find_one({
             'email': _email,
-            'password': _password
+            'password': _hashed_password
         })
         user = stringify_userid(user)
         return user["_id"], 200
@@ -137,13 +137,11 @@ def check_user():
                 return not_found()
     return not_found()
             
-@app.route('/getUser', methods=['POST'])
-def get_user():
-    if request.method == 'POST':
-        _json = request.get_json()
-        _id = _json["id"]
+@app.route('/getUser/<id>', methods=['GET'])
+def get_user(id):
+    if request.method == 'GET':
         user = db_operations.find_one({
-            '_id': ObjectId(_id)
+            '_id': ObjectId(id)
         })
         if user:
             user = stringify_userid(user)
