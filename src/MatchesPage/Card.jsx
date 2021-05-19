@@ -25,6 +25,7 @@ function Card(props) {
         <Detail label="Hobbies" detailInfo={hobbies} />
         <Detail label="Friendship" detailInfo={friendship} />
         <Detail label="Partying" detailInfo={partying} />
+        <Detail label="Score" detailInfo={props.score} />
       </div>
     </div>
   );
