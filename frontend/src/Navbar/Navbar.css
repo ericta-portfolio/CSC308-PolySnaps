@@ -16,7 +16,7 @@
 }
 
 #link1 {
-    left: 180px;
+    left:220px;
     font-weight:bold;
     font-size:12pt;
 }
@@ -35,6 +35,13 @@
 
 #link4 {
     left: 405px;
+}
+
+#log {
+    right: 30px;
+    top:10px;
+    background-color:darkgray;
+    position:absolute;
 }
 
 #link0:hover, #link1:hover, #link2:hover, #link3:hover {

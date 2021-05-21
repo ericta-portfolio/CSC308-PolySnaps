@@ -1,12 +1,37 @@
 import React, { useState } from "react";
+import { Button } from 'react-bootstrap';
+import "./login.css";
+import logo from "./logo3.png";
+import axios from "axios";
 
-function LoginForm({ Login, error }) {
+function LoginForm() {
+
+  const Login = (details) => {
+    document.getElementById("failed").innerHTML = null;
+    axios
+      .post("http://localhost:5000/users", details)
+      .then(function (response) {
+        const data = response.data;
+        localStorage.setItem("id", data);
+        window.location.href = "http://localhost:3000/ProfileForm";
+      })
+      .catch(function (e) {
+        document.getElementById("failed").innerHTML = "Incorrect username or password";
+      });
+  };
+
   const [details, setDetails] = useState({ email: "", password: "" });
   const submitHandler = (e) => {
     e.preventDefault();
     Login(details);
   };
+
+  const signup = () => {
+    window.location.href = "http://localhost:3000/Signup";
+  }
   return (
+    <div className="container">
+      <img src={logo} alt="PolySnaps Logo" />
     <form onSubmit={submitHandler}>
       <div className="form-inner">
         <div className="form-group">
@@ -41,9 +66,15 @@ function LoginForm({ Login, error }) {
             value={details.password}
           />
         </div>
-        <input type="submit" value="Log In" />
+
+        <p id="failed"></p>
+        <span>
+        <Button type="submit" onClick={submitHandler}>Log In</Button>
+        <Button type="submit" id="signup" onClick={signup}>Sign Up</Button>
+        </span>
       </div>
     </form>
+    </div>
   );
 }
 

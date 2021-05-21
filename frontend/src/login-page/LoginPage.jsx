@@ -21,16 +21,12 @@ function LoginPage() {
       .post("http://localhost:5000/users", details)
       .then(function (response) {
         const data = response.data;
-        localStorage.setItem("id", data)
+        localStorage.setItem("id", data);
         window.location.href = "http://localhost:3000/ProfileForm";
-        
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (e) {
+        document.getElementById("failure").innerHTML = e;
       });
-    // setUser({
-    //   email: details.email
-    // });
   };
 
   const Logout = () => {
@@ -43,14 +39,7 @@ function LoginPage() {
   return (
     <div className="container">
       <img src={logo} alt="PolySnaps Logo" />
-      {user.email !== "" ? (
-        <div className="welcome">
-          <h2>Welcome to PolySnaps!</h2>
-          <button onClick={Logout}> Logout</button>
-        </div>
-      ) : (
         <LoginForm Login={Login} error={error} />
-      )}
     </div>
   );
 }

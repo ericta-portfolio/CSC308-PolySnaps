@@ -4,7 +4,7 @@ import history from './history'
 
 import Signup from "../signup-page/Signup";
 import ProfileFormPage from "../profile-form-FE/ProfileFormPage"
-import LoginPage from "../login-page/LoginPage"
+import LoginPage from "../login-page/LoginForm"
 import MatchesPage from "../MatchesPage/MatchesPage"
 
 export default class Routes extends Component {
