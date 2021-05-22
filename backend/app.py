@@ -11,8 +11,9 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb+srv://polysnaps:cpw2021@cluster0.2oaoq.mongodb.net/mydatabase?retryWrites=true&w=majority"
 app.config['CORS_HEADERS'] = 'Content-Type'
-
+#CORS stands for Cross Origin Requests.
 CORS(app) #Here we'll allow requests coming from any domain.
+# Not recommended for production environment.
 
 mongo = PyMongo(app) #initializing the app variable
 
@@ -21,8 +22,6 @@ mongo = PyMongo(app) #initializing the app variable
 db_operations = mongo.db.newUsers
 db_operations2 = mongo.db.profiles
 
-CACHE = None
-
 #All the routings in our app will be mentioned here.
 @app.route('/test')
 def test():
@@ -30,9 +29,9 @@ def test():
 
 @app.route('/profileUser/<id>', methods=['PUT'])
 def add_info_users(id):
-    if request.method == 'PUT':
-        _id = id
-        _json = request.get_json()
+    _id = id
+    _json = request.get_json()
+    try:
         _personality = _json['personality']
         _romance = _json['romance']
         _friendship = _json['friendship']
@@ -40,44 +39,49 @@ def add_info_users(id):
         _spirituality = _json['spirituality']
         _partying = _json['partying']
         _major = _json['major']
-        db_operations.update_one({
-            '_id': ObjectId(
-                _id['$oid']) if '$oid' in _id else ObjectId(_id)
-                },
-                {
-                    '$set' : {
-                        'personality': _personality,
-                        'romance': _romance,
-                        'friendship': _friendship,
-                        'hobbies': _hobbies,
-                        'spirituality': _spirituality,
-                        'partying': _partying,
-                        'major': _major
-                    }
+        _id = ObjectId(_id)
+    except :
+        return not_found()
+    db_operations.update_one({
+        '_id': _id
+        },
+            {
+                '$set' : {
+                    'personality': _personality,
+                    'romance': _romance,
+                    'friendship': _friendship,
+                    'hobbies': _hobbies,
+                    'spirituality': _spirituality,
+                    'partying': _partying,
+                    'major': _major
                 }
+            }
         )
-        user = db_operations.find_one({
-            '_id': ObjectId(_id)
-        })
-        user = stringify_userid(user)
-        return user["_id"]
-    return not_found()
+    user = db_operations.find_one({
+        '_id': ObjectId(_id)
+    })
+    user = stringify_userid(user)
+    return user["_id"], 201
 
 @app.route('/newUser', methods=['GET','POST'])
 def get_users():
     if request.method == 'GET':
         users = db_operations.find()
         # users = map(stringify_userid, users)
-        return dumps(users)
-    if request.method == 'POST':
+        return dumps(users), 200
+    else:
         _json = request.get_json()
-        _email = _json['email']
-        _password = _json['password']
-        _gender = _json['gender']
-        _first = _json['first']
-        _last = _json['last']
-        _date = _json['date']
+        try:
+            _email = _json['email']
+            _password = _json['password']
+            _gender = _json['gender']
+            _first = _json['first']
+            _last = _json['last']
+            _date = _json['date']
+        except:
+            return not_found()
         _hashed_password = generate_password_hash(_password)
+        
         db_operations.insert({
             'email': _email,
             'password': _hashed_password,
@@ -91,30 +95,27 @@ def get_users():
             'password': _hashed_password
         })
         user = stringify_userid(user)
-        return user["_id"], 200
-    return not_found()
+        return user["_id"], 201
     
 @app.route('/matches', methods=['POST'])
 def get_matches():
-    if request.method == 'POST':
-        _json = request.get_json()
-        _id = _json['id']
-        users = list(db_operations.find())
-        if users:
-            users = list(map(stringify_userid, users))
+    _json = request.get_json()
+    _id = _json['id']
+    users = list(db_operations.find())
+    if users:
+        users = list(map(stringify_userid, users))
+        users = list(filter(lambda x: "romance" in x.keys(), users))
+    user = db_operations.find_one({
+        '_id': ObjectId(_id)
+    })
+    if user:
+        if "romance" in user.keys():
             users = list(filter(lambda x: "romance" in x.keys(), users))
-        user = db_operations.find_one({
-            '_id': ObjectId(_id)
-        })
-        if user:
-            if "romance" in user.keys():
-                users = list(filter(lambda x: "romance" in x.keys(), users))
-                users = list(map(lambda x: get_scores(x, user), users))
-                users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
-                users = sorted(users, key=lambda k: k["score"], reverse=True)
-                return dumps(users), 200
-            return "no profile info", 200
-    return not_found()
+            users = list(map(lambda x: get_scores(x, user), users))
+            users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
+            users = sorted(users, key=lambda k: k["score"], reverse=True)
+            return dumps(users), 200
+    return "no profile info", 404
 
 @app.route('/users', methods=['POST'])
 def check_user():
@@ -138,25 +139,28 @@ def check_user():
             
 @app.route('/getUser/<id>', methods=['GET'])
 def get_user(id):
-    if request.method == 'GET':
-        user = db_operations.find_one({
-            '_id': ObjectId(id)
-        })
-        if user:
-            user = stringify_userid(user)
-            user["password"] = None
-            return user, 200
+    try:
+        id = ObjectId(id)
+    except:
+        return id, 400
+    user = db_operations.find_one({
+        '_id': ObjectId(id)
+    })
+    if user:
+        user = stringify_userid(user)
+        user["password"] = None
+        return user, 200
     return not_found()
 
 @app.route('/profile_pic_upload/<id>', methods=['POST', 'PUT'])
 def upload(id):
     if 'image' in request.files:
-        print("inside upload")
         #create a file object
         image = request.files['image']
+        _id = id
         #save_file params (file_name, "actual file data (binary data)")
         user = db_operations.find_one({
-            '_id': ObjectId(id)
+            '_id': ObjectId(_id)
         })
         if user and request.method == 'PUT':
             mongo.save_file(image.filename, image)
@@ -170,9 +174,6 @@ def upload(id):
                     }
             }
         )
-        global CACHE
-        #update cache
-        CACHE = user
         resp = jsonify("picture added and user updated successfully!")
         resp.status_code = 201
         return resp
