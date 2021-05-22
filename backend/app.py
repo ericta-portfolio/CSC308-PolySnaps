@@ -11,9 +11,8 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb+srv://polysnaps:cpw2021@cluster0.2oaoq.mongodb.net/mydatabase?retryWrites=true&w=majority"
 app.config['CORS_HEADERS'] = 'Content-Type'
-#CORS stands for Cross Origin Requests.
+
 CORS(app) #Here we'll allow requests coming from any domain.
-# Not recommended for production environment.
 
 mongo = PyMongo(app) #initializing the app variable
 
@@ -149,16 +148,15 @@ def get_user(id):
             return user, 200
     return not_found()
 
-@app.route('/upload/<id>', methods=['POST', 'PUT'])
+@app.route('/profile_pic_upload/<id>', methods=['POST', 'PUT'])
 def upload(id):
     if 'image' in request.files:
         print("inside upload")
         #create a file object
         image = request.files['image']
-        _id = id
         #save_file params (file_name, "actual file data (binary data)")
         user = db_operations.find_one({
-            '_id': ObjectId(_id)
+            '_id': ObjectId(id)
         })
         if user and request.method == 'PUT':
             mongo.save_file(image.filename, image)
@@ -185,7 +183,7 @@ def upload(id):
 def file(filename):
     return mongo.send_file(filename)
 
-@app.route('/profile/<id>', methods=['GET'])
+@app.route('/profile_pic_retrieve/<id>', methods=['GET'])
 def profile(id):
     if request.method == 'GET':
         _id = id
@@ -193,21 +191,9 @@ def profile(id):
                 '_id': ObjectId(_id)
         })
         if user:
-            # resp = jsonify(url_for('file', filename= user['image']))
             filename= user['image']
-            # resp = jsonify()
-            # resp.status_code = 201
             return ("http://localhost:5000/file/" + str(filename))
-            # mongo.send_file(filename)
-            # return f'''
-            # <img src="{url_for('file', filename= user['image_name'])}">
-            # '''
     return not_found()
-    # return f'''
-    #     <h1>{username}</h1>
-    #     <img src="{url_for('file', filename= user['image_name'])}">
-    # '''
-
 
 @app.errorhandler(404)
 def not_found(error=None):

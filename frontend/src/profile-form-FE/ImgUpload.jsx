@@ -11,10 +11,6 @@ class ImgUpload extends Component {
     selectedFile: null 
   }
 
-  // handleImageChange = (profileImage) => {
-
-  // }
-
   fileSelectedHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
     console.log(event.target.files[0]);
@@ -33,7 +29,7 @@ class ImgUpload extends Component {
       fd.append("image", this.state.selectedFile, this.state.selectedFile.name);
       //needs to send an http request
       axios
-        .put("http://localhost:5000/upload/" + data["_id"], fd, {
+        .put("http://localhost:5000/profile_pic_upload/" + data["_id"], fd, {
           onUploadProgress: (progressEvent) => {
             console.log(
               "Upload Progress:" +
@@ -45,7 +41,7 @@ class ImgUpload extends Component {
         .then((res) => {
           console.log(res);
           axios
-          .get("http://localhost:5000/profile/" + data["_id"])
+          .get("http://localhost:5000/profile_pic_retrieve/" + data["_id"])
             .then((res) => {
                console.log(res);
                this.setState({
