@@ -2,34 +2,38 @@
     margin-right: 5px;
 }
 
+#navbarID {
+    background:#542e71;
+}
+
 #link0, #link1, #link2, #link3, #link4 {
     color: black;
-    top: 20px;
+    top: 15px;
     position: absolute;
+    font-size:20px;
+    font-family:Copperplate;
 }
 
 #link0 {
     left: 100px;
+    font-weight:375;
     position:absolute;
-    font-size:12pt;
-    font-weight:bold;
 }
 
 #link1 {
-    left:220px;
-    font-weight:bold;
-    font-size:12pt;
+    font-weight:375;
+    left:260px;
 }
 
 #link2 {
     left: 303px;
-    font-weight:bold;
+    font-weight:10000;
     font-size:12pt;
 }
 
 #link3 {
     left: 380px;
-    font-weight:bold;
+    font-weight:medium;
     font-size:12pt;
 }
 
@@ -40,8 +44,10 @@
 #log {
     right: 30px;
     top:10px;
-    background-color:darkgray;
+    background-color:#a799b7;
     position:absolute;
+    
+    font-family:Copperplate;
 }
 
 #link0:hover, #link1:hover, #link2:hover, #link3:hover {
