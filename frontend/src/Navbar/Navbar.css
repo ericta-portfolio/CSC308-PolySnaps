@@ -7,11 +7,11 @@
 }
 
 #link0, #link1, #link2, #link3, #link4 {
-    color: black;
     top: 15px;
     position: absolute;
     font-size:20px;
     font-family:Copperplate;
+    color:rgba(252, 252, 252, 0.8);
 }
 
 #link0 {
@@ -55,9 +55,13 @@
 }
 
 #logo {
-    height:30px;
+    height:36px;
     width:auto;
     position: absolute;
+    top:109px !important;
+    background-color:rgba(252, 252, 252, 0.8);
+    border-radius:10px;
+    padding:3px;
 }
 
 #toggle {
