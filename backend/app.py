@@ -100,7 +100,12 @@ def get_users():
 @app.route('/matches', methods=['POST'])
 def get_matches():
     _json = request.get_json()
-    _id = _json['id']
+    try:
+        _id = ObjectId(_json['id'])
+    except:
+        resp = jsonify({"message":"id error"})
+        resp.status_code = 400
+        return resp
     users = list(db_operations.find())
     if users:
         users = list(map(stringify_userid, users))
@@ -115,26 +120,26 @@ def get_matches():
             users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
             users = sorted(users, key=lambda k: k["score"], reverse=True)
             return dumps(users), 200
-    return "no profile info", 404
+    return not_found()
 
 @app.route('/users', methods=['POST'])
 def check_user():
-    if request.method == 'POST':
-        _json = request.get_json()
+    _json = request.get_json()
+    try:
         _email = _json['email']
         _password = _json['password']
-        get_info = db_operations.find_one({
-                'email': _email
-        })
-        if (get_info):
-            _stored_password = get_info['password']
-            if (check_password_hash(_stored_password, _password)):
-                if get_info:
-                    user = stringify_userid(get_info)
-                    return user["_id"], 200
-            else:
-                print("Wrong Password!")
-                return not_found()
+    except:
+        resp = jsonify({"message":"email/password error"})
+        resp.status_code = 400
+        return resp
+    get_info = db_operations.find_one({
+            'email': _email
+    })
+    if (get_info):
+        _stored_password = get_info['password']
+        if (check_password_hash(_stored_password, _password)):
+            user = stringify_userid(get_info)
+            return user["_id"], 200
     return not_found()
             
 @app.route('/getUser/<id>', methods=['GET'])
@@ -152,31 +157,33 @@ def get_user(id):
         return user, 200
     return not_found()
 
-@app.route('/profile_pic_upload/<id>', methods=['POST', 'PUT'])
+@app.route('/profile_pic_upload/<id>', methods=['PUT'])
 def upload(id):
     if 'image' in request.files:
         #create a file object
         image = request.files['image']
-        _id = id
+        try:
+            _id = id
+        except:
+            return "id error", 400
         #save_file params (file_name, "actual file data (binary data)")
         user = db_operations.find_one({
-            '_id': ObjectId(_id)
+            '_id': _id
         })
-        if user and request.method == 'PUT':
+        if user:
             mongo.save_file(image.filename, image)
             db_operations.update_one({
-                '_id': ObjectId(
-                    _id['$oid']) if '$oid' in _id else ObjectId(_id)
+                '_id': _id
                     },
                     {
                         '$set' : {
                             'image' : image.filename
-                    }
-            }
-        )
-        resp = jsonify("picture added and user updated successfully!")
-        resp.status_code = 201
-        return resp
+                        }
+                        
+                    })
+            resp = jsonify("picture added and user updated successfully!")
+            resp.status_code = 201
+            return resp
     return not_found()
 
 #send file
