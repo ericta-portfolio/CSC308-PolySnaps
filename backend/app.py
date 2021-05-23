@@ -76,7 +76,7 @@ def add_users():
     except:
         return not_found()
     _hashed_password = generate_password_hash(_password)
-    
+
     db_operations.insert({
         'email': _email,
         'password': _hashed_password,
@@ -100,7 +100,7 @@ def get_users():
         email_list = get_user_email(copy_users)
         return dumps(users)
         # return dumps(email_list)
-    
+
 @app.route('/matches', methods=['POST'])
 def get_matches():
     _json = request.get_json()
@@ -140,7 +140,7 @@ def check_user():
                 print("Wrong Password!")
                 return not_found()
     return not_found()
-            
+
 @app.route('/getUser/<id>', methods=['GET'])
 def get_user(id):
     try:
@@ -209,7 +209,7 @@ def not_found(error=None):
     resp = jsonify(message)
     resp.status_code = 404
     return resp
-    
+
 def stringify_userid(user):
     user["_id"] = str(user["_id"])
     user["password"] = None
@@ -218,7 +218,7 @@ def stringify_userid(user):
 def get_user_email(user):
     email_list = [e["email"] for e in user]
     return email_list
-    
+
 def get_scores(user, match):
     user["score"] = compareProfiles(user, match)
     return user

@@ -1,0 +1,18 @@
+.form-inner {
+    left:calc(50% - 100px);
+    width:200px;
+    position:absolute;
+}
+
+.form-group {
+  left:calc(50% - 100px);
+    width:200px;
+}
+
+#selectdiv {
+  width:250px;
+}
+
+#date {
+  margin-bottom:15px;
+}

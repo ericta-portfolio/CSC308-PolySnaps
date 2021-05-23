@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from 'react-bootstrap';
 import "./login.css";
+import "./styles.css";
 import logo from "./logo3.png";
 import axios from "axios";
 
@@ -36,6 +37,7 @@ function LoginForm() {
       <div className="form-inner">
         <div className="form-group">
           <input
+            style={{ "margin-left": "calc(50% - 125px)" }}
             type="email"
             placeholder="Email"
             name="email"
@@ -53,6 +55,7 @@ function LoginForm() {
         </div>
         <div className="form-group">
           <input
+            style={{"margin-left": "calc(50% - 125px)" }}
             type="password"
             placeholder="Password"
             name="password"
@@ -69,8 +72,8 @@ function LoginForm() {
 
         <p id="failed"></p>
         <span>
-        <Button type="submit" onClick={submitHandler}>Log In</Button>
-        <Button type="submit" id="signup" onClick={signup}>Sign Up</Button>
+        <Button type="submit" id="loginbtn" onClick={submitHandler}>Log In</Button>
+        <Button type="submit" id="signupbtn" onClick={signup}>Sign Up</Button>
         </span>
       </div>
     </form>
