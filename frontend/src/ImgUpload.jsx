@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import { Avatar } from 'antd';
 
 class ImgUpload extends Component {
-
+  
   state={
     profileImage: "",
     selectedFile: null 

@@ -1,5 +1,6 @@
 import React from "react";
-import Avatar from "./Avatar";
+// import Avatar from "./Avatar";
+import { Image } from 'antd';
 import Detail from "./Detail";
 
 function Card(props) {
@@ -11,12 +12,27 @@ function Card(props) {
     <div className="card">
       <div className="top">
         <p className="mid"> {props.id} </p>
-        <p className="name">
+        <p className="name"
+        style={{ 
+          "margin-top": "50px", 
+          "font-family": "Copperplate",
+          "font-size" : "35px",
+          "font-weight" : "bold"
+         }}>
           {props.first} {props.last}
         </p>
-        <Avatar img={props.img} />
+        <Image 
+        style={{ "margin": "5px" }}
+        width={200} 
+        src="error" 
+        fallback="https://semantic-ui.com/images/wireframe/image.png" />
       </div>
-      <div className="bottom">
+      <div className="bottom"
+      style={{ 
+          "font-family": "Copperplate",
+          "font-size" : "20px",
+          "font-weight" : "200"
+         }}>
         <Detail label="Gender" detailInfo={props.gender} />
         <Detail label="Major" detailInfo={props.major} />
         <Detail label="Personality" detailInfo={props.personality} />

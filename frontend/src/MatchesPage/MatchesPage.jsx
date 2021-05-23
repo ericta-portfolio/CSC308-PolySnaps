@@ -29,7 +29,9 @@ export default class MatchesPage extends Component {
   render() {
     return (
       <div>
-        <h1 className="heading">My Matches</h1>
+        <h1 className="heading"
+        style={{ 
+          "font-family": "Copperplate"}}>My Matches</h1>
         <dl className="dictionary">
           {this.state.profiles.map(this.createCard)}{" "}
         </dl>
@@ -49,8 +51,6 @@ export default class MatchesPage extends Component {
   createCard = (profile) => {
     return (
       <div key={profile._id}>
-        <button>Accept</button>
-        <button onClick={() => this.removeCard(profile._id)}>Reject</button>
         <Card
           //this key must be written like that!
           // it can be  string, number, but it must be unique across
@@ -70,6 +70,9 @@ export default class MatchesPage extends Component {
           partying={profile.partying}
           score={profile.score}
         />
+        <button>Accept</button>
+        <button 
+        onClick={() => this.removeCard(profile._id)}>Reject</button>
       </div>
     );
   };
