@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'
 import { Avatar } from 'antd';
 
 class ImgUpload extends Component {
-
+  
   state={
     profileImage: "",
     selectedFile: null 
@@ -68,17 +68,20 @@ class ImgUpload extends Component {
     return (
       <div className="ImgUpload">
         <input
-          style={{ display: "none" }}
+          // style={{ display: "none" }}
           type="file"
           onChange={this.fileSelectedHandler}
           ref={(fileInput) => (this.fileInput = fileInput)}
         />
-        <button onClick={() => this.fileInput.click()}>Pick File</button>
+        {/* <button onClick={() => this.fileInput.click()}>Pick File</button> */}
         <button onClick={this.fileUploadHandler}>Upload Your Picture</button>
         <div>
         <Avatar 
-        style={{ "margin-top": "30px" }}
-        size={300} icon="img" src={this.state.profileImage}/>
+        // style={{ "margin-top": "30px" }}
+        size={300} 
+        icon="img"
+        src={this.state.profileImage}
+        />
         {/* <ProfileImg img="https://picsum.photos/200" /> */}
         </div>
       </div>

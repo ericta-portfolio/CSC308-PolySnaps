@@ -63,40 +63,53 @@ def add_info_users(id):
     user = stringify_userid(user)
     return user["_id"], 201
 
-@app.route('/newUser', methods=['GET','POST'])
+@app.route('/newUser', methods=['POST'])
+def add_users():
+    _json = request.get_json()
+    try:
+        _email = _json['email']
+        _password = _json['password']
+        _gender = _json['gender']
+        _first = _json['first']
+        _last = _json['last']
+        _date = _json['date']
+    except:
+        return not_found()
+    _hashed_password = generate_password_hash(_password)
+# check if the email already exists
+    all_users = list(db_operations.find())
+    # maybe I don't need this here anymore!
+    email_list = get_user_email(all_users)
+    if _email in email_list:
+        print("Account already exists! Please sign-in :)")
+        return "Account already exists! Please sign-in :)", 400
+
+    db_operations.insert({
+        'email': _email,
+        'password': _hashed_password,
+        'gender': _gender,
+        'first': _first,
+        'last': _last,
+        'date': _date,
+        'image': ""
+    })
+    user = db_operations.find_one({
+        'email': _email,
+        'password': _hashed_password
+    })
+    user = stringify_userid(user)
+    return user["_id"], 201
+
+@app.route('/retrieve_all', methods=['GET'])
 def get_users():
     if request.method == 'GET':
-        users = db_operations.find()
-        # users = map(stringify_userid, users)
-        return dumps(users), 200
-    else:
-        _json = request.get_json()
-        try:
-            _email = _json['email']
-            _password = _json['password']
-            _gender = _json['gender']
-            _first = _json['first']
-            _last = _json['last']
-            _date = _json['date']
-        except:
-            return not_found()
-        _hashed_password = generate_password_hash(_password)
-        
-        db_operations.insert({
-            'email': _email,
-            'password': _hashed_password,
-            'gender': _gender,
-            'first': _first,
-            'last': _last,
-            'date': _date
-        })
-        user = db_operations.find_one({
-            'email': _email,
-            'password': _hashed_password
-        })
-        user = stringify_userid(user)
-        return user["_id"], 201
-    
+        users = list(db_operations.find())
+        # maybe I don't need this here anymore!
+        copy_users = users.copy()
+        email_list = get_user_email(copy_users)
+        return dumps(users)
+        # return dumps(email_list)
+
 @app.route('/matches', methods=['POST'])
 def get_matches():
     _json = request.get_json()
@@ -141,7 +154,7 @@ def check_user():
             user = stringify_userid(get_info)
             return user["_id"], 200
     return not_found()
-            
+
 @app.route('/getUser/<id>', methods=['GET'])
 def get_user(id):
     try:
@@ -212,12 +225,16 @@ def not_found(error=None):
     resp = jsonify(message)
     resp.status_code = 404
     return resp
-    
+
 def stringify_userid(user):
     user["_id"] = str(user["_id"])
     user["password"] = None
     return user
-    
+
+def get_user_email(user):
+    email_list = [e["email"] for e in user]
+    return email_list
+
 def get_scores(user, match):
     user["score"] = compareProfiles(user, match)
     return user
