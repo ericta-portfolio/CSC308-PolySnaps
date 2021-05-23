@@ -20,7 +20,11 @@ function Signup() {
          window.location.href = "http://localhost:3000/Login";
         })
         .catch(function (error) {
-          console.log(error);
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            alert(error.response.data);
+          }
         });
     } else {
       console.log("Details do not match!");

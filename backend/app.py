@@ -76,6 +76,13 @@ def add_users():
     except:
         return not_found()
     _hashed_password = generate_password_hash(_password)
+# check if the email already exists
+    all_users = list(db_operations.find())
+    # maybe I don't need this here anymore!
+    email_list = get_user_email(all_users)
+    if _email in email_list:
+        print("Account already exists! Please sign-in :)")
+        return "Account already exists! Please sign-in :)", 400
 
     db_operations.insert({
         'email': _email,
@@ -83,7 +90,8 @@ def add_users():
         'gender': _gender,
         'first': _first,
         'last': _last,
-        'date': _date
+        'date': _date,
+        'image': ""
     })
     user = db_operations.find_one({
         'email': _email,
@@ -96,6 +104,7 @@ def add_users():
 def get_users():
     if request.method == 'GET':
         users = list(db_operations.find())
+        # maybe I don't need this here anymore!
         copy_users = users.copy()
         email_list = get_user_email(copy_users)
         return dumps(users)
