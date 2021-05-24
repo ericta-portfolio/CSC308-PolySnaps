@@ -8,7 +8,8 @@ import axios from "axios";
 export default class MatchesPage extends Component {
   state = {
     profiles: [],
-    response: false
+    response: false,
+    failure: false
   };
 
   componentDidMount() {
@@ -18,15 +19,21 @@ export default class MatchesPage extends Component {
       .post("http://localhost:5000/matches", jsonId)
       .then((res) => {
         const profileList = res.data;
-        this.setState({ profiles: profileList, response: true });
+        this.setState({ profiles: profileList, response: true, failure: false });
       })
       .catch(function (error) {
         //Not handling the error. Just logging into the console.
-        console.log(error);
+        this.setState({ profiles: [], response: true, failure: true });
       })
   }
 
   render() {
+    if (!this.state.response) {
+      return null;
+    }
+    if (this.state.profiles.length === 0 || this.state.failure) {
+      return (<h4>No matches found</h4>);
+    }
     return (
       <div>
         <h1 className="heading"
@@ -59,6 +66,11 @@ export default class MatchesPage extends Component {
   accept = (id) => {
     axios
     .post("http://localhost:5000/acceptMatch/" + localStorage.getItem("id"), {"match":id})
+    .then((res) => {
+      console.log("rejected");
+    })
+    axios
+    .post("http://localhost:5000/rejectMatch/" + localStorage.getItem("id"), {"match":id})
     .then((res) => {
       console.log("rejected");
     })

@@ -29,6 +29,7 @@ db_operations4 = mongo.db.rejected
 #All the routings in our app will be mentioned here.
 @app.route('/test')
 def test():
+    db_operations.delete_many({"first":"Test"})
     return "App is working perfectly"
 
 @app.route('/profileUser/<id>', methods=['PUT'])
@@ -135,6 +136,7 @@ def get_accepted(id):
             return "no accepted matches", 200
         matches = list(map(str, matches))
         matches = list(map(lambda x: db_operations.find_one({'_id': ObjectId(x)}), matches))
+        matches = list(filter(lambda x: x is not None, matches))
         matches = list(map(stringify_userid, matches))
         matches = list(map(lambda x: get_scores(x, userProf), matches))
         matches = sorted(matches, key=lambda k: k["score"], reverse=True)
@@ -190,7 +192,7 @@ def get_matches():
         if "romance" in user.keys():
             users = list(filter(lambda x: "romance" in x.keys(), users))
             users = list(map(lambda x: get_scores(x, user), users))
-            users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
+            users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != str(_id), users))
             users = sorted(users, key=lambda k: k["score"], reverse=True)
             if rejected:
                 try:
