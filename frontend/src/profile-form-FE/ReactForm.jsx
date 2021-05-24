@@ -5,6 +5,7 @@ import interestsList from "./data/interests.js";
 import recreationalsList from "./data/recreationals.js";
 import majorsList from "./data/majors.js";
 import axios from 'axios';
+import './profile.css';
 
 export default function ReactForm() {
   let submit = true;
@@ -118,9 +119,12 @@ export default function ReactForm() {
   }
 
   return (
+  <label className="format-titles">  
     <div>
+      <h1> Fill out Profile Form Below: </h1>
       {/* Gender */}
       <h1>Gender: {gender}</h1>
+      <label className="gender-input">
       <input
         checked={gender === "Male"}
         onChange={genderChange}
@@ -135,6 +139,7 @@ export default function ReactForm() {
         type="radio"
         value="Female"
       />
+      
       <label className="form-input">Female</label>
       <br />
       <input
@@ -144,10 +149,12 @@ export default function ReactForm() {
         value="Other"
       />
       <label className="form-input">Other</label>
+      </label>
       <br />
 
       {/* Personality */}
       <h1>Personality: {personality}</h1>
+      <label className="person-input">
       <input
         checked={personality === "Introvert"}
         onChange={personalityChange}
@@ -171,12 +178,14 @@ export default function ReactForm() {
         value="In Between"
       />
       <label className="form-input">In Between</label>
+      </label>
       <br />
 
       {/* Major */}
       <h1>Major: {major}</h1>
       {majorsList.map((majorItem) => (
         <div>
+           <label className="major-input">
           <input
             checked={major === majorItem}
             onChange={majorChange}
@@ -184,6 +193,7 @@ export default function ReactForm() {
             value={majorItem}
           />
           <label className="form-input">{majorItem}</label>
+          </label>
         </div>
       ))}
 
@@ -191,13 +201,15 @@ export default function ReactForm() {
       <h1>Romantic Interests: {romance}</h1>
       {interestsList.map((interest) => (
         <div>
+          <label className="romance-input">
           <input
             onChange={romanceChange}
-            type="checkbox"
+            type="radio"
             placeholder={interest}
             value={interest}
           />
-          <span className="form-input">{interest}</span>
+          <label className="form-input">{interest}</label>
+          </label>
         </div>
       ))}
 
@@ -205,13 +217,15 @@ export default function ReactForm() {
       <h1>Friendship Interest: {friendship}</h1>
       {interestsList.map((interest) => (
         <div>
+          <label className="friend-input">
           <input
             onChange={friendshipChange}
-            type="checkbox"
+            type="radio"
             placeholder={interest}
             value={interest}
           />
-          <span className="form-input">{interest}</span>
+          <label className="form-input">{interest}</label>
+          </label>
         </div>
       ))}
 
@@ -219,13 +233,15 @@ export default function ReactForm() {
       <h1>Hobbies: {hobbies}</h1>
       {hobbiesList.map((hobby) => (
         <div>
+          <label className="hobb-input">
           <input
             onChange={hobbiesChange}
-            type="checkbox"
+            type="radio"
             placeholder={hobby}
             value={hobby}
           />
-          <span className="form-input">{hobby}</span>
+          <label className="form-input">{hobby}</label>
+          </label>
         </div>
       ))}
 
@@ -233,6 +249,7 @@ export default function ReactForm() {
       <h1>Spirituality: {spirituality}</h1>
       {religionsList.map((religion) => (
         <div>
+          <label className="spirit-input">
           <input
             checked={spirituality === religion}
             onChange={spiritualityChange}
@@ -240,6 +257,7 @@ export default function ReactForm() {
             value={religion}
           />
           <label className="form-input">{religion}</label>
+          </label>
         </div>
       ))}
 
@@ -247,13 +265,15 @@ export default function ReactForm() {
       <h1>Party Favors: {partying}</h1>
       {recreationalsList.map((recreational) => (
         <div>
+          <label className="party-input">
           <input
             onChange={recreationalChange}
-            type="checkbox"
+            type="radio"
             placeholder={recreational}
             value={recreational}
           />
-          <span className="form-input">{recreational}</span>
+          <label className="form-input">{recreational}</label>
+          </label>
         </div>
       ))}
 
@@ -266,9 +286,12 @@ export default function ReactForm() {
           <button onClick={() => setError(false)}>Close</button>
         </div>
       )}
+      <h3>
       <button onClick={handleSubmit} type="submit">
         Submit
       </button>
+      </h3>
     </div>
+  </label>
   );
 }
