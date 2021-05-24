@@ -118,41 +118,29 @@ export default function ReactForm() {
     }
   }
 
+  function deselectRecreational(event) {
+    const changedItem = event.target.value;
+    var recr = document.getElementsByClassName("recreationals");
+    var deselectRec = document.getElementById("deselectRec");
+    if (deselectRec.checked) {
+      for (var i = 0; i < recr.length; i++) {
+        recr[i].checked = false;
+      }
+    }
+    if (!partying.includes(changedItem)) {
+      setPartying((prevVal) => {
+        return [...prevVal, changedItem];
+      });
+    } else {
+      setPartying(partying.filter((option) => option !== changedItem));
+    }
+    
+  }
+
   return (
   <label className="format-titles">  
     <div>
-      <h1> Fill out Profile Form Below: </h1>
-      {/* Gender */}
-      <h1>Gender:</h1>
-      <label className="gender-input">
-      <h1>Gender:</h1>
-      <input
-        checked={gender === "Male"}
-        onChange={genderChange}
-        type="radio"
-        value="Male"
-      />
-      <label className="form-input">Male</label>
-      <br />
-      <input
-        checked={gender === "Female"}
-        onChange={genderChange}
-        type="radio"
-        value="Female"
-      />
-      
-      <label className="form-input">Female</label>
-      <br />
-      <input
-        checked={gender === "Other"}
-        onChange={genderChange}
-        type="radio"
-        value="Other"
-      />
-      <label className="form-input">Other</label>
-      </label>
-      <br />
-
+      <h1> Fill out Profile Form Below: </h1>      
       {/* Personality */}
       <h1>Personality:</h1>
       <label className="person-input">
@@ -264,19 +252,33 @@ export default function ReactForm() {
 
       {/* Partying */}
       <h1>Party Favors:</h1>
-      {recreationalsList.map((recreational) => (
+      {recreationalsList.map((recreational) => {if (recreational != "None") { return (
         <div>
           <label className="party-input">
           <input
             onChange={recreationalChange}
             type="checkbox"
+            className="recreationals"
             placeholder={recreational}
             value={recreational}
           />
           <label className="form-input">{recreational}</label>
           </label>
         </div>
-      ))}
+      )} else {
+        return (<div>
+          <label className="party-input">
+          <input
+            onChange={deselectRecreational}
+            type="checkbox"
+            placeholder={recreational}
+            value={recreational}
+            id="deselectRec"
+          />
+          <label className="form-input">{recreational}</label>
+          </label>
+        </div>)
+      }})}
 
       <br />
 
