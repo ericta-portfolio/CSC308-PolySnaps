@@ -2,28 +2,25 @@
 
 import React, { Component } from "react";
 import Card from "./Card";
-import profiles from "./profiles";
 import axios from "axios";
 
 export default class MatchesPage extends Component {
   state = {
     profiles: [],
-    response: false,
-    failure: false
+    response: false
   };
 
   componentDidMount() {
     const id = localStorage.getItem("id");
-    const jsonId = {"id": id};
     axios
-      .post("http://localhost:5000/matches", jsonId)
+      .get("http://localhost:5000/getAccepted/" + id)
       .then((res) => {
         const profileList = res.data;
-        this.setState({ profiles: profileList, response: true, failure: false });
+        this.setState({ profiles: profileList, response: true });
       })
       .catch(function (error) {
         //Not handling the error. Just logging into the console.
-        this.setState({ profiles: [], response: true, failure: true });
+        console.log(error);
       })
   }
 
@@ -31,14 +28,14 @@ export default class MatchesPage extends Component {
     if (!this.state.response) {
       return null;
     }
-    if (this.state.profiles.length === 0 || this.state.failure) {
-      return (<h4>No matches found</h4>);
+    if (this.state.profiles == "no accepted matches") {
+      return (<h4>No accepted matches found</h4>);
     }
     return (
       <div>
         <h1 className="heading"
         style={{ 
-          "font-family": "Copperplate"}}>My Matches</h1>
+          "font-family": "Copperplate"}}>My Accepted Matches</h1>
         <dl className="dictionary">
           {this.state.profiles.map(this.createCard)}{" "}
         </dl>
@@ -54,27 +51,6 @@ export default class MatchesPage extends Component {
       })
     });
   };
-
-  reject = (id) => {
-    axios
-    .post("http://localhost:5000/rejectMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-  }
-
-  accept = (id) => {
-    axios
-    .post("http://localhost:5000/acceptMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-    axios
-    .post("http://localhost:5000/rejectMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-  }
 
   createCard = (profile) => {
     return (
@@ -98,15 +74,6 @@ export default class MatchesPage extends Component {
           partying={profile.partying}
           score={profile.score}
         />
-        <button onClick={() => {
-          this.accept(profile._id);
-          this.removeCard(profile._id);
-        }}>Accept</button>
-        <button
-        onClick={() => {
-          this.reject(profile._id);
-          this.removeCard(profile._id);
-        }}>Reject</button>
       </div>
     );
   };

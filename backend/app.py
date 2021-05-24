@@ -23,10 +23,13 @@ mongo = PyMongo(app) #initializing the app variable
 ## db_operations = mongo.db.<COLLECTION_NAME>
 db_operations = mongo.db.newUsers
 db_operations2 = mongo.db.profiles
+db_operations3 = mongo.db.accepted
+db_operations4 = mongo.db.rejected
 
 #All the routings in our app will be mentioned here.
 @app.route('/test')
 def test():
+    db_operations.delete_many({"first":"Test"})
     return "App is working perfectly"
 
 @app.route('/profileUser/<id>', methods=['PUT'])
@@ -76,7 +79,7 @@ def add_users():
         _last = _json['last']
         _date = _json['date']
     except:
-        return not_found()
+        return "field error", 400
     _hashed_password = generate_password_hash(_password)
 # check if the email already exists
     all_users = list(db_operations.find())
@@ -100,15 +103,70 @@ def add_users():
     })
     user = stringify_userid(user)
     return user["_id"], 201
+    
+@app.route('/acceptMatch/<id>', methods=['POST'])
+def accept_match(id):
+    _json = request.get_json()
+    try:
+        match_id = ObjectId(_json['match'])
+        id = ObjectId(id)
+    except:
+        return "match error", 400
+    user = db_operations3.find_one({'id': id})
+    if user:
+        db_operations3.update({"id": id}, {'$push': {"matches": match_id}})
+        return "success", 201
+    matches = []
+    matches.append(match_id)
+    db_operations3.insert({"id": id, "matches": matches})
+    return "success", 201
+
+@app.route('/getAccepted/<id>', methods=['GET'])
+def get_accepted(id):
+    try:
+        id = ObjectId(id)
+    except:
+        return "id error", 400
+    user = db_operations3.find_one({'id': id})
+    userProf = db_operations.find_one({'_id': id})
+    if user:
+        try:
+            matches = user['matches']
+        except:
+            return "no accepted matches", 200
+        matches = list(map(str, matches))
+        matches = list(map(lambda x: db_operations.find_one({'_id': ObjectId(x)}), matches))
+        matches = list(filter(lambda x: x is not None, matches))
+        matches = list(map(stringify_userid, matches))
+        matches = list(map(lambda x: get_scores(x, userProf), matches))
+        matches = sorted(matches, key=lambda k: k["score"], reverse=True)
+        return dumps(matches), 200
+    return "no accepted matches", 200
+    
+@app.route('/rejectMatch/<id>', methods=['POST'])
+def reject_match(id):
+    _json = request.get_json()
+    try:
+        match_id = ObjectId(_json['match'])
+        id = ObjectId(id)
+    except:
+        return "match error", 400
+    user = db_operations4.find_one({'id': id})
+    if user:
+        db_operations4.update({"id": id}, {'$push': {"matches": match_id}})
+        return "success", 201
+    matches = []
+    matches.append(match_id)
+    db_operations4.insert({"id": id, "matches": matches})
+    return "success", 201
 
 @app.route('/retrieve_all', methods=['GET'])
 def get_users():
     if request.method == 'GET':
         users = list(db_operations.find())
         # maybe I don't need this here anymore!
-        copy_users = users.copy()
-        email_list = get_user_email(copy_users)
-        return dumps(users)
+        users = list(map(stringify_userid, users))
+        return dumps(users), 200
         # return dumps(email_list)
 
 @app.route('/matches', methods=['POST'])
@@ -125,14 +183,24 @@ def get_matches():
         users = list(map(stringify_userid, users))
         users = list(filter(lambda x: "romance" in x.keys(), users))
     user = db_operations.find_one({
-        '_id': ObjectId(_id)
+        '_id': _id
+    })
+    rejected = db_operations4.find_one({
+        'id': _id
     })
     if user:
         if "romance" in user.keys():
             users = list(filter(lambda x: "romance" in x.keys(), users))
             users = list(map(lambda x: get_scores(x, user), users))
-            users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != _id, users))
+            users = list(filter(lambda x: x["score"] >= 0 and str(x["_id"]) != str(_id), users))
             users = sorted(users, key=lambda k: k["score"], reverse=True)
+            if rejected:
+                try:
+                    rejected = rejected["matches"]
+                    rejected = list(map(str, rejected))
+                except:
+                    print("none rejected")
+                users = list(filter(lambda x: x["_id"] not in rejected, users))
             return dumps(users), 200
     return not_found()
 

@@ -123,8 +123,9 @@ export default function ReactForm() {
     <div>
       <h1> Fill out Profile Form Below: </h1>
       {/* Gender */}
-      <h1>Gender: {gender}</h1>
+      <h1>Gender:</h1>
       <label className="gender-input">
+      <h1>Gender:</h1>
       <input
         checked={gender === "Male"}
         onChange={genderChange}
@@ -153,7 +154,7 @@ export default function ReactForm() {
       <br />
 
       {/* Personality */}
-      <h1>Personality: {personality}</h1>
+      <h1>Personality:</h1>
       <label className="person-input">
       <input
         checked={personality === "Introvert"}
@@ -182,7 +183,7 @@ export default function ReactForm() {
       <br />
 
       {/* Major */}
-      <h1>Major: {major}</h1>
+      <h1>Major:</h1>
       {majorsList.map((majorItem) => (
         <div>
            <label className="major-input">
@@ -198,13 +199,13 @@ export default function ReactForm() {
       ))}
 
       {/* Romance */}
-      <h1>Romantic Interests: {romance}</h1>
+      <h1>Romantic Interests:</h1>
       {interestsList.map((interest) => (
         <div>
           <label className="romance-input">
           <input
             onChange={romanceChange}
-            type="radio"
+            type="checkbox"
             placeholder={interest}
             value={interest}
           />
@@ -214,13 +215,13 @@ export default function ReactForm() {
       ))}
 
       {/* Friendship */}
-      <h1>Friendship Interest: {friendship}</h1>
+      <h1>Friendship Interest:</h1>
       {interestsList.map((interest) => (
         <div>
           <label className="friend-input">
           <input
             onChange={friendshipChange}
-            type="radio"
+            type="checkbox"
             placeholder={interest}
             value={interest}
           />
@@ -230,13 +231,13 @@ export default function ReactForm() {
       ))}
 
       {/* Hobbies */}
-      <h1>Hobbies: {hobbies}</h1>
+      <h1>Hobbies:</h1>
       {hobbiesList.map((hobby) => (
         <div>
           <label className="hobb-input">
           <input
             onChange={hobbiesChange}
-            type="radio"
+            type="checkbox"
             placeholder={hobby}
             value={hobby}
           />
@@ -246,7 +247,7 @@ export default function ReactForm() {
       ))}
 
       {/* Spirituality */}
-      <h1>Spirituality: {spirituality}</h1>
+      <h1>Spirituality:</h1>
       {religionsList.map((religion) => (
         <div>
           <label className="spirit-input">
@@ -262,13 +263,13 @@ export default function ReactForm() {
       ))}
 
       {/* Partying */}
-      <h1>Party Favors: {partying}</h1>
+      <h1>Party Favors:</h1>
       {recreationalsList.map((recreational) => (
         <div>
           <label className="party-input">
           <input
             onChange={recreationalChange}
-            type="radio"
+            type="checkbox"
             placeholder={recreational}
             value={recreational}
           />
