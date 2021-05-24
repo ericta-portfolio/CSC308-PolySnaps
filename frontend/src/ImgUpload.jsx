@@ -74,11 +74,11 @@ class ImgUpload extends Component {
           ref={(fileInput) => (this.fileInput = fileInput)}
         />
         {/* <button onClick={() => this.fileInput.click()}>Pick File</button> */}
-        <button onClick={this.fileUploadHandler}>Upload Your Picture</button>
+        <button onClick={this.fileUploadHandler}>Upload</button>
         <div>
         <Avatar 
-        // style={{ "margin-top": "30px" }}
-        size={300} 
+        style={{ "margin-top": "5px" }}
+        size={350} 
         icon="img"
         src={this.state.profileImage}
         />
