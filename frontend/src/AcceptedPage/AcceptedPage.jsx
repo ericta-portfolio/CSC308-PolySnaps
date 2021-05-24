@@ -25,7 +25,10 @@ export default class MatchesPage extends Component {
   }
 
   render() {
-    if (!this.state.response || this.state.profiles == "no accepted matches") {
+    if (!this.state.response) {
+      return null;
+    }
+    if (this.state.profiles == "no accepted matches") {
       return (<h4>No accepted matches found</h4>);
     }
     return (
