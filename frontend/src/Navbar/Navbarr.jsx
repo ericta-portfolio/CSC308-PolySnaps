@@ -35,7 +35,7 @@ export default class Navbarr extends Component
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
       <div>
       <Navbar bg="primary" variant="dark" id="navbarID">
-              <Navbar.Brand href="/" id="brand"><img id="logo" src={logo} alt="PolySnaps Logo" /></Navbar.Brand>
+              <Navbar.Brand href="/" id="brand"><img className="logoimg" id="logo" src={logo} alt="PolySnaps Logo" /></Navbar.Brand>
                   <Nav className="mr-auto">
                       <Nav.Link href="/ProfileForm" id="link0">Profile Form</Nav.Link>
                       <Nav.Link href="/MatchesPage" id="link1">Matches Page</Nav.Link>

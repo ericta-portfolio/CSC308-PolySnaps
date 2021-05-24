@@ -4,6 +4,8 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import jsonify, request, url_for
 from flask_cors import CORS
+import ssl
+import pymongo
 from werkzeug.security import generate_password_hash, check_password_hash
 from compareProfiles import compareProfiles
 
@@ -176,17 +178,17 @@ def upload(id):
         #create a file object
         image = request.files['image']
         try:
-            _id = id
+            id = ObjectId(id)
         except:
             return "id error", 400
         #save_file params (file_name, "actual file data (binary data)")
         user = db_operations.find_one({
-            '_id': _id
+            '_id': id
         })
         if user:
             mongo.save_file(image.filename, image)
             db_operations.update_one({
-                '_id': _id
+                '_id': id
                     },
                     {
                         '$set' : {
