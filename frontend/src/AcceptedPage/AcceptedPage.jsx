@@ -2,7 +2,6 @@
 
 import React, { Component } from "react";
 import Card from "./Card";
-import profiles from "./profiles";
 import axios from "axios";
 
 export default class MatchesPage extends Component {
@@ -13,9 +12,8 @@ export default class MatchesPage extends Component {
 
   componentDidMount() {
     const id = localStorage.getItem("id");
-    const jsonId = {"id": id};
     axios
-      .post("http://localhost:5000/matches", jsonId)
+      .get("http://localhost:5000/getAccepted/" + id)
       .then((res) => {
         const profileList = res.data;
         this.setState({ profiles: profileList, response: true });
@@ -48,22 +46,6 @@ export default class MatchesPage extends Component {
     });
   };
 
-  reject = (id) => {
-    axios
-    .post("http://localhost:5000/rejectMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-  }
-
-  accept = (id) => {
-    axios
-    .post("http://localhost:5000/acceptMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-  }
-
   createCard = (profile) => {
     return (
       <div key={profile._id}>
@@ -86,15 +68,6 @@ export default class MatchesPage extends Component {
           partying={profile.partying}
           score={profile.score}
         />
-        <button onClick={() => {
-          this.accept(profile._id);
-          this.removeCard(profile._id);
-        }}>Accept</button>
-        <button
-        onClick={() => {
-          this.reject(profile._id);
-          this.removeCard(profile._id);
-        }}>Reject</button>
       </div>
     );
   };

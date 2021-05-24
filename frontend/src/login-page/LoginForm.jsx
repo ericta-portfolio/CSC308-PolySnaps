@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from 'react-bootstrap';
-import "./login.css";
 import "./styles.css";
+import "./login.css";
 import logo from "./logo3.png";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ function LoginForm() {
   }
   return (
     <div className="container">
-      <img src={logo} alt="PolySnaps Logo" />
+      <img className="logoimg" src={logo} alt="PolySnaps Logo" />
     <form onSubmit={submitHandler}>
       <div className="form-inner">
         <div className="form-group">

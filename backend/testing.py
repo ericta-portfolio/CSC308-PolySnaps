@@ -31,11 +31,25 @@ class TestStringMethods(unittest.TestCase):
         pytest.user_id = str(response.data.decode('UTF-8'))
         self.assertEqual(response.status_code,201)
 
-    def test1_add_user_fail(self):
+    def test1_add_user_fail1(self):
         tester = app.test_client(self)
         response = tester.post('/newUser',json={}, content_type='application/json',
                               follow_redirects=True)
-        self.assertEqual(response.status_code,404)
+        self.assertEqual(response.status_code,400)
+        
+    def test1_add_user_fail2(self):
+        tester = app.test_client(self)
+        email = pytest.user_email
+        response = tester.post('/newUser',json={
+                "email": email,
+                "password": "123",
+                "password2": "123",
+                "gender": "Male",
+                "last": "User",
+                "first": "Test",
+                "date": "1999-08-17T20:50:30.000Z"
+        }, content_type='application/json', follow_redirects=True)
+        self.assertEqual(response.status_code,400)
         
     def test1_profile_user(self):
         tester = app.test_client(self)
@@ -94,7 +108,7 @@ class TestStringMethods(unittest.TestCase):
         
     def test2_get_user(self):
         tester = app.test_client(self)
-        response = tester.get('newUser')
+        response = tester.get('retrieve_all')
         id = pytest.user_id
         response = tester.get('/getUser/' + id)
         self.assertEqual(response.status_code,200)
