@@ -1,0 +1,62 @@
+.form-input {
+    margin-left:10px;
+}
+
+.prof-input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif, serif;
+    font-weight: boldest;
+    /* justify-content: center;
+    align-items: center;
+    text-align: center;  */
+}
+
+.format-titles {
+    margin-left: 10px;
+    font-family: sans-serif, serif;
+    font-weight: boldest;   
+}
+
+.hobb-input {
+    margin-left:10px;
+
+}
+
+.romance-input {
+    margin-left:10px;
+}
+
+.major-input {
+    margin-left:10px;
+}
+
+.checked {
+    margin-left: 10px;
+}
+
+.friend-input {
+    margin-left: 10px;
+}
+
+.person-input {
+    margin-left: 10px;
+}
+
+.gender-input {
+    margin-left: 10px;
+}
+
+.party-input {
+    margin-left: 10px;
+}
+
+.spirit-input {
+    margin-left: 10px;
+}
+
+
+
+
