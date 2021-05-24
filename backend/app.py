@@ -81,7 +81,6 @@ def add_users():
     # maybe I don't need this here anymore!
     email_list = get_user_email(all_users)
     if _email in email_list:
-        print("Account already exists! Please sign-in :)")
         return "Account already exists! Please sign-in :)", 400
 
     db_operations.insert({

@@ -11,7 +11,7 @@ function Card(props) {
   return (
     <div className="card">
       <div className="top">
-        <p className="mid"> {props.id} </p>
+        {/* <p className="mid"> {props.id} </p> */}
         <p className="name"
         style={{ 
           "margin-top": "50px", 
