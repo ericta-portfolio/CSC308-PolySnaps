@@ -33,7 +33,7 @@ function Signup() {
 
   return (
     <div id="signupDiv" className="container">
-      <img src={logo} alt="PolySnaps Logo" />
+      <img className="logoimg" src={logo} alt="PolySnaps Logo" />
       <SignupForm Signup={signup} />
     </div>
   );
