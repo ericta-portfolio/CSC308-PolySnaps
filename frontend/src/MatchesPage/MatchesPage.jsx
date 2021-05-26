@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import Card from "./Card";
 import profiles from "./profiles";
@@ -9,7 +7,7 @@ export default class MatchesPage extends Component {
   state = {
     profiles: [],
     response: false,
-    failure: false
+    failure: false,
   };
 
   componentDidMount() {

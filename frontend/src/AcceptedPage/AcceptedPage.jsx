@@ -1,7 +1,7 @@
 
 
 import React, { Component } from "react";
-import Card from "./Card";
+import Card from "../MatchesPage/Card";
 import axios from "axios";
 
 export default class MatchesPage extends Component {

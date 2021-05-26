@@ -1,3 +1,4 @@
+//WE CAN DELETE THIS ONEE!!!
 import React from "react";
 // import Avatar from "./Avatar";
 import { Image } from 'antd';
