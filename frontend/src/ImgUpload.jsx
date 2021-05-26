@@ -1,14 +1,37 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ProfileImg from "./ProfileImg";
 import 'antd/dist/antd.css'
 import { Avatar } from 'antd';
 
 class ImgUpload extends Component {
-  
+
+  // talk to prof... this is duplicate code!
+  getUserData = (idNum) => {
+    var data = null;
+    axios.get('http://localhost:5000/getUser/' + idNum)
+    .then(res => {
+      console.log(res);
+      data = res["data"]
+      axios
+      .get("http://localhost:5000/profile_pic_retrieve/" + data["_id"])
+        .then((res) => {
+            console.log(res);
+            this.setState({
+            profileImage: res["data"]
+          })
+          console.log(res["data"]);
+      })
+      console.log("This is the state:");
+      console.log(this.state.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   state={
     profileImage: "",
-    selectedFile: null 
+    selectedFile: null,
   }
 
   fileSelectedHandler = (event) => {
@@ -48,6 +71,7 @@ class ImgUpload extends Component {
                 profileImage: res["data"]
               })
               console.log(res["data"]);
+              return res["data"]
           })
           .catch(function (error) {
             console.log(error);
@@ -67,13 +91,12 @@ class ImgUpload extends Component {
   render() {
     return (
       <div className="ImgUpload">
+      {(this.state.profileImage == "") ? this.getUserData(localStorage.getItem("id")) : ""}
         <input
-          // style={{ display: "none" }}
           type="file"
           onChange={this.fileSelectedHandler}
           ref={(fileInput) => (this.fileInput = fileInput)}
         />
-        {/* <button onClick={() => this.fileInput.click()}>Pick File</button> */}
         <button onClick={this.fileUploadHandler}>Upload</button>
         <div>
         <Avatar 
@@ -82,7 +105,6 @@ class ImgUpload extends Component {
         icon="img"
         src={this.state.profileImage}
         />
-        {/* <ProfileImg img="https://picsum.photos/200" /> */}
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ function Signup() {
   
   const signup = (details) => {
     console.log(details);
-
+    document.getElementById("failed").innerHTML = null;
     if (details.password === details.password2) {
       if (details.date == null) {
         details.date = new Date();
@@ -23,7 +23,8 @@ function Signup() {
           if (error.response) {
             console.log(error.response.data);
             console.log(error.response.status);
-            alert(error.response.data);
+            // alert();
+            document.getElementById("failed").innerHTML = error.response.data;
           }
         });
     } else {

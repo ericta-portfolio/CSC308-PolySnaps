@@ -1,3 +1,7 @@
+#failed {
+  color:red;
+}
+
 .form-inner {
     left:calc(50% - 100px);
     width:200px;

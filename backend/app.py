@@ -81,9 +81,8 @@ def add_users():
     except:
         return "field error", 400
     _hashed_password = generate_password_hash(_password)
-# check if the email already exists
+    # check if the email already exists
     all_users = list(db_operations.find())
-    # maybe I don't need this here anymore!
     email_list = get_user_email(all_users)
     if _email in email_list:
         return "Account already exists! Please sign-in :)", 400
@@ -164,10 +163,8 @@ def reject_match(id):
 def get_users():
     if request.method == 'GET':
         users = list(db_operations.find())
-        # maybe I don't need this here anymore!
         users = list(map(stringify_userid, users))
         return dumps(users), 200
-        # return dumps(email_list)
 
 @app.route('/matches', methods=['POST'])
 def get_matches():
@@ -300,9 +297,10 @@ def stringify_userid(user):
     user["password"] = None
     return user
 
-def get_user_email(user):
-    email_list = [e["email"] for e in user]
-    return email_list
+def get_user_image(user):
+    keys = ['email', 'image']
+    image_dict = {i:user[i] for i in keys}
+    return image_dict
 
 def get_scores(user, match):
     user["score"] = compareProfiles(user, match)
