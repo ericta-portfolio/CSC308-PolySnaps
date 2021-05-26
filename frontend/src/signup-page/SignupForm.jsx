@@ -134,6 +134,14 @@ function SignupForm({ Signup }) {
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
+          <p 
+          style={{
+            "font-weight": "350",
+            "white-space": "nowrap",
+            "margin-top": "10px",
+            "margin-left": "5px"
+          }}
+          id="failed"></p>
         </div>
         <input id="signupSubmit" type="submit" value="Sign Up" />
       </div>
