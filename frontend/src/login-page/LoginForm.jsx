@@ -70,7 +70,12 @@ function LoginForm() {
           />
         </div>
 
-        <p id="failed"></p>
+        <p 
+        style={{
+            "font-weight": "350",
+            "white-space": "nowrap",
+          }}
+        id="failed"></p>
         <span>
         <Button type="submit" id="loginbtn" onClick={submitHandler}>Log In</Button>
         <Button type="submit" id="signupbtn" onClick={signup}>Sign Up</Button>
