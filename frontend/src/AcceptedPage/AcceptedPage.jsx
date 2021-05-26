@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import Card from "../MatchesPage/Card";
 import axios from "axios";
