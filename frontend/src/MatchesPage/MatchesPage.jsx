@@ -21,7 +21,7 @@ export default class MatchesPage extends Component {
         const profileList = res.data;
         this.setState({ profiles: profileList, response: true, failure: false });
       })
-      .catch(function (error) {
+      .catch((error) => {
         //Not handling the error. Just logging into the console.
         this.setState({ profiles: [], response: true, failure: true });
       })

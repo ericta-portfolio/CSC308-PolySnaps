@@ -15,6 +15,7 @@ export default class Navbarr extends Component
     // send to home page
     localStorage.setItem("id", "null");
     this.setState({funct: this.login.bind(this), text: "Log In"});
+    window.location.href = "http://localhost:3000/";
   }
 
   state = {

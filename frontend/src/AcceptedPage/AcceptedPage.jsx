@@ -7,7 +7,8 @@ import axios from "axios";
 export default class MatchesPage extends Component {
   state = {
     profiles: [],
-    response: false
+    response: false,
+    failure: false
   };
 
   componentDidMount() {
@@ -16,11 +17,11 @@ export default class MatchesPage extends Component {
       .get("http://localhost:5000/getAccepted/" + id)
       .then((res) => {
         const profileList = res.data;
-        this.setState({ profiles: profileList, response: true });
+        this.setState({ profiles: profileList, response: true, failure:false} );
       })
-      .catch(function (error) {
+      .catch((error) => {
         //Not handling the error. Just logging into the console.
-        console.log(error);
+        this.setState({ profiles: [], response: true, failure: true });
       })
   }
 
@@ -28,7 +29,7 @@ export default class MatchesPage extends Component {
     if (!this.state.response) {
       return null;
     }
-    if (this.state.profiles == "no accepted matches") {
+    if (this.state.failure || this.state.profiles === "no accepted matches") {
       return (<h4>No accepted matches found</h4>);
     }
     return (
