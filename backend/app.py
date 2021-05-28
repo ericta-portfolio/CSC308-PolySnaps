@@ -139,7 +139,7 @@ def get_accepted(id):
         matches = list(map(stringify_userid, matches))
         matches = list(map(lambda x: get_scores(x, userProf), matches))
         matches = sorted(matches, key=lambda k: k["score"], reverse=True)
-        return dumps(matches), 200
+        return jsonify(matches), 200
     return "no accepted matches", 200
     
 @app.route('/rejectMatch/<id>', methods=['POST'])
@@ -164,7 +164,7 @@ def get_users():
     if request.method == 'GET':
         users = list(db_operations.find())
         users = list(map(stringify_userid, users))
-        return dumps(users), 200
+        return jsonify(users), 200
 
 @app.route('/matches', methods=['POST'])
 def get_matches():
@@ -198,7 +198,7 @@ def get_matches():
                 except:
                     print("none rejected")
                 users = list(filter(lambda x: x["_id"] not in rejected, users))
-            return dumps(users), 200
+            return jsonify(users), 200
     return not_found()
 
 @app.route('/users', methods=['POST'])
