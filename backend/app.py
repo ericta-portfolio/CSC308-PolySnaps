@@ -305,6 +305,10 @@ def get_user_image(user):
 def get_scores(user, match):
     user["score"] = compareProfiles(user, match)
     return user
+    
+def get_user_email(user):
+    email_list = [e["email"] for e in user]
+    return email_list
 
 if __name__ == "__main__":
     app.run(debug=True)
