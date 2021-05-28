@@ -28,3 +28,15 @@ describe('Backend running - post new user', () => {
         });
     });
 });
+
+describe('Backend running - post new user', () => {
+    context('Given I have submitted an empty signup form', () => {
+        it('When sending an empty user object for insertion', () => {
+            cy.request({method: 'POST', url: 'http://localhost:5000/newUser', body: {}, failOnStatusCode: false})
+              .then((response) => {
+                  expect(response.status).to.be.equal(400);
+                  expect(response.body).to.be.equal("field error");
+              })
+        });
+    });
+});
