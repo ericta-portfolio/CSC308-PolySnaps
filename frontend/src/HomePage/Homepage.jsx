@@ -16,7 +16,6 @@ export default function Homepage() {
 
   return (
     <div>
-      <h1>*Replace with Navbar*</h1>
       <div
         style={{
           display: "flex",

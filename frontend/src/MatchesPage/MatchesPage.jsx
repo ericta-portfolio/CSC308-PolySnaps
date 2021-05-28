@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Card from "./Card";
-import profiles from "./profiles";
 import axios from "axios";
 
 export default class MatchesPage extends Component {
