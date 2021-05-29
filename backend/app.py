@@ -80,13 +80,15 @@ def add_users():
         _date = _json['date']
     except:
         return "field error", 400
+        
+    if _email == "" or _password == "" or _gender == "" or _first == "" or _last == "":
+        return "Please fill out the entire form!", 400
     _hashed_password = generate_password_hash(_password)
     # check if the email already exists
     all_users = list(db_operations.find())
     email_list = get_user_email(all_users)
     if _email in email_list:
         return "Account already exists! Please sign-in :)", 400
-
     db_operations.insert({
         'email': _email,
         'password': _hashed_password,
@@ -208,18 +210,20 @@ def check_user():
         _email = _json['email']
         _password = _json['password']
     except:
-        resp = jsonify({"message":"email/password error"})
+        resp = jsonify({"message":"Email/Password error"})
         resp.status_code = 400
         return resp
     get_info = db_operations.find_one({
             'email': _email
     })
+    if _email == "" and _password == "":
+        return "Email and Password left blank!", 400
     if (get_info):
         _stored_password = get_info['password']
         if (check_password_hash(_stored_password, _password)):
             user = stringify_userid(get_info)
             return user["_id"], 200
-    return not_found()
+    return "Incorrect username or password", 400
 
 @app.route('/getUser/<id>', methods=['GET'])
 def get_user(id):

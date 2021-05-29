@@ -121,6 +121,7 @@ function SignupForm({ Signup }) {
         <div className="form-group">
           <select
             id="selectdiv"
+            name="gender"
             value={details.gender}
             onChange={(e) =>
               setDetails({

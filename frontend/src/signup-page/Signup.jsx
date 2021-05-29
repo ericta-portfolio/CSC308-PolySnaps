@@ -28,7 +28,7 @@ function Signup() {
           }
         });
     } else {
-      console.log("Details do not match!");
+      document.getElementById("failed").innerHTML = "Passwords do not match!";
     }
   };
 
