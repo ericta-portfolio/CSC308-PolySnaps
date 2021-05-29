@@ -26,8 +26,7 @@ export default function ReactForm() {
       submit = false;
     }
 
-    const profile = {
-      gender: gender !== "" ? gender : runError("Gender"),
+    const profile = {\
       major: major !== "" ? major : runError("Major"),
       personality:
         personality !== "" ? personality : runError("Personality Type"),
@@ -56,10 +55,6 @@ export default function ReactForm() {
   }
   function majorChange(event) {
     setMajor(event.target.value);
-  }
-
-  function genderChange(event) {
-    setGender(event.target.value);
   }
 
   function personalityChange(event) {
