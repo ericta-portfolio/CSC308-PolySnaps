@@ -26,7 +26,7 @@ export default function ReactForm() {
       submit = false;
     }
 
-    const profile = {\
+    const profile = {
       major: major !== "" ? major : runError("Major"),
       personality:
         personality !== "" ? personality : runError("Personality Type"),
