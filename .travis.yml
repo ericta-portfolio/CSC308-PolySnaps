@@ -1,7 +1,11 @@
-language: python
-
-install:
-  - pip install -r requirements.txt
-
-script: 
-  - echo "No tests so far"
+jobs:
+  include:
+    - language: python
+      python: 3.8
+      before_install:
+      - cd backend
+      install: 
+      - pip install -r requirements.txt
+      script:
+      - pylint app.py --exit-zero
+      - pytest testing.py
