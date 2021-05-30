@@ -5,6 +5,7 @@ coverage==5.5
 dnspython==2.1.0
 flask-cors==1.10.3
 flask-pymongo==2.3.0
+flask-unittest==0.1.1
 flask==1.1.2
 gunicorn==20.1.0
 importlib-metadata==4.0.1
