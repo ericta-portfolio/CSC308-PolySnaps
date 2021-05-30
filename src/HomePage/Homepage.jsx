@@ -15,11 +15,11 @@ export default function Homepage() {
   }
 
   return (
-    <div>    
+    <div>
       <div
         style={{
           display: "flex",
-          flexDirection: "row"
+          flexDirection: "row",
         }}
       >
         <img
@@ -29,17 +29,21 @@ export default function Homepage() {
         />
         <div style={{ width: "50%", margin: "60px 20px" }}>
           <h1
-          style={{
-            "font-family":"Open Sans",
-            "font-weight" : "300",
-            "font-size" : "50px"
-          }}>Welcome to PolySnaps!</h1>
+            style={{
+              "font-family": "Open Sans",
+              "font-weight": "300",
+              "font-size": "50px",
+            }}
+          >
+            Welcome to PolySnaps!
+          </h1>
           <span
-          style={{
-            "font-family":"Open Sans",
-            "font-weight" : "300",
-            "font-size" : "23px"
-          }}>
+            style={{
+              "font-family": "Open Sans",
+              "font-weight": "300",
+              "font-size": "23px",
+            }}
+          >
             Life is often lonely and it is bleak, though it is better to be
             spent together. There is a need for community in every person, and
             it often goes unmet. PolySnaps makes it easier for students at Cal
@@ -54,7 +58,7 @@ export default function Homepage() {
       <div
         style={{
           display: "flex",
-          flexDirection: "row"
+          flexDirection: "row",
         }}
       >
         {testimonials.map(createTestimonial)}

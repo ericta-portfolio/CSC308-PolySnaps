@@ -20,7 +20,7 @@ const hobbiesList = [
   "EDM",
   "Raving",
   "Playing Sports",
-  "Watching Sports"
+  "Watching Sports",
 ];
 
 export default hobbiesList;

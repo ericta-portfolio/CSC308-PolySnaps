@@ -6,7 +6,7 @@ const religions = [
   "Jewish",
   "Muslim",
   "Other",
-  "Decline to State"
+  "Decline to State",
 ];
 
 export default religions;

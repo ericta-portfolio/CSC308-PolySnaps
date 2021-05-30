@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import logo from "./logo3.png";
-import axios from "axios"
+import axios from "axios";
 
 function LoginPage() {
   const adminUser = {
     email: "admin@calpoly.edu",
-    password: "admin123"
+    password: "admin123",
   };
 
   const [user, setUser] = useState({ email: "" });
@@ -32,14 +32,14 @@ function LoginPage() {
   const Logout = () => {
     console.log("Logout");
     setUser({
-      email: ""
+      email: "",
     });
   };
 
   return (
     <div className="container">
       <img src={logo} alt="PolySnaps Logo" />
-        <LoginForm Login={Login} error={error} />
+      <LoginForm Login={Login} error={error} />
     </div>
   );
 }

@@ -39,10 +39,13 @@ function LoginForm() {
     <div className="container">
       <img className="logoimg" src={logo} alt="PolySnaps Logo" />
       <h1
-      style={{
-        "font-family": "Copperplate",
-        "font-size" : "50px"
-        }}>Sign In</h1>
+        style={{
+          "font-family": "Copperplate",
+          "font-size": "50px",
+        }}
+      >
+        Sign In
+      </h1>
       <form onSubmit={submitHandler}>
         <div className="form-inner">
           <div className="form-group">
@@ -90,7 +93,9 @@ function LoginForm() {
           <Button type="submit" id="loginbtn" onClick={submitHandler}>
             Log In
           </Button>
-          <a id="signupbtn" href="https://polysnaps-fe.herokuapp.com/Signup">Need an account?</a>
+          <a id="signupbtn" href="https://polysnaps-fe.herokuapp.com/Signup">
+            Need an account?
+          </a>
         </div>
       </form>
     </div>
