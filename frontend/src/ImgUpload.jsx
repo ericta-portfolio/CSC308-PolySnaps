@@ -104,11 +104,13 @@ class ImgUpload extends Component {
           // style={{"width":"200px",
           // "position": "relative",
           // "left": "40px"}}
+          id="profileimgupload"
           type="file"
           onChange={this.fileSelectedHandler}
           ref={(fileInput) => (this.fileInput = fileInput)}
         />
-        <button 
+        <button
+        id="uploadimg"
         className="btn2 upload"
         onClick={this.fileUploadHandler}>Upload</button>
         <div>

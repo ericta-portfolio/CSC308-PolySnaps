@@ -31,12 +31,12 @@ describe("/Signup", () => {
   //check for emails that aren't calpoly
 
   it("Successful Sign up", () => {
-    cy.get("[name=first]").type("JayJay");
-    cy.get("[name=last]").type("the Jet Plane");
-    cy.get("[name=email]").type("jjplane@calpoly.edu");
+    cy.get("[name=first]").type("Cat");
+    cy.get("[name=last]").type("in the Hat");
+    cy.get("[name=email]").type("cinhat@calpoly.edu");
     cy.get('select').select("Other");
-    cy.get("[name=password]").type("jayjay");
-    cy.get("[name=password2]").type("jayjay{enter}");
-    cy.location("pathname").should("match", /\/Login$/);
+    cy.get("[name=password]").type("123");
+    cy.get("[name=password2]").type("123{enter}");
+    cy.location("pathname").should("match", /\/ProfileForm$/);
   });
 });

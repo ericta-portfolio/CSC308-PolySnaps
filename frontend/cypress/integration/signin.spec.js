@@ -17,7 +17,7 @@ describe("/Login", () => {
 
     it("requires email and password", () => {
         cy.get('form').contains('Log In').click()
-        cy.get("[id=failed]").contains("Incorrect username or password");
+        cy.get("[id=failed]").contains("Email and Password left blank!");
     });
 
   it("requires existing email", () => {
@@ -30,6 +30,5 @@ describe("/Login", () => {
     cy.get("[name=email]").type("lalvessi@calpoly.edu");
     cy.get("[name=password]").type("123{enter}");
     cy.location("pathname").should("match", /\/ProfileForm$/);
-    // cy.hash().should('eq', 'http://localhost:3000/ProfileForm')
   });
 });

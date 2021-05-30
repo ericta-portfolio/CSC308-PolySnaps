@@ -1,4 +1,4 @@
-describe("/Login", () => {
+describe("/Logout", () => {
     beforeEach(() => {
       cy.visit("http://localhost:3000/Login");
     });

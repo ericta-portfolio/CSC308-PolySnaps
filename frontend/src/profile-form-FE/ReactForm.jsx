@@ -185,6 +185,7 @@ export default function ReactForm() {
             <label className="container2">
               {majorItem}
               <input
+                name="major"
                 checked={major === majorItem}
                 onChange={majorChange}
                 type="radio"
@@ -202,6 +203,7 @@ export default function ReactForm() {
             <label className="containerbox">
               {interest}
               <input
+                id="romance"
                 onChange={romanceChange}
                 type="checkbox"
                 placeholder={interest}
@@ -219,6 +221,7 @@ export default function ReactForm() {
             <label className="containerbox">
               {interest}
               <input
+              name="friendship"
                 onChange={friendshipChange}
                 type="checkbox"
                 placeholder={interest}
@@ -236,6 +239,7 @@ export default function ReactForm() {
             <label className="containerbox">
               {hobby}
               <input
+                name="hobbies"
                 onChange={hobbiesChange}
                 type="checkbox"
                 placeholder={hobby}
@@ -253,6 +257,7 @@ export default function ReactForm() {
             <label className="container2">
               {religion}
               <input
+                name="spirituality"
                 checked={spirituality === religion}
                 onChange={spiritualityChange}
                 type="radio"
@@ -272,6 +277,7 @@ export default function ReactForm() {
                 <label className="containerbox">
                   {recreational}
                   <input
+                    name="partying"
                     onChange={recreationalChange}
                     type="checkbox"
                     className="recreationals"
@@ -288,6 +294,7 @@ export default function ReactForm() {
                 <label className="containerbox">
                   {recreational}
                   <input
+                    name="noparty"
                     onChange={deselectRecreational}
                     type="checkbox"
                     placeholder={recreational}
@@ -306,7 +313,7 @@ export default function ReactForm() {
         {/* Incomplete Submission Handler + Submit Button */}
         {error[0] && (
           <div>
-            <span>Incomplete Submission, what's your {error[1]}?</span>
+            <span id="incompleteform">Incomplete Submission, what's your {error[1]}?</span>
             <button onClick={() => setError(false)}>Close</button>
           </div>
         )}
