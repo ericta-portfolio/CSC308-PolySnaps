@@ -8,7 +8,7 @@ function compareProfiles(p1, p2) {
     friendship: friendship1,
     hobbies: hobbies1,
     spirituality: spirituality1,
-    partying: partying1
+    partying: partying1,
   } = p1;
   if (gender1 === "Male") {
     gender1 = "Men";
@@ -24,7 +24,7 @@ function compareProfiles(p1, p2) {
     friendship: friendship2,
     hobbies: hobbies2,
     spirituality: spirituality2,
-    partying: partying2
+    partying: partying2,
   } = p2;
   if (gender2 === "Male") {
     gender2 = "Men";

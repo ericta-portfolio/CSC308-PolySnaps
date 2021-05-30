@@ -4,7 +4,6 @@ import logo from "./logo3.png";
 import axios from "axios";
 
 function Signup() {
-
   const signup = (details) => {
     console.log(details);
 

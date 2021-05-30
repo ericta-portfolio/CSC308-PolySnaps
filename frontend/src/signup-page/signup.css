@@ -1,22 +1,22 @@
 #failed {
-  color:red;
+  color: red;
 }
 
 .form-inner {
-    left:calc(50% - 100px);
-    width:200px;
-    position:absolute;
+  left: calc(50% - 100px);
+  width: 200px;
+  position: absolute;
 }
 
 .form-group {
-  left:calc(50% - 100px);
-    width:200px;
+  left: calc(50% - 100px);
+  width: 200px;
 }
 
 #selectdiv {
-  width:250px;
+  width: 250px;
 }
 
 #date {
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }

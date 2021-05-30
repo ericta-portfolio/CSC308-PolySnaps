@@ -1,6 +1,5 @@
-
-import Navbarr from './Navbar/Navbarr'
-import Routes from './Navbar/Routes'
+import Navbarr from "./Navbar/Navbarr";
+import Routes from "./Navbar/Routes";
 
 function App() {
   return (

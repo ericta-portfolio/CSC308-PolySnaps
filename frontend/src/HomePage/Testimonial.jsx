@@ -10,7 +10,7 @@ export default function Testimonial(props) {
         display: "block",
         marginLeft: "auto",
         marginRight: "auto",
-        float: "left"
+        float: "left",
       }}
     >
       <dt>
@@ -24,7 +24,7 @@ export default function Testimonial(props) {
             height: "150px",
             display: "block",
             marginLeft: "auto",
-            marginRight: "auto"
+            marginRight: "auto",
           }}
         />
         <h1>{props.name}</h1>

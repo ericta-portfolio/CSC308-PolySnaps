@@ -5,7 +5,7 @@ const recreationals = [
   "Tobacco",
   "Alcohol",
   "Other",
-  "None"
+  "None",
 ];
 
 export default recreationals;

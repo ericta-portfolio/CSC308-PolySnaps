@@ -11,7 +11,7 @@ function SignupForm({ Signup }) {
     gender: "",
     last: "",
     first: "",
-    date: new Date().now 
+    date: new Date().now,
   });
   const submitHandler = (e) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ function SignupForm({ Signup }) {
             onChange={(e) =>
               setDetails({
                 ...details,
-                first: e.target.value
+                first: e.target.value,
               })
             }
             value={details.first}
@@ -45,7 +45,7 @@ function SignupForm({ Signup }) {
             onChange={(e) =>
               setDetails({
                 ...details,
-                last: e.target.value
+                last: e.target.value,
               })
             }
             value={details.last}
@@ -62,7 +62,7 @@ function SignupForm({ Signup }) {
             onChange={(e) =>
               setDetails({
                 ...details,
-                email: e.target.value
+                email: e.target.value,
               })
             }
             pattern=".+@calpoly.edu"
@@ -80,7 +80,7 @@ function SignupForm({ Signup }) {
             onChange={(e) =>
               setDetails({
                 ...details,
-                password: e.target.value
+                password: e.target.value,
               })
             }
             value={details.password}
@@ -96,7 +96,7 @@ function SignupForm({ Signup }) {
             onChange={(e) =>
               setDetails({
                 ...details,
-                password2: e.target.value
+                password2: e.target.value,
               })
             }
             value={details.password2}
@@ -113,7 +113,7 @@ function SignupForm({ Signup }) {
               setStartDate(date);
               setDetails({
                 ...details,
-                date: date
+                date: date,
               });
             }}
           />
@@ -126,7 +126,7 @@ function SignupForm({ Signup }) {
             onChange={(e) =>
               setDetails({
                 ...details,
-                gender: e.target.value
+                gender: e.target.value,
               })
             }
           >
@@ -135,14 +135,15 @@ function SignupForm({ Signup }) {
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
-          <p 
-          style={{
-            "font-weight": "350",
-            "white-space": "nowrap",
-            "margin-top": "10px",
-            "margin-left": "5px"
-          }}
-          id="failed"></p>
+          <p
+            style={{
+              "font-weight": "350",
+              "white-space": "nowrap",
+              "margin-top": "10px",
+              "margin-left": "5px",
+            }}
+            id="failed"
+          ></p>
         </div>
         <input id="signupSubmit" type="submit" value="Sign Up" />
       </div>

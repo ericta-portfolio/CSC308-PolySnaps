@@ -138,9 +138,9 @@ export default function ReactForm() {
 
   return (
     <>
-    <h1 className="titleofPage"> Fill out Profile Form Below </h1>
+      <h1 className="titleofPage"> Fill out Profile Form Below </h1>
       {/* <h1>Upload Your Profile Picture:</h1> */}
-      <ImgUpload/>
+      <ImgUpload />
       <div className="moveEverything">
         {/* Personality */}
         <h1 className="titles">Personality:</h1>
@@ -221,7 +221,7 @@ export default function ReactForm() {
             <label className="containerbox">
               {interest}
               <input
-              name="friendship"
+                name="friendship"
                 onChange={friendshipChange}
                 type="checkbox"
                 placeholder={interest}
@@ -313,14 +313,14 @@ export default function ReactForm() {
         {/* Incomplete Submission Handler + Submit Button */}
         {error[0] && (
           <div>
-            <span id="incompleteform">Incomplete Submission, what's your {error[1]}?</span>
+            <span id="incompleteform">
+              Incomplete Submission, what's your {error[1]}?
+            </span>
             <button onClick={() => setError(false)}>Close</button>
           </div>
         )}
         <h3>
-          <button 
-          className="submitbtn"
-          onClick={handleSubmit} type="submit">
+          <button className="submitbtn" onClick={handleSubmit} type="submit">
             Submit
           </button>
         </h3>
