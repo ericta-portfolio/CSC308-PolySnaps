@@ -5,5 +5,4 @@ jobs:
       install:
       - npm install
       script:
-      - yarn run lint
-      - yarn test
+      - npx prettier .
