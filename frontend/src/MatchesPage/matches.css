@@ -4,6 +4,7 @@
     justify-content: space-between;
     margin: 4rem auto;
     max-width: 90%;
+    position:relative;
   }
 
   .dictionary > .term {
@@ -40,7 +41,7 @@
     color: white;
     position: relative;
     bottom: 130px;
-    left: 900px;
+    left: 135px;
     margin: 30px;
     /* margin-left: 10px; */
   }

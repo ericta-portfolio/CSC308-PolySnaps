@@ -19,8 +19,7 @@
   font-family: Copperplate;
   white-space: nowrap;
   font-weight: 500;
-  position: relative;
-  left: 300px;
+  text-align:center;
 }
 
 .container2 {

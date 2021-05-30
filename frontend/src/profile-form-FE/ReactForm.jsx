@@ -137,7 +137,7 @@ export default function ReactForm() {
   }
 
   return (
-    <label>
+    <>
     <h1 className="titleofPage"> Fill out Profile Form Below </h1>
       {/* <h1>Upload Your Profile Picture:</h1> */}
       <ImgUpload/>
@@ -325,6 +325,6 @@ export default function ReactForm() {
           </button>
         </h3>
       </div>
-    </label>
+    </>
   );
 }

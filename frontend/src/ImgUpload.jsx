@@ -101,9 +101,6 @@ class ImgUpload extends Component {
         src={this.state.profileImage}
         />
         <input
-          // style={{"width":"200px",
-          // "position": "relative",
-          // "left": "40px"}}
           id="profileimgupload"
           type="file"
           onChange={this.fileSelectedHandler}
