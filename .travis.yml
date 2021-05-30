@@ -16,4 +16,4 @@ jobs:
       install:
       - npm install
       script:
-      - npx prettier .
+      - npx prettier --check .
