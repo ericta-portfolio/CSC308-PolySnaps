@@ -67,7 +67,7 @@ select {
   border-color: #542e71;
   font-family: Copperplate;
   position: relative;
-  left: 50px;
+  top: 0px;
 }
 
 #signupbtn {
@@ -83,8 +83,8 @@ select {
   font-family: Copperplate;
   white-space: nowrap;
 }
-
-button {
+/* 
+.button {
   border: 1px solid rgba(252, 252, 252, 0.4);
   width: 100px;
   background-color: rgba(252, 252, 252, 0.2);
@@ -94,7 +94,7 @@ button {
   border-radius: 5px;
   border: 1px solid rgba(252, 252, 252, 0.4);
   float: left;
-}
+} */
 
 #loginbtn:hover {
   background-color: #542e71;

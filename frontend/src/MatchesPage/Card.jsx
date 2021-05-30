@@ -38,10 +38,11 @@ function Card(props) {
   const hobbies = props.hobbies.join(", ");
   const partying = props.partying.join(", ");
   return (
-    <div className="card">
+    <div className="term">
     {console.log(props.id)}
     {(profileImage.image == "") ? getUserData(props.id) : ""}
       <div className="top">
+      <dt>
         <p className="name"
         style={{ 
           "margin-top": "50px", 
@@ -51,6 +52,7 @@ function Card(props) {
          }}>
           {props.first} {props.last}
         </p>
+        </dt>
         <Image 
         style={{ "margin": "5px" }}
         width={300} 
@@ -63,6 +65,7 @@ function Card(props) {
           "font-size" : "20px",
           "font-weight" : "200"
          }}>
+         <dd>
         <Detail label="Gender" detailInfo={props.gender} />
         <Detail label="Major" detailInfo={props.major} />
         <Detail label="Personality" detailInfo={props.personality} />
@@ -72,6 +75,7 @@ function Card(props) {
         <Detail label="Friendship" detailInfo={friendship} />
         <Detail label="Partying" detailInfo={partying} />
         <Detail label="Score" detailInfo={props.score} />
+        </dd>
       </div>
     </div>
   );

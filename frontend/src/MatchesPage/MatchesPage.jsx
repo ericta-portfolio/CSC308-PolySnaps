@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import axios from "axios";
+import "./matches.css"
 
 export default class MatchesPage extends Component {
   state = {
@@ -29,13 +30,16 @@ export default class MatchesPage extends Component {
       return null;
     }
     if (this.state.profiles.length === 0 || this.state.failure) {
-      return (<h4>No matches found</h4>);
+      return (<h4 style={{ 
+        "font-family": "Copperplate",
+        "text-align" : "center"}} >No matches found</h4>);
     }
     return (
       <div>
         <h1 className="heading"
         style={{ 
-          "font-family": "Copperplate"}}>My Matches</h1>
+          "font-family": "Copperplate",
+          "text-align" : "center"}}>My Matches</h1>
         <dl className="dictionary">
           {this.state.profiles.map(this.createCard)}{" "}
         </dl>
@@ -76,12 +80,9 @@ export default class MatchesPage extends Component {
   createCard = (profile) => {
     return (
       <div key={profile._id}>
+      <dl className="dictionary">
         <Card
-          //this key must be written like that!
-          // it can be  string, number, but it must be unique across
-          // all of the repeated components
           key={profile._id}
-          //has to be the name inside the contact (contact.NAMEINCONTACT)
           id={profile._id}
           first={profile.first}
           last={profile.last}
@@ -95,15 +96,23 @@ export default class MatchesPage extends Component {
           partying={profile.partying}
           score={profile.score}
         />
-        <button onClick={() => {
+        <button
+        className="button-accept"
+        styles={{
+          "position": "relative",
+          "top": "700px"
+        }} 
+        onClick={() => {
           this.accept(profile._id);
           this.removeCard(profile._id);
         }}>Accept</button>
         <button
+        className="button-reject" 
         onClick={() => {
           this.reject(profile._id);
           this.removeCard(profile._id);
         }}>Reject</button>
+        </dl>
       </div>
     );
   };

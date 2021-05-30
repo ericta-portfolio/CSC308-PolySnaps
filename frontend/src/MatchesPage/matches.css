@@ -1,0 +1,57 @@
+.dictionary {
+    /* display: flex; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 4rem auto;
+    max-width: 90%;
+  }
+
+  .dictionary > .term {
+    text-align: center;
+    /* max-width: 20rem; */
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05), 0 5px 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: all 100ms ease-in-out;
+  }
+
+  .button-reject {
+    background-color: #542e71;
+    opacity: 0.8;
+    border-color: #542e71;
+    padding: 15px 32px;
+    font-family: Copperplate;
+    color: white;
+    position: relative;
+    bottom: 130px;
+    right: 135px;
+    /* margin: 30px; */
+    /* margin-left: 10px; */
+  }
+
+  .button-accept {
+    background-color: #542e71;
+    opacity: 0.8;
+    border-color: #542e71;
+    padding: 15px 32px;
+    font-family: Copperplate;
+    color: white;
+    position: relative;
+    bottom: 130px;
+    left: 900px;
+    margin: 30px;
+    /* margin-left: 10px; */
+  }
+  
+
+  .button-reject:hover {
+    background-color: #542e71;
+    opacity: 1;
+  }
+
+  .button-accept:hover {
+    background-color: #542e71;
+    opacity: 1;
+  }
