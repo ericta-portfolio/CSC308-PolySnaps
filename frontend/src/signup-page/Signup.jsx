@@ -17,7 +17,7 @@ function Signup() {
         .then(function (response) {
           const data = response.data;
           localStorage.setItem("id", data)
-         window.location.href = "http://localhost:3000/Login";
+         window.location.href = "http://localhost:3000/ProfileForm";
         })
         .catch(function (error) {
           if (error.response) {

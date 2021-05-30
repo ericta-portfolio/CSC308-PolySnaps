@@ -45,6 +45,9 @@ export default function ReactForm() {
         .put("http://localhost:5000/profileUser/" + id, profile)
         .then(function (response) {
           console.log(response);
+          const data = response.data;
+          localStorage.setItem("id", data)
+         window.location.href = "http://localhost:3000/MatchesPage";
         })
         .catch(function (e) {
           console.log(e);
