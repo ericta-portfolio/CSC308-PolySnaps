@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./signup.css";
 function SignupForm({ Signup }) {
   const [startDate, setStartDate] = useState(new Date());
   const [details, setDetails] = useState({
@@ -17,7 +18,7 @@ function SignupForm({ Signup }) {
     Signup(details);
   };
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} id="signupwrapper">
       <div className="form-inner">
         <div className="form-group">
           <input
@@ -57,6 +58,7 @@ function SignupForm({ Signup }) {
             placeholder="Email"
             name="email"
             id="email"
+            autoComplete="off"
             onChange={(e) =>
               setDetails({
                 ...details,
@@ -106,6 +108,7 @@ function SignupForm({ Signup }) {
             selected={startDate}
             value={startDate}
             id="date"
+            class="form-group"
             onChange={(date) => {
               setStartDate(date);
               setDetails({
@@ -115,8 +118,10 @@ function SignupForm({ Signup }) {
             }}
           />
         </div>
-        <div>
+        <div className="form-group">
           <select
+            id="selectdiv"
+            name="gender"
             value={details.gender}
             onChange={(e) =>
               setDetails({
@@ -130,6 +135,14 @@ function SignupForm({ Signup }) {
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
+          <p 
+          style={{
+            "font-weight": "350",
+            "white-space": "nowrap",
+            "margin-top": "10px",
+            "margin-left": "5px"
+          }}
+          id="failed"></p>
         </div>
         <input id="signupSubmit" type="submit" value="Sign Up" />
       </div>

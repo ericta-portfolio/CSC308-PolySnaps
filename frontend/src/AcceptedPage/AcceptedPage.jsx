@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import axios from "axios";
-import "./matches.css"
+import "../MatchesPage/matches.css"
 
 export default class MatchesPage extends Component {
   state = {
     profiles: [],
     response: false,
-    failure: false,
+    failure: false
   };
 
   componentDidMount() {
     const id = localStorage.getItem("id");
-    const jsonId = {"id": id};
     axios
-      .post("https://polysnaps-be.herokuapp.com/matches", jsonId)
+      .get("https://polysnaps-be.herokuapp.com/getAccepted/" + id)
       .then((res) => {
         const profileList = res.data;
-        this.setState({ profiles: profileList, response: true, failure: false });
+        this.setState({ profiles: profileList, response: true, failure:false} );
       })
       .catch((error) => {
         //Not handling the error. Just logging into the console.
@@ -29,17 +28,17 @@ export default class MatchesPage extends Component {
     if (!this.state.response) {
       return null;
     }
-    if (this.state.profiles.length === 0 || this.state.failure) {
+    if (this.state.failure || this.state.profiles === "no accepted matches") {
       return (<h4 style={{ 
         "font-family": "Copperplate",
-        "text-align" : "center"}} >No matches found</h4>);
+        "text-align" : "center"}}>No accepted matches found</h4>);
     }
     return (
       <div>
         <h1 className="heading"
         style={{ 
           "font-family": "Copperplate",
-          "text-align" : "center"}}>My Matches</h1>
+          "text-align" : "center"}}>My Accepted Matches</h1>
         <dl className="dictionary">
           {this.state.profiles.map(this.createCard)}{" "}
         </dl>
@@ -56,33 +55,16 @@ export default class MatchesPage extends Component {
     });
   };
 
-  reject = (id) => {
-    axios
-    .post("https://polysnaps-be.herokuapp.com/rejectMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-  }
-
-  accept = (id) => {
-    axios
-    .post("https://polysnaps-be.herokuapp.com/acceptMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-    axios
-    .post("https://polysnaps-be.herokuapp.com/rejectMatch/" + localStorage.getItem("id"), {"match":id})
-    .then((res) => {
-      console.log("rejected");
-    })
-  }
-
   createCard = (profile) => {
     return (
       <div key={profile._id}>
       <dl className="dictionary">
         <Card
+          //this key must be written like that!
+          // it can be  string, number, but it must be unique across
+          // all of the repeated components
           key={profile._id}
+          //has to be the name inside the contact (contact.NAMEINCONTACT)
           id={profile._id}
           first={profile.first}
           last={profile.last}
@@ -96,22 +78,6 @@ export default class MatchesPage extends Component {
           partying={profile.partying}
           score={profile.score}
         />
-        <button
-        className="button-accept"
-        styles={{
-          "position": "relative",
-          "top": "700px"
-        }} 
-        onClick={() => {
-          this.accept(profile._id);
-          this.removeCard(profile._id);
-        }}>Accept</button>
-        <button
-        className="button-reject" 
-        onClick={() => {
-          this.reject(profile._id);
-          this.removeCard(profile._id);
-        }}>Reject</button>
         </dl>
       </div>
     );
