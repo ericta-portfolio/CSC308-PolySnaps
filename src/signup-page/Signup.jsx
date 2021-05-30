@@ -4,34 +4,37 @@ import logo from "./logo3.png";
 import axios from "axios";
 
 function Signup() {
-  const feURL = "https://polysnaps-fe.herokuapp.com/";
-  const beURL = "https://polysnaps-be.herokuapp.com/";
   
   const signup = (details) => {
     console.log(details);
-
+    document.getElementById("failed").innerHTML = null;
     if (details.password === details.password2) {
       if (details.date == null) {
         details.date = new Date();
-      }
+      } 
       axios
-        .post(beURL + "newUser", details)
+        .post("https://polysnaps-be.herokuapp.com/newUser", details)
         .then(function (response) {
           const data = response.data;
           localStorage.setItem("id", data)
-          window.location.href = feURL + "Login";
+         window.location.href = "https://polysnaps-fe.herokuapp.com/ProfileForm";
         })
         .catch(function (error) {
-          console.log(error);
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            // alert();
+            document.getElementById("failed").innerHTML = error.response.data;
+          }
         });
     } else {
-      console.log("Details do not match!");
+      document.getElementById("failed").innerHTML = "Passwords do not match!";
     }
   };
 
   return (
     <div id="signupDiv" className="container">
-      <img src={logo} alt="PolySnaps Logo" />
+      <img className="logoimg" src={logo} alt="PolySnaps Logo" />
       <SignupForm Signup={signup} />
     </div>
   );

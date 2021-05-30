@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import Avatar from "./Avatar";
 import { Image } from 'antd';
-import Detail from "./Detail";
+import Detail from "../MatchesPage/Detail";
 import ImgUpload from "../ImgUpload"
 import axios from "axios";
 

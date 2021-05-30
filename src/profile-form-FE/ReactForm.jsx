@@ -4,11 +4,12 @@ import religionsList from "./data/religions.js";
 import interestsList from "./data/interests.js";
 import recreationalsList from "./data/recreationals.js";
 import majorsList from "./data/majors.js";
-import axios from 'axios';
+import axios from "axios";
+import ImgUpload from "../ImgUpload";
+import "./profileform-radio.css";
+import "./profileform-checkbox.css";
 
 export default function ReactForm() {
-  const feURL = "https://polysnaps-fe.herokuapp.com/";
-  const beURL = "https://polysnaps-be.herokuapp.com/";
   let submit = true;
   const [error, setError] = useState([false]);
   const [gender, setGender] = useState("");
@@ -28,7 +29,6 @@ export default function ReactForm() {
     }
 
     const profile = {
-      gender: gender !== "" ? gender : runError("Gender"),
       major: major !== "" ? major : runError("Major"),
       personality:
         personality !== "" ? personality : runError("Personality Type"),
@@ -38,16 +38,18 @@ export default function ReactForm() {
       hobbies: hobbies.length !== 0 ? hobbies : runError("Hobby"),
       spirituality:
         spirituality !== "" ? spirituality : runError("Spirituality"),
-      partying: partying.length !== 0 ? partying : runError("Party Favor")
+      partying: partying.length !== 0 ? partying : runError("Party Favor"),
     };
 
     if (submit) {
       const id = localStorage.getItem("id");
       axios
-        .put(beURL + "profileUser/" + id, profile)
+        .put("https://polysnaps-be.herokuapp.com/profileUser/" + id, profile)
         .then(function (response) {
-          window.location.href = feURL + "MatchesPage";
           console.log(response);
+          const data = response.data;
+          localStorage.setItem("id", data);
+          window.location.href = "https://polysnaps-fe.herokuapp.com/MatchesPage";
         })
         .catch(function (e) {
           console.log(e);
@@ -58,10 +60,6 @@ export default function ReactForm() {
   }
   function majorChange(event) {
     setMajor(event.target.value);
-  }
-
-  function genderChange(event) {
-    setGender(event.target.value);
   }
 
   function personalityChange(event) {
@@ -120,158 +118,213 @@ export default function ReactForm() {
     }
   }
 
+  function deselectRecreational(event) {
+    const changedItem = event.target.value;
+    var recr = document.getElementsByClassName("recreationals");
+    var deselectRec = document.getElementById("deselectRec");
+    if (deselectRec.checked) {
+      for (var i = 0; i < recr.length; i++) {
+        recr[i].checked = false;
+      }
+    }
+    if (!partying.includes(changedItem)) {
+      setPartying((prevVal) => {
+        return [...prevVal, changedItem];
+      });
+    } else {
+      setPartying(partying.filter((option) => option !== changedItem));
+    }
+  }
+
   return (
-    <div>
-      {/* Gender */}
-      <h1>Gender: {gender}</h1>
-      <input
-        checked={gender === "Male"}
-        onChange={genderChange}
-        type="radio"
-        value="Male"
-      />
-      <label className="form-input">Male</label>
-      <br />
-      <input
-        checked={gender === "Female"}
-        onChange={genderChange}
-        type="radio"
-        value="Female"
-      />
-      <label className="form-input">Female</label>
-      <br />
-      <input
-        checked={gender === "Other"}
-        onChange={genderChange}
-        type="radio"
-        value="Other"
-      />
-      <label className="form-input">Other</label>
-      <br />
-
-      {/* Personality */}
-      <h1>Personality: {personality}</h1>
-      <input
-        checked={personality === "Introvert"}
-        onChange={personalityChange}
-        type="radio"
-        value="Introvert"
-      />
-      <label className="form-input">Introvert</label>
-      <br />
-      <input
-        checked={personality === "Extrovert"}
-        onChange={personalityChange}
-        type="radio"
-        value="Extrovert"
-      />
-      <label className="form-input">Extrovert</label>
-      <br />
-      <input
-        checked={personality === "In Between"}
-        onChange={personalityChange}
-        type="radio"
-        value="In Between"
-      />
-      <label className="form-input">In Between</label>
-      <br />
-
-      {/* Major */}
-      <h1>Major: {major}</h1>
-      {majorsList.map((majorItem) => (
-        <div>
+    <>
+    <h1 className="titleofPage"> Fill out Profile Form Below </h1>
+      {/* <h1>Upload Your Profile Picture:</h1> */}
+      <ImgUpload/>
+      <div className="moveEverything">
+        {/* Personality */}
+        <h1 className="titles">Personality:</h1>
+        <label className="container2">
+          Introvert
           <input
-            checked={major === majorItem}
-            onChange={majorChange}
+            checked={personality === "Introvert"}
+            onChange={personalityChange}
             type="radio"
-            value={majorItem}
+            value="Introvert"
           />
-          <label className="form-input">{majorItem}</label>
-        </div>
-      ))}
-
-      {/* Romance */}
-      <h1>Romantic Interests: {romance}</h1>
-      {interestsList.map((interest) => (
-        <div>
+          <span className="checkmark"></span>
+        </label>
+        <br />
+        <label className="container2">
+          Extrovert
           <input
-            onChange={romanceChange}
-            type="checkbox"
-            placeholder={interest}
-            value={interest}
-          />
-          <span className="form-input">{interest}</span>
-        </div>
-      ))}
-
-      {/* Friendship */}
-      <h1>Friendship Interest: {friendship}</h1>
-      {interestsList.map((interest) => (
-        <div>
-          <input
-            onChange={friendshipChange}
-            type="checkbox"
-            placeholder={interest}
-            value={interest}
-          />
-          <span className="form-input">{interest}</span>
-        </div>
-      ))}
-
-      {/* Hobbies */}
-      <h1>Hobbies: {hobbies}</h1>
-      {hobbiesList.map((hobby) => (
-        <div>
-          <input
-            onChange={hobbiesChange}
-            type="checkbox"
-            placeholder={hobby}
-            value={hobby}
-          />
-          <span className="form-input">{hobby}</span>
-        </div>
-      ))}
-
-      {/* Spirituality */}
-      <h1>Spirituality: {spirituality}</h1>
-      {religionsList.map((religion) => (
-        <div>
-          <input
-            checked={spirituality === religion}
-            onChange={spiritualityChange}
+            checked={personality === "Extrovert"}
+            onChange={personalityChange}
             type="radio"
-            value={religion}
+            value="Extrovert"
           />
-          <label className="form-input">{religion}</label>
-        </div>
-      ))}
-
-      {/* Partying */}
-      <h1>Party Favors: {partying}</h1>
-      {recreationalsList.map((recreational) => (
-        <div>
+          <span className="checkmark"></span>
+        </label>
+        <br />
+        <label className="container2">
+          In Between
           <input
-            onChange={recreationalChange}
-            type="checkbox"
-            placeholder={recreational}
-            value={recreational}
+            checked={personality === "In Between"}
+            onChange={personalityChange}
+            type="radio"
+            value="In Between"
           />
-          <span className="form-input">{recreational}</span>
-        </div>
-      ))}
+          <span className="checkmark"></span>
+        </label>
+        <br />
 
-      <br />
+        {/* Major */}
+        <h1 className="titles">Major:</h1>
+        {majorsList.map((majorItem) => (
+          <div>
+            <label className="container2">
+              {majorItem}
+              <input
+                name="major"
+                checked={major === majorItem}
+                onChange={majorChange}
+                type="radio"
+                value={majorItem}
+              />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+        ))}
 
-      {/* Incomplete Submission Handler + Submit Button */}
-      {error[0] && (
-        <div>
-          <span>Incomplete Submission, what's your {error[1]}?</span>
-          <button onClick={() => setError(false)}>Close</button>
-        </div>
-      )}
-      <button onClick={handleSubmit} type="submit">
-        Submit
-      </button>
-    </div>
+        {/* Romance */}
+        <h1 className="titles">Romantic Interests:</h1>
+        {interestsList.map((interest) => (
+          <div>
+            <label className="containerbox">
+              {interest}
+              <input
+                id="romance"
+                onChange={romanceChange}
+                type="checkbox"
+                placeholder={interest}
+                value={interest}
+              />
+              <span className="checkmarkbox"></span>
+            </label>
+          </div>
+        ))}
+
+        {/* Friendship */}
+        <h1 className="titles">Friendship Interest:</h1>
+        {interestsList.map((interest) => (
+          <div>
+            <label className="containerbox">
+              {interest}
+              <input
+              name="friendship"
+                onChange={friendshipChange}
+                type="checkbox"
+                placeholder={interest}
+                value={interest}
+              />
+              <span className="checkmarkbox"></span>
+            </label>
+          </div>
+        ))}
+
+        {/* Hobbies */}
+        <h1 className="titles">Hobbies:</h1>
+        {hobbiesList.map((hobby) => (
+          <div>
+            <label className="containerbox">
+              {hobby}
+              <input
+                name="hobbies"
+                onChange={hobbiesChange}
+                type="checkbox"
+                placeholder={hobby}
+                value={hobby}
+              />
+              <span className="checkmarkbox"></span>
+            </label>
+          </div>
+        ))}
+
+        {/* Spirituality */}
+        <h1 className="titles">Spirituality:</h1>
+        {religionsList.map((religion) => (
+          <div>
+            <label className="container2">
+              {religion}
+              <input
+                name="spirituality"
+                checked={spirituality === religion}
+                onChange={spiritualityChange}
+                type="radio"
+                value={religion}
+              />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+        ))}
+
+        {/* Partying */}
+        <h1 className="titles">Party Favors:</h1>
+        {recreationalsList.map((recreational) => {
+          if (recreational != "None") {
+            return (
+              <div>
+                <label className="containerbox">
+                  {recreational}
+                  <input
+                    name="partying"
+                    onChange={recreationalChange}
+                    type="checkbox"
+                    className="recreationals"
+                    placeholder={recreational}
+                    value={recreational}
+                  />
+                  <span className="checkmarkbox"></span>
+                </label>
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <label className="containerbox">
+                  {recreational}
+                  <input
+                    name="noparty"
+                    onChange={deselectRecreational}
+                    type="checkbox"
+                    placeholder={recreational}
+                    value={recreational}
+                    id="deselectRec"
+                  />
+                  <span className="checkmarkbox"></span>
+                </label>
+              </div>
+            );
+          }
+        })}
+
+        <br />
+
+        {/* Incomplete Submission Handler + Submit Button */}
+        {error[0] && (
+          <div>
+            <span id="incompleteform">Incomplete Submission, what's your {error[1]}?</span>
+            <button onClick={() => setError(false)}>Close</button>
+          </div>
+        )}
+        <h3>
+          <button 
+          className="submitbtn"
+          onClick={handleSubmit} type="submit">
+            Submit
+          </button>
+        </h3>
+      </div>
+    </>
   );
 }

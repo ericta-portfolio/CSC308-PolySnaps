@@ -5,14 +5,12 @@
   font-weight: 300;
 }
 
-#date {
-  border: 1px solid rgba(252, 252, 252, 0.4);
-  background-color: rgba(252, 252, 252, 0.2);
-  font-size: 18px;
-  font-weight: 300;
-  width: 250px;
-  margin-bottom: 10px;
+body {
   font-family: "Source Sans Pro", sans-serif;
+  font-weight: 300;
+  width: 100%;
+  height: 100%;
+  background-color: #a799b7 !important;
 }
 
 .container {
@@ -26,15 +24,16 @@
   font-weight: 200;
 }
 
-img {
+.logoimg {
   display: block;
   margin-left: auto;
   margin-right: auto;
   image-resolution: 300dpi;
   width: 40%;
+  margin-top: -100px;
 }
 
-input.textFields {
+input {
   border: 1px solid rgba(252, 252, 252, 0.4);
   background-color: rgba(252, 252, 252, 0.2);
   width: 250px;
@@ -46,47 +45,48 @@ input.textFields {
   text-align: center;
   font-size: 18px;
   font-weight: 300;
-  padding: 10px 15px;
 }
 
 select {
   border: 1px solid rgba(252, 252, 252, 0.4);
   background-color: rgba(252, 252, 252, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
   font-size: 18px;
   font-weight: 300;
-  width: 250px;
-  margin-bottom: 10px;
-  font-family: "Source Sans Pro", sans-serif;
 }
 
-input[type="submit"]:hover {
+#loginbtn {
+  background-color: #542e71;
+  opacity: 0.8;
+  border-color: #542e71;
+  font-family: Copperplate;
+  position: relative;
+  width: 250px;
+  right: 25px;
+}
+
+#signupbtn {
+  /* background-color: #542e71; */
+  /* opacity: 8; */
+  /* border-color: #542e71; */
+  position: relative;
+  font-weight: bold;
+  font-size: 15px;
+  top: 10px;
+  /* right: 30px; */
+  /* margin-left: 2px; */
+  font-family: Copperplate;
+  white-space: nowrap;
+}
+
+#loginbtn:hover {
+  background-color: #542e71;
   opacity: 1;
 }
 
-.moveImg {
-  position: relative;
-  left: 20px;
-  bottom: 20px;
-}
-
-.btn2 {
-  border: 2px solid #e6b3e6;
-  background-color: whitesmoke;
-  color: #993399;
-  padding: 5px 20px;
-  font-size: 15px;
-  font-family: Copperplate;
-  cursor: pointer;
-  position: relative;
-  left: 250px;
-  bottom: 40px;
-}
-
-.upload {
-  color: #993399
-}
-
-.upload:hover {
-  background: #993399;
-  color: white;
-}

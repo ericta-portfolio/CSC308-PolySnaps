@@ -1,19 +1,39 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ProfileImg from "./ProfileImg";
 import 'antd/dist/antd.css'
 import { Avatar } from 'antd';
+import "./styles.css"
 
 class ImgUpload extends Component {
 
-  state={
-    profileImage: "",
-    selectedFile: null 
+  // talk to prof... this is duplicate code!
+  getUserData = (idNum) => {
+    var data = null;
+    axios.get('https://polysnaps-be.herokuapp.com/getUser/' + idNum)
+    .then(res => {
+      console.log(res);
+      data = res["data"]
+      axios
+      .get("https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" + data["_id"])
+        .then((res) => {
+            console.log(res);
+            this.setState({
+            profileImage: res["data"]
+          })
+          console.log(res["data"]);
+      })
+      console.log("This is the state:");
+      console.log(this.state.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
-  // handleImageChange = (profileImage) => {
-
-  // }
+  state={
+    profileImage: "",
+    selectedFile: null,
+  }
 
   fileSelectedHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
@@ -23,8 +43,7 @@ class ImgUpload extends Component {
   fileUploadHandler = () => {
     var data = null;
     const id = localStorage.getItem("id")
-    const beURL = "https://polysnaps-be.herokuapp.com/";
-    axios.get(beURL + 'getUser/' + id)
+    axios.get('https://polysnaps-be.herokuapp.com/getUser/' + id)
     .then(res => {
       console.log(res);
       data = res["data"];
@@ -34,7 +53,7 @@ class ImgUpload extends Component {
       fd.append("image", this.state.selectedFile, this.state.selectedFile.name);
       //needs to send an http request
       axios
-        .put(beURL + "upload/" + data["_id"], fd, {
+        .put("https://polysnaps-be.herokuapp.com/profile_pic_upload/" + data["_id"], fd, {
           onUploadProgress: (progressEvent) => {
             console.log(
               "Upload Progress:" +
@@ -46,13 +65,14 @@ class ImgUpload extends Component {
         .then((res) => {
           console.log(res);
           axios
-          .get(beURL + "profile/" + data["_id"])
+          .get("https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" + data["_id"])
             .then((res) => {
                console.log(res);
                this.setState({
                 profileImage: res["data"]
               })
               console.log(res["data"]);
+              return res["data"]
           })
           .catch(function (error) {
             console.log(error);
@@ -71,20 +91,26 @@ class ImgUpload extends Component {
 
   render() {
     return (
-      <div className="ImgUpload">
+      <div>
+      {(this.state.profileImage == "") ? this.getUserData(localStorage.getItem("id")) : ""}
+      <Avatar 
+        className="moveImg"
+        style={{ "margin-top": "5px" }}
+        size={350} 
+        icon="img"
+        src={this.state.profileImage}
+        />
         <input
-          style={{ display: "none" }}
+          id="profileimgupload"
           type="file"
           onChange={this.fileSelectedHandler}
           ref={(fileInput) => (this.fileInput = fileInput)}
         />
-        <button onClick={() => this.fileInput.click()}>Pick File</button>
-        <button onClick={this.fileUploadHandler}>Upload Your Picture</button>
+        <button
+        id="uploadimg"
+        className="btn2 upload"
+        onClick={this.fileUploadHandler}>Upload</button>
         <div>
-        <Avatar 
-        style={{ "margin-top": "30px" }}
-        size={300} icon="img" src={this.state.profileImage}/>
-        {/* <ProfileImg img="https://picsum.photos/200" /> */}
         </div>
       </div>
     );
