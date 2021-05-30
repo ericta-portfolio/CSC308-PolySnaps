@@ -67,7 +67,8 @@ select {
   border-color: #542e71;
   font-family: Copperplate;
   position: relative;
-  top: 0px;
+  width: 250px;
+  right: 25px;
 }
 
 #signupbtn {
@@ -83,32 +84,9 @@ select {
   font-family: Copperplate;
   white-space: nowrap;
 }
-/* 
-.button {
-  border: 1px solid rgba(252, 252, 252, 0.4);
-  width: 100px;
-  background-color: rgba(252, 252, 252, 0.2);
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  border-radius: 5px;
-  border: 1px solid rgba(252, 252, 252, 0.4);
-  float: left;
-} */
 
 #loginbtn:hover {
   background-color: #542e71;
   opacity: 1;
 }
 
-/* button {
-  appearance: none;
-  outline: 0;
-  background-color: white;
-  border: 0;
-  padding: 10px 15px;
-  color: #50a3a2;
-  border-radius: 3px;
-  width: 250px;
-  font-size: 18px;
-} */

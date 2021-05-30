@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import 'antd/dist/antd.css'
 import { Avatar } from 'antd';
+import "./styles.css"
 
 class ImgUpload extends Component {
 
@@ -90,21 +91,27 @@ class ImgUpload extends Component {
 
   render() {
     return (
-      <div className="ImgUpload">
+      <div>
       {(this.state.profileImage == "") ? this.getUserData(localStorage.getItem("id")) : ""}
-        <input
-          type="file"
-          onChange={this.fileSelectedHandler}
-          ref={(fileInput) => (this.fileInput = fileInput)}
-        />
-        <button onClick={this.fileUploadHandler}>Upload</button>
-        <div>
-        <Avatar 
+      <Avatar 
+        className="moveImg"
         style={{ "margin-top": "5px" }}
         size={350} 
         icon="img"
         src={this.state.profileImage}
         />
+        <input
+          // style={{"width":"200px",
+          // "position": "relative",
+          // "left": "40px"}}
+          type="file"
+          onChange={this.fileSelectedHandler}
+          ref={(fileInput) => (this.fileInput = fileInput)}
+        />
+        <button 
+        className="btn2 upload"
+        onClick={this.fileUploadHandler}>Upload</button>
+        <div>
         </div>
       </div>
     );

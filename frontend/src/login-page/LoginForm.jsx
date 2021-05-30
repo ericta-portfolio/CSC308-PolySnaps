@@ -87,7 +87,7 @@ function LoginForm() {
             }}
             id="failed"
           ></p>
-          <Button className="button" type="submit" id="loginbtn" onClick={submitHandler}>
+          <Button type="submit" id="loginbtn" onClick={submitHandler}>
             Log In
           </Button>
           <a id="signupbtn" href="http://localhost:3000/Signup">Need an account?</a>

@@ -44,8 +44,9 @@
     right: 30px;
     top:10px;
     background-color:#a799b7;
+    color: white;
+    font-weight: bold;
     position:absolute;
-    
     font-family:Copperplate;
 }
 
