@@ -16,4 +16,4 @@ jobs:
       install:
       - npm install
       script:
-      - npx prettier --check . '!./cypress/*'
+      - npx prettier --check . '!cypress/*'
