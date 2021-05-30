@@ -223,7 +223,7 @@ def check_user():
         if (check_password_hash(_stored_password, _password)):
             user = stringify_userid(get_info)
             return user["_id"], 200
-    return "Incorrect username or password", 400
+    return "Incorrect username or password", 404
 
 @app.route('/getUser/<id>', methods=['GET'])
 def get_user(id):
