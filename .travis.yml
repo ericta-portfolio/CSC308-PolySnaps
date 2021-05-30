@@ -8,6 +8,7 @@ jobs:
       - pip install -r requirements.txt
       script:
       - pylint app.py --exit-zero
+      - pytest testing.py
     - language: node_js
       node_js: 12
       before_install:
