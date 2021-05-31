@@ -26,15 +26,15 @@ Execute 'flask run'\
 In backend directory, execute 'pytest testing.py'\
 \
 ** Travis CI **\
-https://travis-ci.com/github/ericta-portfolio/CSC308-PolySnaps\
+https://travis-ci.com/github/ericta-portfolio/CSC308-PolySnaps \
 \
 ** Heroku CD **\
 dashboards: \
-backend - https://dashboard.heroku.com/apps/polysnaps-be\
-frontend - https://dashboard.heroku.com/apps/polysnaps-fe\
+backend - https://dashboard.heroku.com/apps/polysnaps-be \
+frontend - https://dashboard.heroku.com/apps/polysnaps-fe \
 deployed apps:\
-backend - https://polysnaps-be.herokuapp.com/\
-frontend - https://polysnaps-fe.herokuapp.com/\
+backend - https://polysnaps-be.herokuapp.com/ \
+frontend - https://polysnaps-fe.herokuapp.com/ \
 \
 ** Code Coverage Report **
 
