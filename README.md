@@ -14,9 +14,9 @@ Open VSCode, ctrl+shift+P <Python: Select Linter>
 To use: save file, or ctrl+shift+P <Python: Run Linter>  
         outputs to Problems tab
         
-** Running frontend **
-In frontend directory, execute 'npm install', then 'npm start'
-
+** Running frontend **\
+In frontend directory, execute 'npm install', then 'npm start'\
+\
 ** Running backend **
 In backend directory, execute 'pipenv shell'
 Execute 'export FLASK_APP=app.py', then 'export FLASK_ENV=development'
