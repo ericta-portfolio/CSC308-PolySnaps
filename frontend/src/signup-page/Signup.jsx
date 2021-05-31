@@ -4,20 +4,19 @@ import logo from "./logo3.png";
 import axios from "axios";
 
 function Signup() {
-  
   const signup = (details) => {
     console.log(details);
     document.getElementById("failed").innerHTML = null;
     if (details.password === details.password2) {
       if (details.date == null) {
         details.date = new Date();
-      } 
+      }
       axios
         .post("http://localhost:5000/newUser", details)
         .then(function (response) {
           const data = response.data;
-          localStorage.setItem("id", data)
-         window.location.href = "http://localhost:3000/ProfileForm";
+          localStorage.setItem("id", data);
+          window.location.href = "http://localhost:3000/ProfileForm";
         })
         .catch(function (error) {
           if (error.response) {

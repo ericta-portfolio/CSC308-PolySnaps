@@ -5,7 +5,7 @@ var getfn, getlastname;
 var domain = "@calpoly.edu";
 
 function getElement(list) {
-  return list[Math.floor(Math.random() * list.length)]; 
+  return list[Math.floor(Math.random() * list.length)];
 }
 
 describe("/Signup", () => {

@@ -22,7 +22,10 @@ export default class Navbarr extends Component {
   };
 
   componentDidMount() {
-    if (localStorage.getItem("id") === "null" || localStorage.getItem("id") === null) {
+    if (
+      localStorage.getItem("id") === "null" ||
+      localStorage.getItem("id") === null
+    ) {
       this.setState({ funct: this.login.bind(this), text: "Log In" });
     } else {
       this.setState({ funct: this.logout.bind(this), text: "Log Out" });
@@ -38,7 +41,8 @@ export default class Navbarr extends Component {
           crossorigin="anonymous"
         ></link>
         <div>
-          {(localStorage.getItem("id") === "null" || localStorage.getItem("id") === null) ? (
+          {localStorage.getItem("id") === "null" ||
+          localStorage.getItem("id") === null ? (
             <Navbar bg="primary" variant="dark" id="navbarID">
               <Navbar.Brand href="/" id="brand">
                 <img
@@ -48,9 +52,9 @@ export default class Navbarr extends Component {
                   alt="PolySnaps Logo"
                 />
               </Navbar.Brand>
-                <Button variant="secondary" onClick={this.state.funct} id="log">
-                  {this.state.text}
-                </Button>
+              <Button variant="secondary" onClick={this.state.funct} id="log">
+                {this.state.text}
+              </Button>
             </Navbar>
           ) : (
             <Navbar bg="primary" variant="dark" id="navbarID">

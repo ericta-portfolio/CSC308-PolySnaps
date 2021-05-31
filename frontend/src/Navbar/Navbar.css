@@ -1,70 +1,77 @@
 .btn-space {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 #navbarID {
-    background:#542e71;
+  background: #542e71;
 }
 
-#link0, #link1, #link2, #link3, #link4 {
-    top: 15px;
-    position: absolute;
-    font-size:20px;
-    font-family:Copperplate;
-    color:rgba(252, 252, 252, 0.8);
+#link0,
+#link1,
+#link2,
+#link3,
+#link4 {
+  top: 15px;
+  position: absolute;
+  font-size: 20px;
+  font-family: Copperplate;
+  color: rgba(252, 252, 252, 0.8);
 }
 
 #link0 {
-    left: 100px;
-    font-weight:375;
-    position:absolute;
+  left: 100px;
+  font-weight: 375;
+  position: absolute;
 }
 
 #link1 {
-    font-weight:375;
-    left:260px;
+  font-weight: 375;
+  left: 260px;
 }
 
 #link2 {
-    left: 425px;
-    font-weight:375;
+  left: 425px;
+  font-weight: 375;
 }
 
 #link3 {
-    left: 380px;
-    font-weight:medium;
-    font-size:12pt;
+  left: 380px;
+  font-weight: medium;
+  font-size: 12pt;
 }
 
 #link4 {
-    left: 405px;
+  left: 405px;
 }
 
 #log {
-    right: 30px;
-    top:10px;
-    background-color:#a799b7;
-    color: white;
-    font-weight: bold;
-    position:absolute;
-    font-family:Copperplate;
+  right: 30px;
+  top: 10px;
+  background-color: #a799b7;
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  font-family: Copperplate;
 }
 
-#link0:hover, #link1:hover, #link2:hover, #link3:hover {
-    color: grey;
+#link0:hover,
+#link1:hover,
+#link2:hover,
+#link3:hover {
+  color: grey;
 }
 
 #logo {
-    height:36px;
-    width:auto;
-    position: absolute;
-    top:109px !important;
-    background-color:rgba(252, 252, 252, 0.8);
-    border-radius:10px;
-    padding:3px;
+  height: 36px;
+  width: auto;
+  position: absolute;
+  top: 109px !important;
+  background-color: rgba(252, 252, 252, 0.8);
+  border-radius: 10px;
+  padding: 3px;
 }
 
 #toggle {
-    background-color: #00000000;
-    border: none;
+  background-color: #00000000;
+  border: none;
 }

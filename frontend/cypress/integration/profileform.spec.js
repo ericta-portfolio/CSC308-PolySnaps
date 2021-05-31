@@ -61,7 +61,7 @@ describe("/ProfileForm", () => {
     cy.get("[name=major]").first().check();
     cy.get('[type="checkbox"]').check({ force: true });
     cy.get("[name=spirituality]").first().check();
-    
+
     const filepath = 'images/woman3.jpeg'
     cy.get('input[type="file"]').attachFile(filepath)
     cy.get("[id=uploadimg]").contains("Upload").click();

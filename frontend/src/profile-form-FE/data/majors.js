@@ -4,7 +4,7 @@ const majorsList = [
   "Business",
   "Engineering",
   "Liberal Arts",
-  "Science and Mathematics"
+  "Science and Mathematics",
 ];
 
 export default majorsList;
