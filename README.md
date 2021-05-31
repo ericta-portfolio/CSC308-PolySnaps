@@ -37,4 +37,5 @@ backend - https://polysnaps-be.herokuapp.com/
 frontend - https://polysnaps-fe.herokuapp.com/
 
 ** Code Coverage Report **
+
 <img width="289" alt="Screen Shot 2021-05-31 at 1 01 28 PM" src="https://user-images.githubusercontent.com/67278790/120242027-d4cadb80-c218-11eb-95ba-1b3177431465.png">
