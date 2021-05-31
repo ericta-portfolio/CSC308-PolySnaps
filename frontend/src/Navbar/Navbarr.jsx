@@ -72,7 +72,7 @@ export default class Navbarr extends Component {
                 <Nav.Link href="/AcceptedPage" id="link2">
                   Accepted Matches
                 </Nav.Link>
-                <Button variant="secondary" onClick={this.state.funct} id="log">
+                <Button variant="secondary" name="logoutbutton" onClick={this.state.funct} id="log">
                   {this.state.text}
                 </Button>
               </Nav>

@@ -221,7 +221,7 @@ export default function ReactForm() {
             <label className="containerbox">
               {interest}
               <input
-              name="friendship"
+                name="friendship"
                 onChange={friendshipChange}
                 type="checkbox"
                 placeholder={interest}

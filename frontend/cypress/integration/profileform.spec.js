@@ -9,17 +9,19 @@ describe("/ProfileForm", () => {
 
   it("Successful Log In", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
-    cy.get("[name=password]").type("123{enter}");
+    cy.get("[name=password]").type("123");
+    cy.get("[type=submit]").contains("Log In").click();
     cy.location("pathname").should("match", /\/ProfileForm$/);
   });
 
   it("filling out entire form", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
-    cy.get("[name=password]").type("123{enter}");
+    cy.get("[name=password]").type("123");
+    cy.get("[type=submit]").contains("Log In").click();
     cy.location("pathname").should("match", /\/ProfileForm$/);
     cy.get("[value=Introvert]").first().check();
     cy.get("[name=major]").first().check();
-    cy.get('[type="checkbox"]').check({force: true})
+    cy.get('[type="checkbox"]').check({ force: true });
     cy.get("[name=spirituality]").first().check();
     cy.get("[type=submit]").contains("Submit").click();
     cy.location("pathname").should("match", /\/MatchesPage$/);
@@ -27,11 +29,12 @@ describe("/ProfileForm", () => {
 
   it("filling out part of form 1", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
-    cy.get("[name=password]").type("123{enter}");
+    cy.get("[name=password]").type("123");
+    cy.get("[type=submit]").contains("Log In").click();
     cy.location("pathname").should("match", /\/ProfileForm$/);
     cy.get("[value=Introvert]").first().check();
     cy.get("[name=major]").first().check();
-    cy.get('[type="checkbox"]').check({force: true})
+    cy.get('[type="checkbox"]').check({ force: true });
     cy.get("[type=submit]").contains("Submit").click();
     cy.get("[id=incompleteform]").contains(
       "Incomplete Submission, what's your Spirituality?"
@@ -40,7 +43,8 @@ describe("/ProfileForm", () => {
 
   it("filling out part of form 2", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
-    cy.get("[name=password]").type("123{enter}");
+    cy.get("[name=password]").type("123");
+    cy.get("[type=submit]").contains("Log In").click();
     cy.location("pathname").should("match", /\/ProfileForm$/);
     cy.get("[type=submit]").contains("Submit").click();
     cy.get("[id=incompleteform]").contains(
@@ -50,19 +54,16 @@ describe("/ProfileForm", () => {
 
   it("Testing picture uploading", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
-    cy.get("[name=password]").type("123{enter}");
+    cy.get("[name=password]").type("123");
+    cy.get("[type=submit]").contains("Log In").click();
     cy.location("pathname").should("match", /\/ProfileForm$/);
     cy.get("[value=Introvert]").first().check();
     cy.get("[name=major]").first().check();
-    cy.get('[type="checkbox"]').check({force: true})
+    cy.get('[type="checkbox"]').check({ force: true });
     cy.get("[name=spirituality]").first().check();
-    cy.fixture("testingperry.jpeg").then((fileContent) => {
-      cy.get('input[id="profileimgupload"]').attachFile({
-        fileContent: fileContent.toString(),
-        fileName: "testingperry.jpeg",
-        mimeType: "image/png",
-      });
-    });
+    
+    const filepath = 'images/woman3.jpeg'
+    cy.get('input[type="file"]').attachFile(filepath)
     cy.get("[id=uploadimg]").contains("Upload").click();
   });
 });
