@@ -8,6 +8,7 @@
     "axios": "0.21.1",
     "cypress": "^7.4.0",
     "cypress-react-selector": "^2.3.7",
+    "cypress-file-upload": "5.0.7",
     "cypress-wait-until": "^1.7.1",
     "jalali-react-datepicker": "1.2.1",
     "prettier": "^2.3.0",
