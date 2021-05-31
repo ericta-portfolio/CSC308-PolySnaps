@@ -1,3 +1,7 @@
+// Given I have requested all users
+// When a get request is sent to retrieve_all
+// Then all user profiles will be returned, along with a response code of 200
+
 describe('Backend running - get all users', () => {
     context('Given I have requested all users', () => {
         before(() => {

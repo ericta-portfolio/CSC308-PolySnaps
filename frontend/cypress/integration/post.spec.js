@@ -9,6 +9,9 @@ function generateString(length) {
     return result;
 }
 
+// Given I have submitted a signup form
+// When the user object is sent to the backend port newUser
+// Then a response code of 201 will be returned, along with a string id
 describe('Backend running - post new user', () => {
     context('Given I have submitted a signup form', () => {
         it('When sending a user object for insertion', () => {
@@ -29,6 +32,9 @@ describe('Backend running - post new user', () => {
     });
 });
 
+// Given I have submitted an empty signup form
+// When the empty object is sent for insertion
+// Then the backend will return a 400 field error
 describe('Backend running - post new user', () => {
     context('Given I have submitted an empty signup form', () => {
         it('When sending an empty user object for insertion', () => {
