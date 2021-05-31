@@ -192,7 +192,7 @@ def get_matches():
         if "romance" in user.keys():
             users = list(filter(lambda x: "romance" in x.keys(), users))
             users = list(map(lambda x: get_scores(x, user), users))
-            users = list(filter(lambda x: x["score"] >= 0 and str(
+            users = list(filter(lambda x: x["score"] > 0 and str(
                 x["_id"]) != str(_id), users))
             users = sorted(users, key=lambda k: k["score"], reverse=True)
             if rejected:
