@@ -9,12 +9,12 @@ from compareProfiles import compareProfiles
 
 app = Flask(__name__)
 
-CORS(app)
-
 app.config["MONGO_URI"] = "mongodb+srv://polysnaps:cpw2021@cluster0.2oaoq.mongodb.net/mydatabase?retryWrites=true&w=majority"
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 mongo = PyMongo(app)
+
+CORS(app)
 
 db_operations = mongo.db.newUsers
 db_operations2 = mongo.db.profiles

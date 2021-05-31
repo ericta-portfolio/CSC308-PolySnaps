@@ -9,12 +9,16 @@ describe("/Logout", () => {
   
     it("Successful Log In", () => {
         cy.get("[name=email]").type("lalvessi@calpoly.edu");
-        cy.get("[name=password]").type("123{enter}");
+        cy.get("[name=password]").type("123");
+        cy.get("[type=submit]").contains("Log In").click();
         cy.location("pathname").should("match", /\/ProfileForm$/);
       });
 
     it("log out successfully", () => {
-        cy.get('[id=log]').contains('Log Out').click()
+        cy.get("[name=email]").type("lalvessi@calpoly.edu");
+        cy.get("[name=password]").type("123");
+        cy.get("[type=submit]").contains("Log In").click();
+        cy.get("[name=logbutton]").contains('Log Out').click()
         cy.location("pathname").should("match", /\/$/);
     });
     

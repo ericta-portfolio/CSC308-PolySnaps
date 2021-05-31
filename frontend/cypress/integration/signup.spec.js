@@ -15,6 +15,7 @@ describe("/Signup", () => {
     cy.get('select').select("Other");
     cy.get("[name=password]").type("whatever");
     cy.get("[name=password2]").type("whatever{enter}");
+    cy.get("[type=submit]").contains("Sign Up").click();
     cy.get("[id=failed]").contains("Account already exists! Please sign-in :)");
   });
 
@@ -24,7 +25,8 @@ describe("/Signup", () => {
     cy.get("[name=email]").type("jjplane@calpoly.edu");
     cy.get('select').select("Other");
     cy.get("[name=password]").type("whatever");
-    cy.get("[name=password2]").type("nope{enter}");
+    cy.get("[name=password2]").type("nope");
+    cy.get("[type=submit]").contains("Sign Up").click();
     cy.get("[id=failed]").contains("Passwords do not match!");
   });
 
@@ -36,7 +38,8 @@ describe("/Signup", () => {
     cy.get("[name=email]").type("cinhat@calpoly.edu");
     cy.get('select').select("Other");
     cy.get("[name=password]").type("123");
-    cy.get("[name=password2]").type("123{enter}");
-    cy.location("pathname").should("match", /\/ProfileForm$/);
+    cy.get("[name=password2]").type("123");
+    cy.get("[type=submit]").contains("Sign Up").click();
+    cy.location("pathname").should("match", /\/Login/);
   });
 });
