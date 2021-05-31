@@ -1,3 +1,4 @@
+
 describe("/ProfileForm", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/Login");
@@ -7,6 +8,9 @@ describe("/ProfileForm", () => {
     cy.contains("h1", "Sign In");
   });
 
+//Given: I successfully log in
+//When: I press the log in button
+//Then: I get redirected to the Profile Form page
   it("Successful Log In", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
     cy.get("[name=password]").type("123");
@@ -14,6 +18,9 @@ describe("/ProfileForm", () => {
     cy.location("pathname").should("match", /\/ProfileForm$/);
   });
 
+//Given: I successfully fill out the entire form
+//When: I press the Submit button
+//Then: I get redirected to the Matches page
   it("filling out entire form", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
     cy.get("[name=password]").type("123");
@@ -27,6 +34,9 @@ describe("/ProfileForm", () => {
     cy.location("pathname").should("match", /\/MatchesPage$/);
   });
 
+//Given: I fill out part of the form
+//When: I press the Submit button
+//Then: the page displays a message detailing a missing item
   it("filling out part of form 1", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
     cy.get("[name=password]").type("123");
@@ -41,6 +51,9 @@ describe("/ProfileForm", () => {
     );
   });
 
+//Given: I fill out part of the form
+//When: I press the Submit button
+//Then: the page displays a message detailing a missing item
   it("filling out part of form 2", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
     cy.get("[name=password]").type("123");
@@ -52,6 +65,9 @@ describe("/ProfileForm", () => {
     );
   });
 
+//Given: I select a file for the profile image
+//When: I press the upload button
+//Then: the page should load the image 
   it("Testing picture uploading", () => {
     cy.get("[name=email]").type("kperry@calpoly.edu");
     cy.get("[name=password]").type("123");
