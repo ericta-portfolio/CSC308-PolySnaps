@@ -235,14 +235,6 @@ class TestStringMethods(unittest.TestCase):
         response = tester.get('/getAccepted/' + id)
         self.assertEqual(response.status_code, 400)
 
-class ImageObj:
-    file = None
-    filename = None
-
-    def __init__(self, file, filename):
-        self.file = file
-        self.filename = filename
-
 
 if __name__ == '__main__':
     unittest.main()
