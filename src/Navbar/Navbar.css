@@ -3,7 +3,7 @@
 }
 
 #navbarID {
-  background: #542e71;
+  background: #116c51;
 }
 
 #link0,
@@ -47,7 +47,7 @@
 #log {
   right: 30px;
   top: 10px;
-  background-color: #a799b7;
+  /* background-color: #98D7C2; */
   color: white;
   font-weight: bold;
   position: absolute;
