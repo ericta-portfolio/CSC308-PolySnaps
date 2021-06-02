@@ -28,6 +28,9 @@ In backend directory, execute 'pytest testing.py'
 ## Travis CI 
 https://travis-ci.com/github/ericta-portfolio/CSC308-PolySnaps 
 
+[![Build Status](https://www.travis-ci.com/ericta-portfolio/CSC308-PolySnaps.svg?branch=main)](https://www.travis-ci.com/ericta-portfolio/CSC308-PolySnaps)
+
+
 ## Heroku CD 
 dashboards: 
 backend - https://dashboard.heroku.com/apps/polysnaps-be
