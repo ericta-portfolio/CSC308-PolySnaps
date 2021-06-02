@@ -1,19 +1,20 @@
 import { React, Component } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import "./Navbar.css";
+import "antd/dist/antd.css";
+import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 import logo from "../signup-page/logo4.png";
-//remember to add react-bootstrap as a dependency
 
 export default class Navbarr extends Component {
   login() {
-    window.location.href = "https://polysnaps-fe.herokuapp.com/Login";
+    window.location.href = "http://localhost:3000/Login";
   }
 
   logout() {
     // send to home page
     localStorage.setItem("id", "null");
     this.setState({ funct: this.login.bind(this), text: "Log In" });
-    window.location.href = "https://polysnaps-fe.herokuapp.com/";
+    window.location.href = "http://localhost:3000/";
   }
 
   state = {
@@ -52,9 +53,13 @@ export default class Navbarr extends Component {
                   alt="PolySnaps Logo"
                 />
               </Navbar.Brand>
-              <Button variant="secondary" onClick={this.state.funct} id="log">
+              <LoginOutlined
+                variant="secondary"
+                onClick={this.state.funct}
+                id="log"
+                style={{ fontSize: "35px" }}>
                 {this.state.text}
-              </Button>
+              </LoginOutlined>
             </Navbar>
           ) : (
             <Navbar bg="primary" variant="dark" id="navbarID">
@@ -76,9 +81,14 @@ export default class Navbarr extends Component {
                 <Nav.Link href="/AcceptedPage" id="link2">
                   Accepted Matches
                 </Nav.Link>
-                <Button variant="secondary" name="logbutton" onClick={this.state.funct} id="log">
-                  {this.state.text}
-                </Button>
+                <LogoutOutlined
+                  variant="secondary"
+                  name="logoutbutton"
+                  onClick={this.state.funct}
+                  id="log"
+                  style={{ fontSize: "35px" }}>
+                  {this.state.text}>{this.state.text}
+                </LogoutOutlined>
               </Nav>
             </Navbar>
           )}
