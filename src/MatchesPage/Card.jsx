@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import Avatar from "./Avatar";
 import { Image } from "antd";
 import Detail from "./Detail";
 import ImgUpload from "../ImgUpload";
@@ -12,15 +11,12 @@ function Card(props) {
   const getUserData = (idNum) => {
     var data = null;
     axios
-      .get("https://polysnaps-be.herokuapp.com/getUser/" + idNum)
+      .get("http://localhost:5000/getUser/" + idNum)
       .then((res) => {
         console.log(res);
         data = res["data"];
         axios
-          .get(
-            "https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" +
-              data["_id"]
-          )
+          .get("http://localhost:5000/profile_pic_retrieve/" + data["_id"])
           .then((res) => {
             console.log(res);
             setProfileImage({
@@ -82,7 +78,10 @@ function Card(props) {
           <Detail label="Hobbies" detailInfo={hobbies} />
           <Detail label="Friendship" detailInfo={friendship} />
           <Detail label="Partying" detailInfo={partying} />
-          <Detail label="Score" detailInfo={props.score} />
+          <Detail
+            label="Score"
+            detailInfo={Math.round(props.score).toFixed(1)}
+          />
         </dd>
       </div>
     </div>
