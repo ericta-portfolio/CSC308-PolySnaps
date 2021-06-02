@@ -63,7 +63,7 @@
 
 /* When the radio button is checked, add a blue background */
 .container2 input:checked ~ .checkmark {
-  background-color: #2196f3;
+  background-color: #053132;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -89,9 +89,9 @@
 }
 
 .submitbtn {
-  border: 2px solid #e6b3e6;
+  border: 2px solid #DDFFE7;
   background-color: whitesmoke;
-  color: #993399;
+  color: #167D7F;
   padding: 12px 20px;
   font-size: 30px;
   font-family: Copperplate;
@@ -102,6 +102,6 @@
 }
 
 .submitbtn:hover {
-  background: #993399;
+  background: #116c51;
   color: white;
 }
