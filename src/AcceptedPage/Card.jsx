@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-// import Avatar from "./Avatar";
 import { Image } from "antd";
 import Detail from "../MatchesPage/Detail";
-import ImgUpload from "../ImgUpload";
 import axios from "axios";
 
 function Card(props) {
@@ -12,15 +10,12 @@ function Card(props) {
   const getUserData = (idNum) => {
     var data = null;
     axios
-      .get("https://polysnaps-be.herokuapp.com/getUser/" + idNum)
+      .get("http://localhost:5000/getUser/" + idNum)
       .then((res) => {
         console.log(res);
         data = res["data"];
         axios
-          .get(
-            "https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" +
-              data["_id"]
-          )
+          .get("http://localhost:5000/profile_pic_retrieve/" + data["_id"])
           .then((res) => {
             console.log(res);
             setProfileImage({
@@ -74,6 +69,7 @@ function Card(props) {
         }}
       >
         <dd>
+          <Detail label="Contact" detailInfo={props.email} />
           <Detail label="Gender" detailInfo={props.gender} />
           <Detail label="Major" detailInfo={props.major} />
           <Detail label="Personality" detailInfo={props.personality} />
