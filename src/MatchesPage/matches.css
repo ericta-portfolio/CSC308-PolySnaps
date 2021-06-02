@@ -21,7 +21,7 @@
 .button-reject {
   background-color: #116c51;
   opacity: 0.8;
-  border-color: #DDFFE7;
+  border-color: #ddffe7;
   padding: 15px 32px;
   font-family: Copperplate;
   font-weight: bold;
@@ -36,7 +36,7 @@
 .button-accept {
   background-color: #116c51;
   opacity: 0.8;
-  border-color: #DDFFE7;
+  border-color: #ddffe7;
   padding: 15px 32px;
   font-family: Copperplate;
   font-weight: bold;
@@ -49,11 +49,11 @@
 }
 
 .button-reject:hover {
-  background-color: #29A0B1;
+  background-color: #29a0b1;
   opacity: 1;
 }
 
 .button-accept:hover {
-  background-color: #29A0B1;
+  background-color: #29a0b1;
   opacity: 1;
 }

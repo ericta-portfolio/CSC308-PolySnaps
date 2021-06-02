@@ -70,9 +70,9 @@ input[type="submit"]:hover {
 }
 
 .btn2 {
-  border: 2px solid #DDFFE7;
+  border: 2px solid #ddffe7;
   background-color: whitesmoke;
-  color: #167D7F;
+  color: #167d7f;
   padding: 5px 20px;
   font-size: 15px;
   font-weight: bold;
@@ -84,7 +84,7 @@ input[type="submit"]:hover {
 }
 
 .upload {
-  color: #167D7F;
+  color: #167d7f;
 }
 
 .upload:hover {

@@ -57,7 +57,8 @@ export default class Navbarr extends Component {
                 variant="secondary"
                 onClick={this.state.funct}
                 id="log"
-                style={{ fontSize: "35px" }}>
+                style={{ fontSize: "35px" }}
+              >
                 {this.state.text}
               </LoginOutlined>
             </Navbar>
@@ -86,7 +87,8 @@ export default class Navbarr extends Component {
                   name="logoutbutton"
                   onClick={this.state.funct}
                   id="log"
-                  style={{ fontSize: "35px" }}>
+                  style={{ fontSize: "35px" }}
+                >
                   {this.state.text}>{this.state.text}
                 </LogoutOutlined>
               </Nav>
