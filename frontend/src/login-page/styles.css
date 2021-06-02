@@ -10,8 +10,9 @@ body {
   font-weight: 300;
   width: 100%;
   height: 100%;
-  background-color: #a799b7 !important;
+  background-color: #a5c9bc !important;
 }
+
 
 .container {
   margin: 10% auto;
@@ -62,10 +63,10 @@ select {
 }
 
 #loginbtn {
-  background-color: #542e71;
+  background-color: #116c51;
   opacity: 0.8;
-  border-color: #542e71;
   font-family: Copperplate;
+  border-color: #116c51;
   position: relative;
   width: 250px;
   right: 25px;
@@ -86,6 +87,6 @@ select {
 }
 
 #loginbtn:hover {
-  background-color: #542e71;
+  background-color: #29b17d;
   opacity: 1;
 }

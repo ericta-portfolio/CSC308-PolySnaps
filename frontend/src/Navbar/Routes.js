@@ -7,7 +7,7 @@ import ProfileFormPage from "../profile-form-FE/ProfileFormPage";
 import LoginPage from "../login-page/LoginForm";
 import MatchesPage from "../MatchesPage/MatchesPage";
 import AcceptedPage from "../AcceptedPage/AcceptedPage";
-import Homepage from "../HomePage/Homepage";
+import Homepage from "../HomePage/HomePage2";
 
 export default class Routes extends Component {
   history = { history };

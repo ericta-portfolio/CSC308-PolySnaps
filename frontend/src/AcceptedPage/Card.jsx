@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // import Avatar from "./Avatar";
 import { Image } from "antd";
 import Detail from "../MatchesPage/Detail";
-import ImgUpload from "../ImgUpload";
 import axios from "axios";
 
 function Card(props) {
@@ -71,6 +70,7 @@ function Card(props) {
         }}
       >
         <dd>
+          <Detail label="Contact" detailInfo={props.email} />
           <Detail label="Gender" detailInfo={props.gender} />
           <Detail label="Major" detailInfo={props.major} />
           <Detail label="Personality" detailInfo={props.personality} />

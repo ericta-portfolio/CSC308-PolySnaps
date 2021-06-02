@@ -70,23 +70,24 @@ input[type="submit"]:hover {
 }
 
 .btn2 {
-  border: 2px solid #e6b3e6;
+  border: 2px solid #DDFFE7;
   background-color: whitesmoke;
-  color: #993399;
+  color: #167D7F;
   padding: 5px 20px;
   font-size: 15px;
+  font-weight: bold;
   font-family: Copperplate;
   cursor: pointer;
   position: relative;
-  left: 250px;
+  left: 257px;
   bottom: 40px;
 }
 
 .upload {
-  color: #993399;
+  color: #167D7F;
 }
 
 .upload:hover {
-  background: #993399;
+  background: #116c51;
   color: white;
 }

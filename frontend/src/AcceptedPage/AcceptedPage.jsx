@@ -76,12 +76,9 @@ export default class MatchesPage extends Component {
       <div key={profile._id}>
         <dl className="dictionary">
           <Card
-            //this key must be written like that!
-            // it can be  string, number, but it must be unique across
-            // all of the repeated components
             key={profile._id}
-            //has to be the name inside the contact (contact.NAMEINCONTACT)
             id={profile._id}
+            email={profile.email}
             first={profile.first}
             last={profile.last}
             gender={profile.gender}
