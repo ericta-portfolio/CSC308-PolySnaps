@@ -16,7 +16,10 @@ function Card(props) {
         console.log(res);
         data = res["data"];
         axios
-          .get("https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" + data["_id"])
+          .get(
+            "https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" +
+              data["_id"]
+          )
           .then((res) => {
             console.log(res);
             setProfileImage({
