@@ -270,7 +270,8 @@ export default function ReactForm() {
                 </label>
               </div>
             );
-          }})}
+          }
+        })}
         {/* Friendship */}
         <h1 className="titles">Friendship Interest:</h1>
         {interestsList.map((friend) => {
@@ -308,7 +309,8 @@ export default function ReactForm() {
                 </label>
               </div>
             );
-        }})}
+          }
+        })}
         {/* Hobbies */}
         <h1 className="titles">Hobbies:</h1>
         {hobbiesList.map((hobby) => (
