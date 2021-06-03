@@ -39,6 +39,12 @@ def compareProfiles(p1, p2):
     ):
         if (p1['gender'] not in p2['romance'] or p2['gender'] not in p1['romance']):
             return 0
+        
+    if not (
+        (p1['gender'] in p2['romance'] and p2['gender'] in p1['romance']) or 
+        (p1['gender'] in p2['friendship'] and p2['gender'] in p1['friendship'])
+    ):
+        return 0
 
     # Major (10% weight out of 100points)
     if (p1['major'] == p2['major']):
