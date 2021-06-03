@@ -136,6 +136,43 @@ export default function ReactForm() {
     }
   }
 
+  
+  function deselectFriendship(event) {
+    const changedItem = event.target.value;
+    var friend = document.getElementsByClassName("friendships");
+    var deselectFriend = document.getElementById("deselectFriend");
+    if (deselectFriend.checked) {
+      for (var i = 0; i < friend.length; i++) {
+        friend[i].checked = false;
+      }
+    }
+    if (!friendship.includes(changedItem)) {
+      setPartying((prevVal) => {
+        return [...prevVal, changedItem];
+      });
+    } else {
+      setPartying(friendship.filter((option) => option !== changedItem));
+    }
+  }
+
+  function deselectRomance(event) {
+    const changedItem = event.target.value;
+    var rom = document.getElementsByClassName("romances");
+    var deselectRom = document.getElementById("deselectRom");
+    if (deselectRom.checked) {
+      for (var i = 0; i < rom.length; i++) {
+        rom[i].checked = false;
+      }
+    }
+    if (!romance.includes(changedItem)) {
+      setRomance((prevVal) => {
+        return [...prevVal, changedItem];
+      });
+    } else {
+      setRomance(romance.filter((option) => option !== changedItem));
+    }
+  }
+
   return (
     <>
       <h1 className="titleofPage"> Fill out Profile Form Below </h1>
@@ -198,39 +235,80 @@ export default function ReactForm() {
 
         {/* Romance */}
         <h1 className="titles">Romantic Interests:</h1>
-        {interestsList.map((interest) => (
-          <div>
-            <label className="containerbox">
-              {interest}
-              <input
-                id="romance"
-                onChange={romanceChange}
-                type="checkbox"
-                placeholder={interest}
-                value={interest}
-              />
-              <span className="checkmarkbox"></span>
-            </label>
-          </div>
-        ))}
-
+        {interestsList.map((romantic) => {
+          if (romantic != "Not looking for this") {
+            return (
+              <div>
+                <label className="containerbox">
+                  {romantic}
+                  <input
+                    name="romance"
+                    onChange={romanceChange}
+                    type="checkbox"
+                    className="romances"
+                    placeholder={romantic}
+                    value={romantic}
+                  />
+                  <span className="checkmarkbox"></span>
+                </label>
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <label className="containerbox">
+                  {romantic}
+                  <input
+                    name="noromance"
+                    onChange={deselectRomance}
+                    type="checkbox"
+                    placeholder={romantic}
+                    value={romantic}
+                    id="deselectRom"
+                  />
+                  <span className="checkmarkbox"></span>
+                </label>
+              </div>
+            );
+          }})}
         {/* Friendship */}
         <h1 className="titles">Friendship Interest:</h1>
-        {interestsList.map((interest) => (
-          <div>
-            <label className="containerbox">
-              {interest}
-              <input
-                name="friendship"
-                onChange={friendshipChange}
-                type="checkbox"
-                placeholder={interest}
-                value={interest}
-              />
-              <span className="checkmarkbox"></span>
-            </label>
-          </div>
-        ))}
+        {interestsList.map((friend) => {
+          if (friend != "Not looking for this") {
+            return (
+              <div>
+                <label className="containerbox">
+                  {friend}
+                  <input
+                    name="friendship"
+                    onChange={friendshipChange}
+                    type="checkbox"
+                    className="friendships"
+                    placeholder={friend}
+                    value={friend}
+                  />
+                  <span className="checkmarkbox"></span>
+                </label>
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <label className="containerbox">
+                  {friend}
+                  <input
+                    name="nofriend"
+                    onChange={deselectFriendship}
+                    type="checkbox"
+                    placeholder={friend}
+                    value={friend}
+                    id="deselectFriend"
+                  />
+                  <span className="checkmarkbox"></span>
+                </label>
+              </div>
+            );
+        }})}
 
         {/* Hobbies */}
         <h1 className="titles">Hobbies:</h1>
