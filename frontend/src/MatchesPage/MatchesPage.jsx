@@ -116,7 +116,7 @@ export default class MatchesPage extends Component {
             hobbies={profile.hobbies}
             spirituality={profile.spirituality}
             partying={profile.partying}
-            score={profile.score}
+            score={Math.round(profile.score)}
           />
           <button
             className="button-accept"
