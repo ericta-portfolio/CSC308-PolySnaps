@@ -136,7 +136,6 @@ export default function ReactForm() {
     }
   }
 
-  
   function deselectFriendship(event) {
     const changedItem = event.target.value;
     var friend = document.getElementsByClassName("friendships");
@@ -270,7 +269,8 @@ export default function ReactForm() {
                 </label>
               </div>
             );
-          }})}
+          }
+        })}
         {/* Friendship */}
         <h1 className="titles">Friendship Interest:</h1>
         {interestsList.map((friend) => {
@@ -308,7 +308,8 @@ export default function ReactForm() {
                 </label>
               </div>
             );
-        }})}
+          }
+        })}
 
         {/* Hobbies */}
         <h1 className="titles">Hobbies:</h1>
