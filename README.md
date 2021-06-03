@@ -1,5 +1,10 @@
 # CSC308
 
+## Project Structure
+Main Branch - to be run locally, includes frontend and backend
+Heroku Frontend - CI/CD pipeline for frontend
+Heroku Backend - CI/CD pipeline for backend
+
 ## Javascript Style Guide / Formatter
 Prettier -  
 https://prettier.io/  
