@@ -6,13 +6,13 @@ Heroku Frontend - CI/CD pipeline for frontend
 Heroku Backend - CI/CD pipeline for backend
 
 ## Javascript Style Guide / Formatter
-Prettier -  
+Prettier
 https://prettier.io/  
 Open VSCode, install Prettier extension  
 Use before pushing updates to js/jsx files: in command line, execute 'npx prettier --write .'
 
 ## Python Style Guide / Linter 
-Pylint (PEP8) -  
+Pylint (PEP8)
 https://www.pylint.org/  
 Execute command in terminal: python -m pip install pylint  
 Open VSCode, ctrl+shift+P <Python: Select Linter>  
