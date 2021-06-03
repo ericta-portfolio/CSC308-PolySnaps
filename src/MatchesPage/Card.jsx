@@ -83,7 +83,7 @@ function Card(props) {
           <Detail label="Partying" detailInfo={partying} />
           <Detail
             label="Score"
-            detailInfo={Math.round(props.score).toFixed(1)}
+            detailInfo={Math.round(props.score)}
           />
         </dd>
       </div>
