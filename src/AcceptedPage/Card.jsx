@@ -10,12 +10,12 @@ function Card(props) {
   const getUserData = (idNum) => {
     var data = null;
     axios
-      .get("http://localhost:5000/getUser/" + idNum)
+      .get("https://polysnaps-be.herokuapp.com/getUser/" + idNum)
       .then((res) => {
         console.log(res);
         data = res["data"];
         axios
-          .get("http://localhost:5000/profile_pic_retrieve/" + data["_id"])
+          .get("https://polysnaps-be.herokuapp.com/profile_pic_retrieve/" + data["_id"])
           .then((res) => {
             console.log(res);
             setProfileImage({

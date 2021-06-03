@@ -13,7 +13,7 @@ export default class MatchesPage extends Component {
   componentDidMount() {
     const id = localStorage.getItem("id");
     axios
-      .get("http://localhost:5000/getAccepted/" + id)
+      .get("https://polysnaps-be.herokuapp.com/getAccepted/" + id)
       .then((res) => {
         const profileList = res.data;
         this.setState({

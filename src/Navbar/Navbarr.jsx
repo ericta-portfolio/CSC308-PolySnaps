@@ -7,14 +7,14 @@ import logo from "../signup-page/logo4.png";
 
 export default class Navbarr extends Component {
   login() {
-    window.location.href = "http://localhost:3000/Login";
+    window.location.href = "https://polysnaps-fe.herokuapp.com/Login";
   }
 
   logout() {
     // send to home page
     localStorage.setItem("id", "null");
     this.setState({ funct: this.login.bind(this), text: "Log In" });
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "https://polysnaps-fe.herokuapp.com/";
   }
 
   state = {
