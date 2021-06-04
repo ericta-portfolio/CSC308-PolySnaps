@@ -1,13 +1,18 @@
 # CSC308
 
+## Project Structure
+Main Branch - to be run locally, includes frontend and backend\
+Heroku Frontend - CI/CD pipeline for frontend\
+Heroku Backend - CI/CD pipeline for backend
+
 ## Javascript Style Guide / Formatter
-Prettier -  
+Prettier:
 https://prettier.io/  
 Open VSCode, install Prettier extension  
 Use before pushing updates to js/jsx files: in command line, execute 'npx prettier --write .'
 
 ## Python Style Guide / Linter 
-Pylint (PEP8) -  
+Pylint (PEP8):
 https://www.pylint.org/  
 Execute command in terminal: python -m pip install pylint  
 Open VSCode, ctrl+shift+P <Python: Select Linter>  
@@ -18,8 +23,8 @@ To use: save file, or ctrl+shift+P <Python: Run Linter>
 In frontend directory, execute 'npm install', then 'npm start'
 
 ## Running backend 
-In backend directory, execute 'pipenv shell'
-Execute 'export FLASK_APP=app.py', then 'export FLASK_ENV=development'
+In backend directory, execute 'pipenv shell' \
+Execute 'export FLASK_APP=app.py', then 'export FLASK_ENV=development' \
 Execute 'flask run'
 
 ## Running local unit/integration tests 
@@ -28,12 +33,15 @@ In backend directory, execute 'pytest testing.py'
 ## Travis CI 
 https://travis-ci.com/github/ericta-portfolio/CSC308-PolySnaps 
 
+[![Build Status](https://www.travis-ci.com/ericta-portfolio/CSC308-PolySnaps.svg?branch=main)](https://www.travis-ci.com/ericta-portfolio/CSC308-PolySnaps)
+
+
 ## Heroku CD 
-dashboards: 
-backend - https://dashboard.heroku.com/apps/polysnaps-be
-frontend - https://dashboard.heroku.com/apps/polysnaps-fe
-deployed apps:
-backend - https://polysnaps-be.herokuapp.com/
+dashboards: \
+backend - https://dashboard.heroku.com/apps/polysnaps-be \
+frontend - https://dashboard.heroku.com/apps/polysnaps-fe \
+deployed apps: \
+backend - https://polysnaps-be.herokuapp.com/ \
 frontend - https://polysnaps-fe.herokuapp.com/
 
 ## Code Coverage Report 
