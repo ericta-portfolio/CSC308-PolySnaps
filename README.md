@@ -42,7 +42,7 @@ backend - https://dashboard.heroku.com/apps/polysnaps-be \
 frontend - https://dashboard.heroku.com/apps/polysnaps-fe \
 deployed apps: \
 backend - https://polysnaps-be.herokuapp.com/ \
-frontend - https://polysnaps-fe.herokuapp.com/ \
+frontend - https://polysnaps-fe.herokuapp.com/
 
 ## Code Coverage Report 
 
