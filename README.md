@@ -37,12 +37,12 @@ https://travis-ci.com/github/ericta-portfolio/CSC308-PolySnaps
 
 
 ## Heroku CD 
-dashboards: 
-backend - https://dashboard.heroku.com/apps/polysnaps-be
-frontend - https://dashboard.heroku.com/apps/polysnaps-fe
-deployed apps:
-backend - https://polysnaps-be.herokuapp.com/
-frontend - https://polysnaps-fe.herokuapp.com/
+dashboards: \
+backend - https://dashboard.heroku.com/apps/polysnaps-be \
+frontend - https://dashboard.heroku.com/apps/polysnaps-fe \
+deployed apps: \
+backend - https://polysnaps-be.herokuapp.com/ \
+frontend - https://polysnaps-fe.herokuapp.com/ \
 
 ## Code Coverage Report 
 
