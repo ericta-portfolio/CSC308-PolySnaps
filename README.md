@@ -23,8 +23,8 @@ To use: save file, or ctrl+shift+P <Python: Run Linter>
 In frontend directory, execute 'npm install', then 'npm start'
 
 ## Running backend 
-In backend directory, execute 'pipenv shell'
-Execute 'export FLASK_APP=app.py', then 'export FLASK_ENV=development'
+In backend directory, execute 'pipenv shell' \
+Execute 'export FLASK_APP=app.py', then 'export FLASK_ENV=development' \
 Execute 'flask run'
 
 ## Running local unit/integration tests 
